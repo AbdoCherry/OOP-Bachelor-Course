@@ -1,0 +1,4 @@
+e[0]=0 
+**** Hello World ****
+
+Value  1 =  47,11

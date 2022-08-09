@@ -1,0 +1,22 @@
+package Week03.Task6;
+
+public class Ascii {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        System.out.println("\n");
+
+        for (int i = 0; i < 127; i++) {
+            System.out.println("The ASCII - Value of " + (char) i + " equals = " + i);
+        }
+
+        System.out.println("\n---------- Only capital letters ----------\n");
+        for (int i = 65; i < 91; i++) {
+            System.out.println("The ASCII - Value of " + (char) i + " equals = " + i);
+        }
+    }
+
+}

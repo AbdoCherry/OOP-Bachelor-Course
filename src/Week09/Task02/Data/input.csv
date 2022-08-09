@@ -1,0 +1,23 @@
+﻿CustomerID;LastName;FirstName;CustomerSince;Description;DepositBalance;InvestmentDate;MaturityDate
+1;Hawk;Mike;30.10.10;Saving Bank Account;108587728;05.09.2019;04.12.2019
+1;Hawk;Mike;30.10.10;Fixed Deposit Account;28612220;29.12.2016;29.03.2017
+1;Hawk;Mike;30.10.10;Current Deposit Account;983804;30.09.2015;29.12.2015
+2;Dover;Ben;06.08.23;Recurring Deposit Account;113472246;26.07.1930;24.10.1930
+5;Bobsgu;Juerdo;04.12.87;Saving Bank Account;1160460;25.03.1989;23.06.1989
+5;Bobsgu;Juerdo;04.12.87;Fixed Deposit Account;93821198;20.07.1990;16.01.1991
+6;Tickles;Tess;10.08.74;Current Deposit Account;114617371;08.11.1975;06.05.1976
+7;Cyder;Dickins;18.12.98;Recurring Deposit Account;118966308;12.10.2002;10.04.2003
+8;Inma Shool;Ramit;11.05.64;Saving Bank Account;25010654;13.10.1970;11.04.1971
+8;Inma Shool;Ramit;11.05.64;Fixed Deposit Account;99701482;27.04.1965;24.10.1965
+8;Inma Shool;Ramit;11.05.64;Current Deposit Account;67718902;02.07.1970;29.12.1970
+8;Inma Shool;Ramit;11.05.64;Recurring Deposit Account;54949026;16.12.1964;14.06.1965
+8;Inma Shool;Ramit;11.05.64;Saving Bank Account;29929312;17.08.1968;15.11.1968
+9;Sheith;Ho-Lee;15.02.84;Fixed Deposit Account;103310663;19.05.1989;17.08.1989
+10;Zib;Akbar;07.04.60;Current Deposit Account;95063438;24.05.1961;22.08.1961
+12;Tador;Conqueef;07.03.68;Recurring Deposit Account;29266552;05.08.1970;01.02.1971
+18;Weh;Awimba;13.06.99;Saving Bank Account;49662599;16.12.2007;13.06.2008
+19;Osas;Uwuwewewe Onyetenwewe Ugweuhem;25.12.61;Fixed Deposit Account;149821084;04.05.1964;31.10.1964
+19;Osas;Uwuwewewe Onyetenwewe Ugweuhem;25.12.61;Current Deposit Account;52289212;22.11.1964;21.05.1965
+20;Yahouse;Amin;15.03.13;Recurring Deposit Account;134146214;12.07.1920;08.01.1921
+28;Tuorkhart;Gunnar;19.09.03;Saving Bank Account;108345298;06.01.2008;05.04.2008
+30;Sergey;Dubis;20.07.21;Fixed Deposit Account;33063274;31.10.1926;29.01.1927
