@@ -8,7 +8,7 @@ import java.io.IOException;
 public class MyBStream {
 
     public static void main(String[] args) {
-        // TODO Auto-Generated method stub
+        
 
         // Check, if In- Outputfile are passed
       /*  if(args.length != 2){

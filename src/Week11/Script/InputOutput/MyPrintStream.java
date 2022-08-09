@@ -6,7 +6,6 @@ import java.io.PrintStream;
 public class MyPrintStream {
 
     public static void main(String[] args) throws FileNotFoundException {
-        // TODO Auto-generated method stub
 
         PrintStream out = new PrintStream("src/Week11/Script/Buffered/output.txt");
 

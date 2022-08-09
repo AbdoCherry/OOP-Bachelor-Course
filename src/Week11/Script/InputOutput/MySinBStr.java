@@ -5,8 +5,6 @@ import java.io.*;
 public class MySinBStr {
 
     public static void main(String[] args) {
-        // TODO Auto-Generated method stub
-
         // Example for In/OutputStream explained
 
         File myFile = new File("src/Week11/Script/InputOutput/Byte.byt");

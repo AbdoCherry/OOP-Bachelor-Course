@@ -5,7 +5,6 @@ import java.io.*;
 public class MyBufFilCop {
 
     public static void main(String[] args) {
-        // TODO Auto-Generated method stub
 
         //Check if In- or Outputfiles are passed
         //    if(args.length != 2){
