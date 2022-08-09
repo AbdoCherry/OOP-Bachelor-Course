@@ -1,4 +1,4 @@
-package Week08.Task2.Auxilary;
+package Week08.Task02.Auxilary;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Week08.Task2.Model.Customer;
+import Week08.Task02.Model.Customer;
 
 public class InputOutputFiles {
 

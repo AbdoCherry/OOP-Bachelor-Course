@@ -1,8 +1,8 @@
-package Week09.Task2.App;
+package Week09.Task02.App;
 
 import java.util.List;
-import Week09.Task2.BusinessRules.Reader;
-import Week09.Task2.Model.*;
+import Week09.Task02.BusinessRules.Reader;
+import Week09.Task02.Model.*;
 
 public class CustomerReport {
     public static void main(String[] args) {

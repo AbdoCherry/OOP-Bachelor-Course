@@ -1,9 +1,9 @@
-package Week09.Task4.App;
+package Week09.Task04.App;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
-import Week09.Task4.Model.BookInventory;
+import Week09.Task04.Model.BookInventory;
 
 public class Library {
 

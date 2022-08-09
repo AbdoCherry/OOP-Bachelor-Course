@@ -1,10 +1,10 @@
-package Week10.Task2.App;
+package Week10.Task02.App;
 
 import java.util.List;
 
-import Week10.Task2.Abstract.Employee;
-import Week10.Task2.Model.Clerk;
-import Week10.Task2.Model.Manager;
+import Week10.Task02.Abstract.Employee;
+import Week10.Task02.Model.*;
+
 
 public class HumanResources {
     public static void main(String[] args) {

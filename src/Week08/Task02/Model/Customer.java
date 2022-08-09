@@ -1,4 +1,4 @@
-package Week08.Task2.Model;
+package Week08.Task02.Model;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import Week08.Task2.Abstract.Account;
-import Week08.Task2.Auxilary.DateConverter;
+import Week08.Task02.Abstract.Account;
+import Week08.Task02.Auxilary.DateConverter;
 
 public class Customer {
 

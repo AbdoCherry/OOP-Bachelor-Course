@@ -1,14 +1,12 @@
-package Week08.Task1.App;
+package Week08.Task01.App;
 
 import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
-import Week08.Task1.Auxilary.Reader;
-import Week08.Task1.Auxilary.Writer;
-import Week08.Task1.Models.Account;
-import Week08.Task1.Models.Customer;
-import Week08.Task1.Models.Deposit;
+import Week08.Task01.Auxilary.Reader;
+import Week08.Task01.Models.*;
+import Week08.Task01.Auxilary.Writer;
 
 public class CustomerReport {
 

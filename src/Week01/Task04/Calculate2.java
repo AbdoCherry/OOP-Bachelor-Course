@@ -1,4 +1,4 @@
-package Week01.Task4;
+package Week01.Task04;
 
 public class Calculate2 {
     public static void main(String[] args) {

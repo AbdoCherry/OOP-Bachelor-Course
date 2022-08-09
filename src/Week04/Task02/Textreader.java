@@ -1,4 +1,4 @@
-package Week04.Task2;
+package Week04.Task02;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,8 +12,8 @@ public class Textreader {
      */
     public static void main(String[] args) throws FileNotFoundException {
 
-        String pathMacOs = "src/Week4/Task2/Kontostaende.txt";
-        String pathWindows = "src\\Week4\\Task2\\Kontostaende.txt";
+        String pathMacOs = "src/Week4/Task2/CheckingBalance.txt";
+        String pathWindows = "src\\Week4\\Task2\\CheckingBalance.txt";
         String path = "";
         String myOS = System.getProperty("os.name"); // Getting my OS name to choose the path convention later
 

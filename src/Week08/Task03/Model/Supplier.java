@@ -1,4 +1,4 @@
-package Week08.Task3.Model;
+package Week08.Task03.Model;
 
 import java.util.Scanner;
 

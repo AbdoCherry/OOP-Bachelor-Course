@@ -1,11 +1,11 @@
-package Week08.Task2.Auxilary;
+package Week08.Task02.Auxilary;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import Week08.Task2.Abstract.Account;
+import Week08.Task02.Abstract.Account;
 
 public class DateConverter {
 

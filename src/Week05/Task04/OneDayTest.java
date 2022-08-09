@@ -1,4 +1,4 @@
-package Week05.Task4;
+package Week05.Task04;
 
 import java.util.Scanner;
 

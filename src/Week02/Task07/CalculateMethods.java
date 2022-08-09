@@ -1,4 +1,4 @@
-package Week02.Task7;
+package Week02.Task07;
 
 public class CalculateMethods {
 

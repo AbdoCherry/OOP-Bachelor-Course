@@ -1,4 +1,4 @@
-package Week05.Task3;
+package Week05.Task03;
 
 public class CustomerTest {
 

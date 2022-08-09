@@ -1,9 +1,9 @@
-package Week08.Task2.Abstract;
+package Week08.Task02.Abstract;
 
 import java.util.List;
 import java.util.Scanner;
 
-import Week08.Task2.Model.Customer;
+import Week08.Task02.Model.Customer;
 
 public abstract class Account {
 

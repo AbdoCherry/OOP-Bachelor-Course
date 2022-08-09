@@ -1,4 +1,4 @@
-package Week09.Task4.BusinessRules;
+package Week09.Task04.BusinessRules;
 
 public class NotAvailable extends Exception {
 

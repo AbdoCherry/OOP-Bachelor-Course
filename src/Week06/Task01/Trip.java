@@ -1,4 +1,4 @@
-package Week06.Task1;
+package Week06.Task01;
 
 public class Trip {
 

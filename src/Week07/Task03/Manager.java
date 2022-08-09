@@ -1,5 +1,4 @@
-package Week07.Task3;
-
+package Week07.Task03;
 public class Manager extends Employee {
 
     private String department;

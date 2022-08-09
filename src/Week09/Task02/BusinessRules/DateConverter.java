@@ -1,4 +1,4 @@
-package Week09.Task2.BusinessRules;
+package Week09.Task02.BusinessRules;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

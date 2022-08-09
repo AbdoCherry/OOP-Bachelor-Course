@@ -1,4 +1,4 @@
-package Week07.Task2;
+package Week07.Task02;
 
 public class Engineer extends Employee {
 

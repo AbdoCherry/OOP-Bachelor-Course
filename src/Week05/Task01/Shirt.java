@@ -1,4 +1,4 @@
-package Week05.Task1;
+package Week05.Task01;
 
 public class Shirt {
 

@@ -1,4 +1,4 @@
-package Week08.Task1.Auxilary;
+package Week08.Task01.Auxilary;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
-import Week08.Task1.Models.Account;
+import Week08.Task01.Models.Account;
 
 public class Writer {
 

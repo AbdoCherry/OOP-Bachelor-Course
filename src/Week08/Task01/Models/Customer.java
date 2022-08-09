@@ -1,11 +1,10 @@
-package Week08.Task1.Models;
-
+package Week08.Task01.Models;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
-import Week08.Task1.Auxilary.DateConverter;
-import Week08.Task1.Auxilary.UnderCutDeposit;
+import Week08.Task01.Auxilary.*;
+
 
 public class Customer {
 

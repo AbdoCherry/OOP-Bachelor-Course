@@ -1,4 +1,4 @@
-package Week09.Task2.Model;
+package Week09.Task02.Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import Week09.Task2.BusinessRules.DateConverter;
+import Week09.Task02.BusinessRules.DateConverter;
 
 public class Deposit extends Customer {
 

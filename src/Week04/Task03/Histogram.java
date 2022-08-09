@@ -1,4 +1,4 @@
-package Week04.Task3;
+package Week04.Task03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,8 +30,8 @@ public class Histogram {
      */
     public static void main(String[] args) throws FileNotFoundException {
 
-        String pathMacOs = "src/Week4/Task3/Kontostaende.txt";
-        String pathWin = "src\\Week4\\Task3\\Kontostaende.txt";
+        String pathMacOs = "src/Week4/Task3/CheckingBalance.txt";
+        String pathWin = "src\\Week4\\Task3\\CheckingBalance.txt";
         String path = "";
         String myOS = System.getProperty("os.name");
 

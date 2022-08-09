@@ -1,4 +1,4 @@
-package Week08.Task1.Models;
+package Week08.Task01.Models;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import Week08.Task1.Auxilary.DateConverter;
+import Week08.Task01.Auxilary.DateConverter;
 
 public class Account {
 

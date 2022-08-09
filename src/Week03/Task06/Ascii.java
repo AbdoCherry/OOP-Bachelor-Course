@@ -1,4 +1,4 @@
-package Week03.Task6;
+package Week03.Task06;
 
 public class Ascii {
 

@@ -1,10 +1,10 @@
-package Week09.Task4.Model;
+package Week09.Task04.Model;
 
 import java.text.ParseException;
 import java.util.Random;
 import java.util.Scanner;
 
-import Week09.Task4.BusinessRules.*;
+import Week09.Task04.BusinessRules.*;
 
 public class BookInventory {
 

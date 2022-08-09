@@ -1,4 +1,4 @@
-package Week09.Task2.BusinessRules;
+package Week09.Task02.BusinessRules;
 
 public enum DAYS {
     A(90), B(180);

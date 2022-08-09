@@ -1,7 +1,7 @@
-package Week08.Task3.App;
+package Week08.Task03.App;
 
-import Week08.Task3.Model.Customer;
-import Week08.Task3.Model.Supplier;
+import Week08.Task03.Model.Customer;
+import Week08.Task03.Model.Supplier;
 
 public class OrderApp {
 

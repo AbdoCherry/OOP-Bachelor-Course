@@ -1,4 +1,4 @@
-package Week09.Task2.BusinessRules;
+package Week09.Task02.BusinessRules;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Week09.Task2.Model.Deposit;
+import Week09.Task02.Model.Deposit;
 
 public class Reader {
 

@@ -1,4 +1,4 @@
-package Week05.Task5;
+package Week05.Task05;
 
 public class TruckTest {
 

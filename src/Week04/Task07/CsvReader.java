@@ -1,4 +1,4 @@
-package Week04.Task7;
+package Week04.Task07;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +13,8 @@ public class CsvReader {
     public static void main(String[] args) throws FileNotFoundException {
 
         String path = "";
-        String pathWindows = "src\\Week4\\Task7\\Auftragsliste.csv";
-        String pathMacOs = "src/Week4/Task7/Auftragsliste.csv";
+        String pathWindows = "src\\Week4\\Task7\\OrderList.csv";
+        String pathMacOs = "src/Week4/Task7/OrderList.csv";
         String myOs = System.getProperty("os.name");
 
         // Depending on our operating system we select the right path convention of the

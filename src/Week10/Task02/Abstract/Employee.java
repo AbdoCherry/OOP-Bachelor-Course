@@ -1,4 +1,4 @@
-package Week10.Task2.Abstract;
+package Week10.Task02.Abstract;
 
 import java.util.List;
 import java.util.Scanner;

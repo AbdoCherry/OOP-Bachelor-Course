@@ -1,4 +1,4 @@
-package Week10.Task2.Model;
+package Week10.Task02.Model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import Week10.Task2.Abstract.Employee;
+import Week10.Task02.Abstract.Employee;
 
 public class Clerk extends Employee {
 

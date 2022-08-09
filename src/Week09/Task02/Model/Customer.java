@@ -1,11 +1,11 @@
-package Week09.Task2.Model;
+package Week09.Task02.Model;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import Week09.Task2.BusinessRules.*;
+import Week09.Task02.BusinessRules.*;
 
 public class Customer {
 

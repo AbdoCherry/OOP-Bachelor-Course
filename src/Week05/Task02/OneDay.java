@@ -1,4 +1,4 @@
-package Week05.Task2;
+package Week05.Task02;
 
 public class OneDay {
 

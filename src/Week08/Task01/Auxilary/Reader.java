@@ -1,4 +1,4 @@
-package Week08.Task1.Auxilary;
+package Week08.Task01.Auxilary;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Week08.Task1.Models.Account;
+import Week08.Task01.Models.Account;
 
 public class Reader {
 

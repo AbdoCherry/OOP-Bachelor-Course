@@ -1,12 +1,11 @@
-package Week08.Task2.App;
+package Week08.Task02.App;
 
 import java.util.List;
 
-import Week08.Task2.Abstract.Account;
-import Week08.Task2.Auxilary.InputOutputFiles;
-import Week08.Task2.Model.Checking;
-import Week08.Task2.Model.Customer;
-import Week08.Task2.Model.Deposit;
+import Week08.Task02.Abstract.Account;
+import Week08.Task02.Auxilary.InputOutputFiles;
+import Week08.Task02.Model.*;
+
 
 public class CustomerReport {
     public static void main(String[] args) {
