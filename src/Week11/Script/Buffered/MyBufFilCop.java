@@ -20,7 +20,7 @@ public class MyBufFilCop {
              BufferedWriter bw = new BufferedWriter(new FileWriter("src/Week11/Script/Buffered/BufferedReader.byt"))) {
 
                  //Example of Stream reading and directly writing
-                 String line = "";
+                 String line;
 
                  while ((line =br.readLine()) !=null){
                      bw.write(line);
