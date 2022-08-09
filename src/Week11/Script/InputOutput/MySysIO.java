@@ -4,8 +4,6 @@ import java.io.IOException;
 
 public class MySysIO {
     public static void main(String[] args) throws IOException {
-        // TODO Auto-Generated method stub
-
         // Declaration of variables
         byte[] line = new byte[128];
         int counter;
