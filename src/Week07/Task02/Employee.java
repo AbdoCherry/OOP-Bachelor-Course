@@ -96,8 +96,11 @@ public class Employee {
 
         if (validator <= 10) {
             System.out.println("\nYour requested salary increase has been approved");
-            System.out.println("Salary before\tSalary after\tIncrease by %\t\tIncrease by $");
-            System.out.printf("%.2f $\t%.2f $\t%.2f %%\t%.2f %%\n", salaryBefore, salaryNew, validator, difference);
+            System.out.println("------------------------------ Approved ------------------------------");
+            System.out.printf("\033[1m%-20s%-20s%-20s\033[0m\n", "Salary before", "Salary after", "Increase by %");
+            System.out.println("----------------------------------------------------------------------");
+            System.out.printf("%-20.2f$%-20.2f$%-20.2f$\n", salaryBefore, salaryNew, difference);
+
         } else {
             System.out.println(
                     "\nWe have to regretfully decline your desired salary increase because it exceeds the maximum of 10 % from the current salary");
