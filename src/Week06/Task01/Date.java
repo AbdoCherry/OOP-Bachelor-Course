@@ -1,0 +1,123 @@
+package Week06.Task01;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
+
+public class Date {
+    private int day, month;
+
+    static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+    static SimpleDateFormat parser = new SimpleDateFormat("dd.MMM");
+
+    public Date() {
+
+    }
+
+    public Date(int day, int month) {
+        this.day = day;
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public static Date createToday() {
+        Date today = new Date();
+        java.util.Date createTodayDate = new java.util.Date();
+
+        today.setDay(createToday().getDay());
+        today.setMonth(createToday().getMonth());
+
+        return today;
+    }
+
+    public static Date createDate() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        Date createDate = new Date();
+
+        System.out.print("Day of trip: ");
+        createDate.setDay(scanner.nextInt());
+
+        System.out.print("Monht of trip: ");
+        createDate.setMonth(scanner.nextInt());
+
+        return createDate;
+    }
+
+    // Not mandatory for the task. Just to format our date to a more beautiful format
+    public static String dateFormatter(Customer c, char controller) {
+
+        String formattedDate = "";
+
+
+        java.util.Date parseDate;
+
+        // The try-catch block is necessary for the java.util.Date api
+        try {
+            switch (controller) {
+                case 'T':
+                    String getTripDate = c.getBookedTrip().getTripDate().getDay() + "." + c.getBookedTrip().getTripDate().getMonth();
+                    parseDate = sdf.parse(getTripDate);
+                    formattedDate = parser.format(parseDate);
+                    break;
+                case 'B':
+                    String getBookingDate = c.getBookedDate().getDay() + "." + c.getBookedDate().getMonth();
+                    parseDate = sdf.parse(getBookingDate);
+                    formattedDate = parser.format(parseDate);
+                    break;
+                default:
+                    formattedDate = " - ";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return formattedDate;
+    }
+
+    public static boolean tripValidator(Customer c) {
+
+        java.util.Date dateOfTripDate;
+        java.util.Date dateOfBookedTrip;
+
+        boolean validator = false;
+        int daysBetween = 0;
+
+        String dateOfTripString = c.getBookedTrip().getTripDate().getDay() + "." + c.getBookedTrip().getTripDate().getMonth();
+        String dateOfBookedTripString = c.getBookedDate().getDay() + "." + c.getBookedDate().getMonth();
+
+        try {
+            dateOfTripDate = sdf.parse(dateOfTripString);
+            dateOfBookedTrip = sdf.parse(dateOfBookedTripString);
+
+            Long timeBetween = dateOfBookedTrip.getTime() - dateOfTripDate.getTime();
+            daysBetween = (int) (timeBetween / (1000 * 60 * 60 * 24));
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+        }
+
+        if (daysBetween >= 5) {
+            validator = true;
+        }
+
+        return validator;
+    }
+}
