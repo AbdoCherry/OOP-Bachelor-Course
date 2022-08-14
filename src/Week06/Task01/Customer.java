@@ -1,10 +1,8 @@
 package Week06.Task01;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,11 +66,11 @@ public class Customer {
 
     public static List<Customer> readObjectsFromCSV() {
 
-        List<Customer> customers = new ArrayList<Customer>();
+        List<Customer> customers = new ArrayList<>();
 
         String pathMacOs = "src/Week06/Task01/TripAgencyDB.csv", pathWindows = "src\\Week06\\Task01\\TripAgencyDB.csv", path;
         String myOS = System.getProperty("os.name");
-        String line = null;
+        String line;
 
         if (myOS.startsWith("win")) {
             path = pathWindows;
@@ -119,18 +117,20 @@ public class Customer {
      */
     public List<Customer> selectCustomers(List<Customer> customers) {
 
-        List<Customer> selectedCustomers = new ArrayList<Customer>();
+        Scanner select = new Scanner(System.in);
+
+        List<Customer> selectedCustomers = new ArrayList<>();
 
         System.out.println("\nPlease enter the necessary information in the fields below");
 
-        System.out.print("\nFirst Name: ");
-        String searchFirstName = scanner.nextLine();
+        System.out.print("First Name: ");
+        String searchFirstName = select.nextLine();
 
         System.out.print("Last Name: ");
-        String searchLastName = scanner.nextLine();
+        String searchLastName = select.nextLine();
 
         for (Customer c : customers) {
-            if (c.getFirstName().equals(searchFirstName) && c.getFirstName().equals(searchLastName)) {
+            if (c.getFirstName().equals(searchFirstName) && c.getLastName().equals(searchLastName)) {
                 selectedCustomers.add(c);
             }
         }
@@ -138,8 +138,9 @@ public class Customer {
         return selectedCustomers;
     }
 
-    public int returnselectedCustomer(List<Customer> customers) {
+    public Customer returnSelectedCustomer(List<Customer> customers) {
         List<Customer> searchedCustomer = selectCustomers(customers);
+        Customer selectedRecord;
 
         int decision = 0;
         boolean checkIfError = true;
@@ -166,7 +167,7 @@ public class Customer {
             decision--;
 
         } else if (searchedCustomer.size() == 0) {
-            System.out.println("\nNo Trip found under. Please restart program");
+            System.out.println("\nNo Trip found in database. Please restart program");
             checkIfError = false;
 
         } else {
@@ -179,27 +180,35 @@ public class Customer {
             System.exit(1);
         }
 
-        return decision;
+        selectedRecord = searchedCustomer.get(decision);
+        return selectedRecord;
 
     }
 
     public void bookTrip(List<Customer> customers) {
 
-        System.out.println("\nPlease enter the necessary information in the fields below");
+        Scanner createScanner = new Scanner(System.in);
 
-        System.out.print("\nFirst Name: ");
-        String createFirstName = scanner.nextLine();
+        Customer createCustomer = new Customer();
+        System.out.println("\nPlease enter the necessary information in the fields below\n");
+
+        System.out.print("First Name: ");
+        String createFirstName = createScanner.nextLine();
 
         System.out.print("Last Name: ");
-        String createLastName = scanner.nextLine();
+        String createLastName = createScanner.nextLine();
 
         Trip createTrip = Trip.createTrip();
         Date createToday = Date.createToday();
 
-        // Set new Object only if dates are valid
-        Customer createCustomer = new Customer(firstName, lastName, createTrip, createToday);
+        // Add attributes to object
+        createCustomer.setFirstName(createFirstName);
+        createCustomer.setLastName(createLastName);
+        createCustomer.setBookedTrip(createTrip);
+        createCustomer.setBookedDate(createToday);
 
         if (Date.tripValidator(createCustomer)) {
+
             customers.add(createCustomer);
             System.out.println("\nTrip added successfully to recorded trips");
         } else {
@@ -209,7 +218,7 @@ public class Customer {
 
     public void editTrip(List<Customer> customers) {
 
-        int decision = returnselectedCustomer(customers);
+        Customer selectedRecord = returnSelectedCustomer(customers);
 
         System.out.println("\nPlease select property you want to edit");
         System.out.println("[Destination = 'D'/'d']\t\t[Date of Trip = 'T'/'t']");
@@ -220,19 +229,20 @@ public class Customer {
 
         switch (property) {
             case 'D':
-                String destinationBefore = customers.get(decision).getBookedTrip().getDestination();
+                String destinationBefore = selectedRecord.getBookedTrip().getDestination();
 
-                Trip editTrip = Trip.editTrip(customers.get(decision));
+                Trip editTrip = Trip.editTrip(selectedRecord);
+                testCustomer.setBookedDate(selectedRecord.getBookedDate());
                 testCustomer.setBookedTrip(editTrip);
 
                 System.out.println("\n*** Date of booking will be modified and checked now ***");
                 if (Date.tripValidator(testCustomer)) {
-                    customers.get(decision).setBookedTrip(editTrip);
+                    selectedRecord.setBookedTrip(editTrip);
                     System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s\033[0m\n", "ID", "Name", "Destination - Before", "Destination - After");
                     System.out.println("------------------------------------------------------------------------------------------------------------------------");
                     System.out.printf("\n%-10d%-20s%-35s%-35s\033[0m\n",
-                            decision, customers.get(decision).getFirstName() + " " + customers.get(decision).getLastName(),
-                            destinationBefore, customers.get(decision).getBookedTrip().getDestination());
+                            1, selectedRecord.getFirstName() + " " + selectedRecord.getLastName(),
+                            destinationBefore, selectedRecord.getBookedTrip().getDestination());
                     System.out.println("\nTrip modified successfully into database");
                 } else {
                     System.out.println("\nTip can not be added to recorded tips.\nPlease follow our policy: Days between trip and booking must be at least 5 days");
@@ -240,21 +250,21 @@ public class Customer {
                 break;
 
             case 'T':
-                String dateOfTripBeforeFormatted = Date.dateFormatter(customers.get(decision), 'T');
+                String dateOfTripBeforeFormatted = Date.dateFormatter(selectedRecord, 'T');
 
-                Trip editTripDate = customers.get(decision).getBookedTrip();
+                Trip editTripDate = selectedRecord.getBookedTrip();
                 editTripDate.setTripDate(Date.createDate());
                 testCustomer.setBookedTrip(editTripDate);
 
                 if (Date.tripValidator(testCustomer)) {
-                    customers.get(decision).setBookedTrip(editTripDate);
-                    String dateOfTripAfterFormatted = Date.dateFormatter(customers.get(decision), 'T');
+                    selectedRecord.setBookedTrip(editTripDate);
+                    String dateOfTripAfterFormatted = Date.dateFormatter(selectedRecord, 'T');
                     System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s\033[0m\n", "ID", "Name", "Date of Trip - Before", "Date of Trip - After");
                     System.out.println("------------------------------------------------------------------------------------------------------------------------");
                     System.out.printf("\n%-10d%-20s%-35s%-35s\033[0m\n",
-                            decision, customers.get(decision).getFirstName() + " " + customers.get(decision).getLastName(),
+                            1, selectedRecord.getFirstName() + " " + selectedRecord.getLastName(),
                             dateOfTripBeforeFormatted,
-                            customers.get(decision).getBookedTrip().getDestination());
+                            dateOfTripAfterFormatted);
                     System.out.println("\nTrip modified successfully into database");
                 } else {
                     System.out.println("\nTip can not be added to recorded tips.\nPlease follow our policy: Days between trip and booking must be at least 5 days");
@@ -268,27 +278,41 @@ public class Customer {
 
     public void cancelTrip(List<Customer> customers) {
 
-        int decision = returnselectedCustomer(customers);
+        Scanner cancel = new Scanner(System.in);
+
+        Customer selectedCustomer = returnSelectedCustomer(customers);
         int sizeBefore = customers.size();
+        int sizeAfter = 0;
 
         System.out.println("\nYou are sure? The whole record will be deleted from database");
         System.out.println("[Yes = 'Y'/'y']\t[No = 'N'/'n]");
+        System.out.print("Are you sure?: ");
+        char cancelConfirmation = Character.toUpperCase(cancel.next().charAt(0));
 
-        customers.remove(decision);
-        int sizeAfer = customers.size();
+        if (cancelConfirmation == 'Y') {
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).equals(selectedCustomer)) {
+                    customers.remove(i);
+                    sizeAfter = customers.size();
+                    break;
+                }
+            }
+        }
 
-        if (sizeBefore < sizeAfer) {
+        if (sizeAfter < sizeBefore) {
             System.out.println("\nRecord deleted from database");
         } else {
             System.out.println("\nError occurred while deleting. Please restart program");
         }
-
     }
 
     public void displayByProperty(List<Customer> customers) {
 
+        Scanner newScanner = new Scanner(System.in);
+
         System.out.println("\nPlease choose property below");
-        System.out.println("[Name = 'N'/'n']\t[Destination = 'D/'d']\n[Month of Trip = 'T'/'t']\t[Month of booking = 'B'/'b']");
+        System.out.printf("\n%-25s%-25s", "[Name = 'N'/'n']", "[Destination = 'D/'d']");
+        System.out.printf("\n%-25s%-25s", "[Month of Trip = 'T'/'t']", "[Month of booking = 'B'/'b']\n");
         System.out.print("Property: ");
         char property = Character.toUpperCase(scanner.next().charAt(0));
 
@@ -297,24 +321,22 @@ public class Customer {
             case 'N':
 
                 System.out.print("\nFirst Name: ");
-                String propFirstName = scanner.nextLine();
+                String propFirstName = newScanner.nextLine();
                 System.out.print("Last Name: ");
-                String propLastName = scanner.nextLine();
+                String propLastName = newScanner.nextLine();
 
-                String propFullName = propFirstName + " " + propLastName;
-
-                System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Date of Trip", "Date of Booking", "Valid Trip");
-                System.out.println("------------------------------------------------------------------------------------------------------------------------");
+                System.out.printf("\n\033[1m%-10s%-20s%-25s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Destination", "Date of Trip", "Date of Booking", "Valid Trip");
+                System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 
                 for (Customer c : customers) {
-                    String FullName = c.getFirstName() + " " + c.getLastName();
-                    if (propFullName.equals(propFirstName)) {
+                    if (c.getFirstName().equals(propFirstName) && c.getLastName().equals(propLastName)) {
                         String validator = Date.tripValidator(c) ? "*** VALID TRIP ***" : "*** NOT VALID TRIP ***";
                         String dateOfTripFormatted = Date.dateFormatter(c, 'T');
                         String dateOfBookedTripFormatted = Date.dateFormatter(c, 'B');
-                        System.out.printf("\n%-10s%-20s%-35s%-35s%-10s\n",
+                        System.out.printf("\n%-10d%-20s%-25s%-35s%-35s%-10s\n",
                                 counter,
                                 c.getFirstName() + " " + c.getLastName(),
+                                c.getBookedTrip().getDestination(),
                                 dateOfTripFormatted,
                                 dateOfBookedTripFormatted,
                                 validator);
@@ -325,11 +347,11 @@ public class Customer {
 
             case 'D':
 
-                System.out.print("\nDestination: ");
-                String propDestination = scanner.nextLine();
+                System.out.print("Destination: ");
+                String propDestination = newScanner.nextLine();
 
-                System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Date of Trip", "Date of Booking", "Valid Trip");
-                System.out.println("------------------------------------------------------------------------------------------------------------------------");
+                System.out.printf("\n\033[1m%-10s%-20s%-25s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Destination", "Date of Trip", "Date of Booking", "Valid Trip");
+                System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 
                 counter = 1;
 
@@ -338,9 +360,10 @@ public class Customer {
                         String validator = Date.tripValidator(c) ? "*** VALID TRIP ***" : "*** NOT VALID TRIP ***";
                         String dateOfTripFormatted = Date.dateFormatter(c, 'T');
                         String dateOfBookedTripFormatted = Date.dateFormatter(c, 'B');
-                        System.out.printf("\n%-10s%-20s%-35s%-35s%-10s\n",
+                        System.out.printf("\n%-10d%-20s%-25s%-35s%-35s%-10s\n",
                                 counter,
                                 c.getFirstName() + " " + c.getLastName(),
+                                c.getBookedTrip().getDestination(),
                                 dateOfTripFormatted,
                                 dateOfBookedTripFormatted,
                                 validator);
@@ -352,10 +375,10 @@ public class Customer {
             case 'T':
 
                 System.out.print("\nMonth value: ");
-                int propMonthTrip = scanner.nextInt();
+                int propMonthTrip = newScanner.nextInt();
 
-                System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s-10s\033[0m\n", "ID", "Name", "Date of Trip", "Date of Booking", "Valid Trip");
-                System.out.println("------------------------------------------------------------------------------------------------------------------------");
+                System.out.printf("\n\033[1m%-10s%-20s%-25s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Destination", "Date of Trip", "Date of Booking", "Valid Trip");
+                System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 
                 counter = 1;
 
@@ -364,9 +387,10 @@ public class Customer {
                         String validator = Date.tripValidator(c) ? "*** VALID TRIP ***" : "*** NOT VALID TRIP ***";
                         String dateOfTripFormatted = Date.dateFormatter(c, 'T');
                         String dateOfBookedTripFormatted = Date.dateFormatter(c, 'B');
-                        System.out.printf("\n%-10s%-20s%-35s%-35s%-10s\n",
+                        System.out.printf("\n%-10d%-20s%-25s%-35s%-35s%-10s\n",
                                 counter,
                                 c.getFirstName() + " " + c.getLastName(),
+                                c.getBookedTrip().getDestination(),
                                 dateOfTripFormatted,
                                 dateOfBookedTripFormatted,
                                 validator);
@@ -376,10 +400,10 @@ public class Customer {
                 break;
             case 'B':
                 System.out.print("\nMonth value: ");
-                int propMonthBooking = scanner.nextInt();
+                int propMonthBooking = newScanner.nextInt();
 
-                System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Date of Trip", "Date of Booking", "Valid Trip");
-                System.out.println("------------------------------------------------------------------------------------------------------------------------");
+                System.out.printf("\n\033[1m%-10s%-20s%-25s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Destination", "Date of Trip", "Date of Booking", "Valid Trip");
+                System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 
                 counter = 1;
 
@@ -388,9 +412,10 @@ public class Customer {
                         String validator = Date.tripValidator(c) ? "*** VALID TRIP ***" : "*** NOT VALID TRIP ***";
                         String dateOfTripFormatted = Date.dateFormatter(c, 'T');
                         String dateOfBookedTripFormatted = Date.dateFormatter(c, 'B');
-                        System.out.printf("\n%-10s%-20s%-35s%-35s%-10s\n",
+                        System.out.printf("\n%-10d%-20s%-25s%-35s%-35s%-10s\n",
                                 counter,
                                 c.getFirstName() + " " + c.getLastName(),
+                                c.getBookedTrip().getDestination(),
                                 dateOfTripFormatted,
                                 dateOfBookedTripFormatted,
                                 validator);
@@ -406,19 +431,21 @@ public class Customer {
 
     public void displayAll(List<Customer> customers) {
 
-        System.out.printf("\n\033[1m%-10s%-20s%-35s%-35s%-10s\033[0m\n", "ID", "Name", "Date of Trip", "Date of Booking", "Valid Trip");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("\n\033[1m%-10s%-20s%-25s%-35s%-15s%-15s%-10s\033[0m\n", "ID", "Name", "Destination", "Date of Trip", "Date of Booking", " | ", "Valid Trip");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 
         int counter = 0;
         for (Customer c : customers) {
             String validator = Date.tripValidator(c) ? "*** VALID TRIP ***" : "*** NOT VALID TRIP ***";
             String dateOfTripFormatted = Date.dateFormatter(c, 'T');
             String dateOfBookedTripFormatted = Date.dateFormatter(c, 'B');
-            System.out.printf("\n%-10s%-20s%-35s%-35s%-10s\n",
+            System.out.printf("%-10d%-20s%-25s%-35s%-15s%-15s%-10s\n",
                     counter,
                     c.getFirstName() + " " + c.getLastName(),
+                    c.getBookedTrip().getDestination(),
                     dateOfTripFormatted,
                     dateOfBookedTripFormatted,
+                    " | ",
                     validator);
             counter++;
         }

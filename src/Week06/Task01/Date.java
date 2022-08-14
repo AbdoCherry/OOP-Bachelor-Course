@@ -2,6 +2,7 @@ package Week06.Task01;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Date {
@@ -36,13 +37,12 @@ public class Date {
     }
 
     public static Date createToday() {
-        Date today = new Date();
-        java.util.Date createTodayDate = new java.util.Date();
 
-        today.setDay(createToday().getDay());
-        today.setMonth(createToday().getMonth());
+        LocalDate createCurrentDate = LocalDate.now();
+        int dayOfMonth = createCurrentDate.getDayOfMonth();
+        int monthValue = createCurrentDate.getMonthValue();
 
-        return today;
+        return new Date(dayOfMonth, monthValue);
     }
 
     public static Date createDate() {
@@ -54,7 +54,7 @@ public class Date {
         System.out.print("Day of trip: ");
         createDate.setDay(scanner.nextInt());
 
-        System.out.print("Monht of trip: ");
+        System.out.print("Month of trip: ");
         createDate.setMonth(scanner.nextInt());
 
         return createDate;
@@ -107,7 +107,7 @@ public class Date {
             dateOfTripDate = sdf.parse(dateOfTripString);
             dateOfBookedTrip = sdf.parse(dateOfBookedTripString);
 
-            Long timeBetween = dateOfBookedTrip.getTime() - dateOfTripDate.getTime();
+            Long timeBetween = dateOfTripDate.getTime() - dateOfBookedTrip.getTime();
             daysBetween = (int) (timeBetween / (1000 * 60 * 60 * 24));
         } catch (ParseException e) {
             e.printStackTrace();

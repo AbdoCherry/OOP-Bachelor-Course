@@ -13,12 +13,12 @@ public class TravelAgencyMain {
 
         Customer c = new Customer();
 
-        System.out.println("\n---------------------------------------------------------------- \033[1mWELCOME TO TRAVEL-AGENCY\033[0m ----------------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------------- \033[1mWELCOME TO TRAVEL-AGENCY\033[0m ----------------------------------------------------------------");
 
         char continueProgram;
 
         do {
-            System.out.println("Please choose menu below");
+            System.out.println("\nPlease choose menu below");
             System.out.println("[Alter Trip = 'A'/'a']\t[Book Trip = 'B'/'b']");
             System.out.println("[Cancel Trip = 'C'/'c']\t[Display Trip = 'D'/'d']");
             System.out.println("\t\t\t[Exit Program = 'E'/'e']");
@@ -50,6 +50,8 @@ public class TravelAgencyMain {
             continueProgram = Character.toUpperCase(scanner.next().charAt(0));
 
         } while (continueProgram == 'Y');
+
+        c.displayAll(customers);
 
 
     }

@@ -15,11 +15,6 @@ public class Trip {
         this.tripDate = new Date(day, month);
     }
 
-    public Trip(String destination, Date tripDate) {
-        this.destination = destination;
-        this.tripDate = tripDate;
-    }
-
     public String getDestination() {
         return destination;
     }
@@ -53,7 +48,7 @@ public class Trip {
         Trip oldTrip = selectedCustomer.getBookedTrip();
         Trip newTrip = new Trip();
 
-        System.out.println("\nNew destination: ");
+        System.out.print("\nNew destination: ");
         String newDestination = scanner.nextLine();
 
         newTrip.setDestination(newDestination);
