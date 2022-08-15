@@ -164,8 +164,8 @@ public class BookInventory {
                 b = newBookInInventory;
                 System.out.println("\nBook successfully borrowed from inventory");
                 String returnDateFormatted = Date.formatDate(b.getReturnDate());
-                System.out.printf("\n\033[1m%-15s%-65s%-25s%-10s%-15s\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
-                System.out.println("------------------------------------------------------------------------------------------------");
+                System.out.printf("\n\033[1m%-15s%-65s%-25s%-10s%-15s\033[0m\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
                 System.out.printf("%-15s%-65s%-25s%-10s%-15s\n",
                         b.getBook().getRackNo(),
                         b.getBook().getTitle(),
@@ -178,7 +178,7 @@ public class BookInventory {
     }
 
     public void display(List<BookInventory> books) {
-        System.out.printf("\n\033[1m%-5s%-65s%-25s%-5s%-15s\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
+        System.out.printf("\n\033[1m%-5s%-65s%-25s%-5s%-15s\033[0m\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
         System.out.println("------------------------------------------------------------------------------------------------");
 
         books.forEach(b -> {
