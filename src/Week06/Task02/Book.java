@@ -64,11 +64,10 @@ public class Book {
             System.out.println("\nPlease select book by ID: ");
             System.out.print("ID: ");
             bookDecision = selectBook.nextInt();
-            selectBook.close();
             return extractedBooksList.get(bookDecision - 1);
         } else {
             System.out.println("\nBook not available or in inventory");
-            selectBook.close();
+            
             return null;
         }
 
@@ -95,8 +94,6 @@ public class Book {
         System.out.print("\nChoose genres: ");
         int index = genreScanner.nextInt();
 
-        genreScanner.close();
-
         return genres[index - 1][0];
     }
 
@@ -111,8 +108,6 @@ public class Book {
         String createPublisher = createScanner.nextLine();
 
         String createRackNo = genres();
-
-        createScanner.close();
 
         return new Book(createRackNo, createTitle, createPublisher);
     }

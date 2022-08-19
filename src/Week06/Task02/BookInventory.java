@@ -75,7 +75,6 @@ public class BookInventory {
 
             while ((line = readCSV.readLine()) != null) {
                 String[] values = line.split(";");
-                System.out.println(values.length);
 
                 for (String[] genre : genres) {
                     for (String s : genre) {
@@ -158,10 +157,10 @@ public class BookInventory {
             System.out.println("\nApparently it is not possible to borrow this book " + borrowBook.getTitle() + "\nAt least one sample needs to stay at the inventory\n");
         }
 
-        BookInventory newBookInInventory = new BookInventory(borrowBook, borrowDate);
         for (BookInventory b : books) {
             if (b.getBook().equals(borrowBook)) {
-                b = newBookInInventory;
+                b.setBook(borrowBook);
+                b.setReturnDate(borrowDate);
                 System.out.println("\nBook successfully borrowed from inventory");
                 String returnDateFormatted = Date.formatDate(b.getReturnDate());
                 System.out.printf("\n\033[1m%-15s%-65s%-25s%-10s%-15s\033[0m\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
@@ -178,12 +177,12 @@ public class BookInventory {
     }
 
     public void display(List<BookInventory> books) {
-        System.out.printf("\n\033[1m%-5s%-65s%-25s%-5s%-15s\033[0m\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
-        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.printf("\n\033[1m%-15s%-65s%-25s%-5s%-15s\033[0m\n", "Rack-No", "Title", "Publisher", " | ", "Return Date");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------");
 
         books.forEach(b -> {
             String returnDateFormatted = Date.formatDate(b.getReturnDate());
-            System.out.printf("%-5s%-65s%-25s%-5s%-15s\n",
+            System.out.printf("%-15s%-65s%-25s%-5s%-15s\n",
                     b.getBook().getRackNo(),
                     b.getBook().getTitle(),
                     b.getBook().getPublisher(),
@@ -191,7 +190,7 @@ public class BookInventory {
                     returnDateFormatted
             );
         });
-        System.out.println("\nIn total we do have: " + books.size() + " in our inventroy\n");
+        System.out.println("\nIn total we do have: \033[1m" + books.size() + "\033[0m in our inventroy\n");
     }
 
 }

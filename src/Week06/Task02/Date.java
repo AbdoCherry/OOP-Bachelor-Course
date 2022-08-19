@@ -55,8 +55,6 @@ public class Date {
 
         LocalDate returnAt = LocalDate.now().plusWeeks(weeks);
 
-        borrowScanner.close();
-
         return new Date(returnAt.getDayOfMonth(), String.valueOf(returnAt.getMonthValue()));
 
     }
