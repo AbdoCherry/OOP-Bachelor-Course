@@ -51,5 +51,7 @@ public class LibraryOfficeMain {
             continueProgram = Character.toUpperCase(scanner.next().charAt(0));
 
         } while (continueProgram == 'Y');
+        scanner.close();
     }
+    
 }

@@ -1,7 +1,6 @@
 package Week06.Task02;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Book {
     private String rackNo, title, publisher;
@@ -47,48 +46,40 @@ public class Book {
         String searchTitle = selectBook.nextLine().toLowerCase();
 
         List<Book> extractedBooksList = books.stream()
-                .filter(b -> b.getReturnDate().getDay() == 0 && (b.getBook().getTitle().equalsIgnoreCase(searchTitle) || b.getBook().getTitle().contains(searchTitle)))
+                .filter(b -> b.getReturnDate().getDay() == 0 && (b.getBook().getTitle().equalsIgnoreCase(searchTitle)
+                        || b.getBook().getTitle().contains(searchTitle)))
                 .map(BookInventory::getBook).distinct().toList();
-
 
         int bookDecision = 1;
         if (extractedBooksList.size() > 0) {
             System.out.printf("\n\033[1m%-10s%-10s%-65s%-25s\033[0m\n", "ID", "RackNo", "Title", "Publisher");
-            System.out.println("------------------------------------------------------------------------------------------------");
+            System.out.println(
+                    "------------------------------------------------------------------------------------------------");
 
             int counter = 1;
             for (Book b : extractedBooksList) {
-                System.out.printf("%-10s%-10s%-65s%-25s\n",
-                        counter++,
-                        b.getRackNo(),
-                        b.getTitle(),
-                        b.getPublisher());
+                System.out.printf("%-10s%-10s%-65s%-25s\n", counter++, b.getRackNo(), b.getTitle(), b.getPublisher());
             }
 
             System.out.println("\nPlease select book by ID: ");
             System.out.print("ID: ");
             bookDecision = selectBook.nextInt();
+            selectBook.close();
             return extractedBooksList.get(bookDecision - 1);
         } else {
             System.out.println("\nBook not available or in inventory");
+            selectBook.close();
             return null;
         }
-    }
 
+    }
 
     public static String genres() {
 
         Scanner genreScanner = new Scanner(System.in);
-        String[][] genres = {{"1", "Fantasy"},
-                {"2", "Education"},
-                {"3", "Adventure"},
-                {"4", "Novel"},
-                {"5", "History"},
-                {"6", "tech"},
-                {"7", "Science"},
-                {"8", "nonfiction"},
-                {"9", "fiction"},
-                {"10", "philosophy"}};
+        String[][] genres = { { "1", "Fantasy" }, { "2", "Education" }, { "3", "Adventure" }, { "4", "Novel" },
+                { "5", "History" }, { "6", "tech" }, { "7", "Science" }, { "8", "nonfiction" }, { "9", "fiction" },
+                { "10", "philosophy" } };
 
         System.out.printf("\n\033[1m%-5s%-15s\033[0m\n", "Key", "Genre");
         System.out.println("--------------------------------");
@@ -104,6 +95,8 @@ public class Book {
         System.out.print("\nChoose genres: ");
         int index = genreScanner.nextInt();
 
+        genreScanner.close();
+
         return genres[index - 1][0];
     }
 
@@ -118,6 +111,8 @@ public class Book {
         String createPublisher = createScanner.nextLine();
 
         String createRackNo = genres();
+
+        createScanner.close();
 
         return new Book(createRackNo, createTitle, createPublisher);
     }
