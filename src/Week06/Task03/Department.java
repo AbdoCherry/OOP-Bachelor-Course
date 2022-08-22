@@ -53,6 +53,8 @@ public class Department {
 
     public static List<Department> readDepartments(Set<Employee> employees) {
 
+        if (employees.size() == 0) Employee.readEmployees();
+
         List<Department> departments = new ArrayList<Department>();
 
         String pathMacOs = "src/Week06/Task03/DepartmentsList.csv";
@@ -60,18 +62,14 @@ public class Department {
         String path, line;
         String myOS = System.getProperty("os.name");
 
-        switch (myOS.substring(0, 3)) {
-            case "Windows":
-                path = pathWindows;
-                break;
-            case "MacOs":
-            case "Darwin":
-                path = pathMacOs;
-                break;
-            default:
-                path = null;
-                System.out.println("\nError: Unknown OS: " + myOS + " Path not parseble\n");
-                System.exit(1);
+        if (myOS.startsWith("Win")) {
+            path = pathWindows;
+        } else if (myOS.startsWith("Mac")) {
+            path = pathMacOs;
+        } else {
+            System.out.println("\nError: Unknown OS: " + myOS + "\nPlease restart program");
+            path = null;
+            System.exit(1);
         }
 
         boolean readSuccessfully = false;
@@ -80,17 +78,39 @@ public class Department {
             BufferedReader readCSV = new BufferedReader(new FileReader(path));
             readCSV.readLine();
 
+            int index = 0;
             while ((line = readCSV.readLine()) != null) {
                 String[] valuesDepartment = line.split(";");
 
-            }
+                if (!valuesDepartment[0].equals("")) {
+                    departments.add(new Department(
+                            valuesDepartment[0],
+                            valuesDepartment[1],
+                            null, Double.parseDouble(valuesDepartment[5])
+                    ));
+                } else {
+                    Set<Employee> insertEmployees = new HashSet<Employee>();
+                    Iterator<Employee> emp = employees.iterator();
 
+                    while (emp.hasNext()) {
+                        if (emp.next().getEmpID() == Integer.parseInt(valuesDepartment[2])) {
+                            insertEmployees.add(emp.next());
+                        }
+                    }
+                    departments.get(index).setEmployees(insertEmployees);
+                }
+                index++;
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println(
+                readSuccessfully ? "\n================================ IMPORT SUCCESSFUL ================================\n"
+                        : "\n================================ IMPORT FAILED ================================\n");
 
         return departments;
     }
@@ -196,6 +216,20 @@ public class Department {
             departments.add(newDepartment);
 
         }
+    }
+
+    public void displayAll(List<Department> departments) {
+
+        System.out.printf("\n%-35s%-15s%-25s%-25s%-25s%-20s\n", "Department", "Employee ID", "First Name", "Last Name", "Budget", "Team Lead");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+        departments.forEach(d -> {
+            String teamRole = d.getTeamLead().equals(null) ? "Staff Member" : "Team Lead";
+            System.out.printf("%-65s%-25s%-20s\n", d.getDepName(), d.getBudget(), teamRole);
+
+            d.getEmployees().forEach(e -> {
+                System.out.printf("%-35s%-15d%-25s%-25s\n", " ", e.getEmpID(), e.getFirstName(), e.getLastName());
+            });
+        });
     }
 
 

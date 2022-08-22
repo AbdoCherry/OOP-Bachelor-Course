@@ -51,18 +51,14 @@ public class Employee {
         String path, line;
         String myOS = System.getProperty("os.name");
 
-        switch (myOS.substring(0, 3)) {
-            case "Windows":
-                path = pathWindows;
-                break;
-            case "MacOs":
-            case "Darwin":
-                path = pathMacOs;
-                break;
-            default:
-                path = null;
-                System.out.println("\nError: Unknown OS: " + myOS + " Path not parseble\n");
-                System.exit(1);
+        if (myOS.startsWith("Win")) {
+            path = pathWindows;
+        } else if (myOS.startsWith("Mac")) {
+            path = pathMacOs;
+        } else {
+            System.out.println("\nError: Unknown OS: " + myOS + "\nPlease restart program");
+            path = null;
+            System.exit(1);
         }
 
         boolean readSuccessfully = false;
