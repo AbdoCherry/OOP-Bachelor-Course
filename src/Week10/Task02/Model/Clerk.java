@@ -37,8 +37,7 @@ public class Clerk extends Employee {
     @SuppressWarnings("unchecked")
     public <T extends Employee> T employee(List<? extends Employee> list) {
 
-        System.out
-                .println("\nPlease enter the necessary information in the fields below for Clerk");
+        System.out.println("\nPlease enter the necessary information in the fields below for Clerk");
         System.out.print("First Name: ");
         String firstName = Employee.getScanner().nextLine();
         System.out.print("Last Name: ");
@@ -73,8 +72,7 @@ public class Clerk extends Employee {
         System.out.println("\nApparently the desired salary exceeds our policy of actual salaries");
         System.out.println("No exceeding of 10% than the highest salary");
 
-        List<Clerk> myClerks = clerk.stream().filter(c -> c.getDepName().equals(department))
-                .collect(Collectors.toList());
+        List<Clerk> myClerks = clerk.stream().filter(c -> c.getDepName().equals(department)).toList();
 
         Double avgDep = (myClerks.stream().mapToDouble(Clerk::getSalary)).sum() / myClerks.size();
 

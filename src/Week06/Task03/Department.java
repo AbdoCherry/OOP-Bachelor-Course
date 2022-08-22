@@ -1,20 +1,20 @@
 package Week06.Task03;
 
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Department {
     private String depName;
-    private String lead;
-    private Employee[] employees;
+    private String teamLead;
+    private Set<Employee> employees;
     private double budget;
 
     public Department() {
     }
 
-    public Department(String depName, String lead, Employee[] employees, double budget) {
+    public Department(String depName, String teamLead, Set<Employee> employees, double budget) {
         this.depName = depName;
-        this.lead = lead;
+        this.teamLead = teamLead;
         this.employees = employees;
         this.budget = budget;
     }
@@ -27,19 +27,19 @@ public class Department {
         this.depName = depName;
     }
 
-    public String getLead() {
-        return lead;
+    public String getTeamLead() {
+        return teamLead;
     }
 
-    public void setLead(String lead) {
-        this.lead = lead;
+    public void setTeamLead(String teamLead) {
+        this.teamLead = teamLead;
     }
 
-    public Employee[] getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Employee[] employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 
@@ -51,58 +51,152 @@ public class Department {
         this.budget = budget;
     }
 
-    public void createDepartment(List<Department> departments) {
+    public static List<Department> readDepartments(Set<Employee> employees) {
+
+        List<Department> departments = new ArrayList<Department>();
+
+        String pathMacOs = "src/Week06/Task03/DepartmentsList.csv";
+        String pathWindows = "src\\Week06\\Task03\\DepartmentsList.csv";
+        String path, line;
+        String myOS = System.getProperty("os.name");
+
+        switch (myOS.substring(0, 3)) {
+            case "Windows":
+                path = pathWindows;
+                break;
+            case "MacOs":
+            case "Darwin":
+                path = pathMacOs;
+                break;
+            default:
+                path = null;
+                System.out.println("\nError: Unknown OS: " + myOS + " Path not parseble\n");
+                System.exit(1);
+        }
+
+        boolean readSuccessfully = false;
+
+        try {
+            BufferedReader readCSV = new BufferedReader(new FileReader(path));
+            readCSV.readLine();
+
+            while ((line = readCSV.readLine()) != null) {
+                String[] valuesDepartment = line.split(";");
+
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return departments;
+    }
+
+    public void createDepartment(List<Department> departments, Set<Employee> employees) {
         Scanner createDepScanner = new Scanner(System.in);
+        Boolean depDuplicate = true;
         System.out.println("\nPlease enter the necessary information in the fields below");
 
-        System.out.print("Name of department: ");
-        String createDep = createDepScanner.nextLine();
+        Department newDepartment = new Department();
 
-        Employee[] selectedEmployee = Employee.selectEmployees(departments);
-        int selectLead;
+        System.out.print("Name of Department: ");
+        newDepartment.setDepName(createDepScanner.nextLine());
 
-        System.out.println("\nPlease select team lead from the selected employees by ID");
+        // Check if department already exists
+        depDuplicate = departments.stream()
+                .allMatch(d -> d.getDepName().equals(newDepartment.getDepName()));
 
-        System.out.printf("\n\033[1m%-15s%-20s%-20s\033[0m\n", "Employee ID", "First Name", "Last Name");
-        System.out.println("-----------------------------------------------------------------------------");
-        for (Employee e : selectedEmployee) {
-            System.out.printf("%-15s%-20s%-20s\n",
-                    e.getEmpID(),
-                    e.getLastName(),
-                    e.getLastName());
+        while (depDuplicate) {
+            char edit = 'Y';
+            System.out.println("\nDepartment already exists.\nDo you want to change edit department name?\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]");
+            System.out.print("Input: ");
+            edit = Character.toUpperCase(createDepScanner.next().charAt(0));
+
+            if (edit == 'Y') {
+                System.out.print("Name of Department: ");
+                newDepartment.setDepName(createDepScanner.nextLine());
+            } else if (edit == 'N') {
+                System.out.println("\nCreation of department cancelled. Please restart program\n");
+                System.exit(1);
+            }
+
+            // Refresh boolean value
+            depDuplicate = departments.stream()
+                    .allMatch(d -> d.getDepName().equals(newDepartment.getDepName()));
         }
-        System.out.print("ID: ");
-        selectLead = createDepScanner.nextInt();
-        String fullName = null;
 
-        for (Employee e : selectedEmployee) {
-            if (e.getEmpID() == selectLead) {
-                fullName = e.getFirstName() + " " + e.getLastName();
+        // Select team lead from employees list
+        System.out.println("Please select Team Lead by Employee ID from list below");
+        System.out.printf("\n%-35s%-15s%-25s%-25s%-25s%-20s\n", "Department", "Employee ID", "First Name", "Last Name", "Budget", "Team Lead");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+
+        departments.forEach(d -> {
+            String teamRole = d.getTeamLead().equals(null) ? "Staff Member" : "Team Lead";
+            System.out.printf("%-65s%-25s%-20s\n", d.getDepName(), d.getBudget(), teamRole);
+
+            d.getEmployees().forEach(e -> {
+                System.out.printf("%-35s%-15d%-25s%-25s\n", " ", e.getEmpID(), e.getFirstName(), e.getLastName());
+            });
+        });
+
+        System.out.print("Team Lead: ");
+        int createEmpID = createDepScanner.nextInt();
+
+        Iterator<Employee> emp = employees.iterator();
+
+        while (emp.hasNext()) {
+            if (emp.next().getEmpID() == createEmpID) {
+                newDepartment.setTeamLead(emp.next().getFirstName() + " " + emp.next().getLastName());
+                break;
             }
         }
 
-        System.out.println("Budget: ");
-        double createBudget = createDepScanner.nextDouble();
+        // Selecting maximum 5 staff member
+        System.out.print("Please select staff member by their no from refresheed list below,\nyou are allowed to select up to 5 members");
 
-        departments.add(new Department(createDep, fullName, selectedEmployee, createBudget));
 
-        System.out.println("\nCreation of new department successfully\n");
-    }
+        System.out.printf("\n%-35s%-15s%-25s%-25s%-25s%-20s\n", "Department", "Employee ID", "First Name", "Last Name", "Budget", "Team Lead");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+        departments.forEach(d -> {
+            String teamRole = d.getTeamLead().equals(null) ? "Staff Member" : "Team Lead";
+            System.out.printf("%-65s%-25s%-20s\n", d.getDepName(), d.getBudget(), teamRole);
 
-    public void display(List<Department> departments) {
-        System.out.printf("\n%-15s%-20s%-20s%-20s%-20s%-20s\n", "Employee ID", "First Name", "Last Name", "Department", "Budget", "Team Lead");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+            d.getEmployees().forEach(e -> {
+                System.out.printf("%-35s%-15d%-25s%-25s\n", " ", e.getEmpID(), e.getFirstName(), e.getLastName());
+            });
+        });
 
-        for (Department d : departments) {
-            for (Employee e : d.getEmployees()) {
-                System.out.printf("%-15s%-20s%-20s%-20s%-20s%-20s\n",
-                        e.getEmpID(),
-                        e.getFirstName(),
-                        e.getLastName(),
-                        d.getDepName(),
-                        d.getBudget(),
-                        d.getLead());
+        Set<Employee> selectEmployees = new HashSet<Employee>();
+
+        int maxMember = 0;
+        char continueSelection = 'Y';
+        while (maxMember < 6 && continueSelection == 'Y') {
+
+            System.out.print("ID: ");
+            int selection = createDepScanner.nextInt();
+
+            Iterator<Employee> empSelection = employees.iterator();
+            while (empSelection.hasNext()) {
+                if (empSelection.next().getEmpID() == selection) {
+                    selectEmployees.add(empSelection.next());
+                    maxMember++;
+
+                    System.out.print("Add Employee?\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]");
+                    continueSelection = Character.toUpperCase(createDepScanner.next().charAt(0));
+                }
             }
+            newDepartment.setEmployees(selectEmployees);
+
+            System.out.print("Budget: ");
+            newDepartment.setBudget(createDepScanner.nextDouble());
+
+            departments.add(newDepartment);
+
         }
     }
+
+
 }

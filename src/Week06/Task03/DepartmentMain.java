@@ -1,7 +1,8 @@
 package Week06.Task03;
 
-public class DepartmentManagementMain {
+public class DepartmentMain {
     public static void main(String[] args) {
+
 
     }
 }
