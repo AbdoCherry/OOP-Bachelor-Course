@@ -51,14 +51,12 @@ public class Department {
         this.budget = budget;
     }
 
-    public static List<Department> readDepartments(Set<Employee> employees) {
-
-        if (employees.size() == 0) Employee.readEmployees();
+    public static List<Department> readDepartments() {
 
         List<Department> departments = new ArrayList<Department>();
 
-        String pathMacOs = "src/Week06/Task03/DepartmentsList.csv";
-        String pathWindows = "src\\Week06\\Task03\\DepartmentsList.csv";
+        String pathMacOs = "src/Week06/Task03/Departments.csv";
+        String pathWindows = "src\\Week06\\Task03\\Departments.csv";
         String path, line;
         String myOS = System.getProperty("os.name");
 
@@ -78,28 +76,11 @@ public class Department {
             BufferedReader readCSV = new BufferedReader(new FileReader(path));
             readCSV.readLine();
 
-            int index = 0;
             while ((line = readCSV.readLine()) != null) {
                 String[] valuesDepartment = line.split(";");
 
-                if (!valuesDepartment[0].equals("")) {
-                    departments.add(new Department(
-                            valuesDepartment[0],
-                            valuesDepartment[1],
-                            null, Double.parseDouble(valuesDepartment[5])
-                    ));
-                } else {
-                    Set<Employee> insertEmployees = new HashSet<Employee>();
-                    Iterator<Employee> emp = employees.iterator();
 
-                    while (emp.hasNext()) {
-                        if (emp.next().getEmpID() == Integer.parseInt(valuesDepartment[2])) {
-                            insertEmployees.add(emp.next());
-                        }
-                    }
-                    departments.get(index).setEmployees(insertEmployees);
-                }
-                index++;
+
             }
 
         } catch (FileNotFoundException e) {

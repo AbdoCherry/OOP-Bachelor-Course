@@ -72,7 +72,9 @@ public class Clerk extends Employee {
         System.out.println("\nApparently the desired salary exceeds our policy of actual salaries");
         System.out.println("No exceeding of 10% than the highest salary");
 
-        List<Clerk> myClerks = clerk.stream().filter(c -> c.getDepName().equals(department)).toList();
+        List<Clerk> myClerks = clerk.stream()
+                .filter(c -> c.getDepName().equals(department))
+                .toList();
 
         Double avgDep = (myClerks.stream().mapToDouble(Clerk::getSalary)).sum() / myClerks.size();
 
@@ -81,7 +83,7 @@ public class Clerk extends Employee {
                     "\nPlease enter a new salary again (per year before tax) for new employee. Otherwise he will be assigned with average salary");
             System.out.print("Salary: ");
             double salaryInput = Employee.getScanner().nextDouble();
-            avgDep = (clerk.stream().mapToDouble(Clerk::getSalary)).sum() / clerk.size();
+            avgDep = clerk.stream().mapToDouble(Clerk::getSalary).sum() / clerk.size();
 
             if (salaryInput > avgDep) {
                 System.out.println("\nEmployee will get the average salary assigned");

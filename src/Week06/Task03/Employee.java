@@ -9,7 +9,21 @@ public class Employee {
     private int empID;
     private String firstName, lastName;
 
+    /* To have a mapping support for the reading process late
+     * we do need this private string property.
+     * Because we want to group our HashMap later by department and map it into several set
+     */
+    private String department;
+
     public Employee() {
+    }
+
+    // For the reading process
+    public Employee(String department, int empID, String firstName, String lastName) {
+        this.department = department;
+        this.empID = empID;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Employee(int empID, String firstName, String lastName) {
@@ -42,14 +56,26 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public static Set<Employee> readEmployees() {
+    public String getDepartment() {
+        return department;
+    }
 
-        Set<Employee> employees = new HashSet<Employee>();
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
-        String pathMacOs = "src/Week06/Task03/DepartmentsList.csv";
-        String pathWindows = "src\\Week06\\Task03\\DepartmentsList.csv";
+    public static Map<String, Set<Employee>> readEmployees() {
+
+        List<Employee> readEmps = new ArrayList<Employee>();
+        Map<String, Set<Employee>> employees = new HashMap<String, Set<Employee>>();
+
+        // Let assure that both OS can use the csv file in same directory
+        String pathMacOs = "src/Week06/Task03/Departments.csv";
+        String pathWindows = "src\\Week06\\Task03\\Departments.csv";
         String path, line;
         String myOS = System.getProperty("os.name");
+
+        int lineNumber = 0;
 
         if (myOS.startsWith("Win")) {
             path = pathWindows;
@@ -61,6 +87,7 @@ public class Employee {
             System.exit(1);
         }
 
+        // Checking if the read process was successfully
         boolean readSuccessfully = false;
 
         try {
@@ -68,24 +95,51 @@ public class Employee {
             readCSV.readLine();
 
             while ((line = readCSV.readLine()) != null) {
-                String[] valuesEmployee = line.split(";");
+                String[] employeeReader = line.split(";");
 
-                employees.add(new Employee(Integer.parseInt(valuesEmployee[2]), valuesEmployee[3], valuesEmployee[4]));
+                if (!Boolean.parseBoolean(employeeReader[5])) {
+                    String[] nameSplitter = employeeReader[1].split(" ");
+                    String castFirstName = null;
+                    String castLastName = null;
+
+                    switch (nameSplitter.length) {
+                        case 3:
+                            castFirstName = nameSplitter[0];
+                            castLastName = nameSplitter[1] + " " + nameSplitter[2];
+                            break;
+                        case 2:
+                            castFirstName = nameSplitter[0];
+                            castLastName = nameSplitter[1];
+                            break;
+                        default:
+                            System.out.println("Invalid Name at line: " + lineNumber + " and Employee ID: " + employeeReader[0]);
+                    }
+
+                    readEmps.add(
+                            new Employee(employeeReader[4],
+                                    Integer.parseInt(employeeReader[0]),
+                                    castFirstName,
+                                    castLastName));
+                }
             }
-            readSuccessfully = true;
+
+
+            employees = readEmps.stream()
+                    .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.toSet()));
+
+
             readCSV.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+        readSuccessfully = employees.size() > 0;
 
         System.out.println(
                 readSuccessfully ? "\n================================ IMPORT SUCCESSFUL ================================\n"
                         : "\n================================ IMPORT FAILED ================================\n");
 
         return employees;
-
     }
 
     public int incrMaxID(Set<Employee> employees) {
