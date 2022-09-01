@@ -1,0 +1,27 @@
+﻿EmployeeID;Name;SSN;Salary;Department Name;Staff;Budget
+10081;Bonalyn Boutwell;7031069;106367;Admin Offices;TRUE;400000
+10238;Mia Brown;8956357;63000;Admin Offices;FALSE;0
+10080;Amy Foster-Baker;6699595;99351;Admin Offices;FALSE;0
+10182;Estelle Howard;4795864;49920;Admin Offices;FALSE;0
+10038;William LaRotonda;3153472;64520;Admin Offices;FALSE;0
+10089;Janet King;1527462;250000;Executive Office;TRUE;500000
+10084;Karthikeyan Ait Sidi;6406078;104437;IT/IS;TRUE;0
+10250;Alejandro Bacong;5250499;50178;IT/IS;FALSE;0
+10012;Hector Barbossa;2277818;92328;IT/IS;FALSE;0
+10245;Renee Becker;9936818;110000;IT/IS;FALSE;0
+10199;Frank Booth;5747276;103613;IT/IS;FALSE;0
+10026;Wilson K Adinolfi;7891440;62506;Production;TRUE;12530291
+10014;Abdellah Veera;4963620;58523;Production;FALSE;0
+10021;Adeel Osturnka;6926620;47414;Production;FALSE;0
+10233;Adil Sahoo;7566807;57975;Production;FALSE;0
+10195;Adrienne J Homberger;5318975;63478;Production;FALSE;0
+10188;Jessica Bunbury;4684013;74326;Sales;TRUE;2140899
+10040;Michelle Carter;3869102;71860;Sales;FALSE;0
+10200;Anton Chigurh;9412541;66808;Sales;FALSE;0
+10099;Lynn Daneault;6703794;65729;Sales;FALSE;0
+10306;Alex Delarge;3819632;61568;Sales;FALSE;0
+10194;Colby Andreola;3522396;95660;Software Engineering;TRUE;250000
+10150;Max Cady;3568446;77692;Software Engineering;FALSE;0
+10085;Judith Carabbio;1272983;93396;Software Engineering;FALSE;0
+10155;Keyla Del Bosque;2987042;101199;Software Engineering;FALSE;0
+10290;Susan Exantus;2322291;99280;Software Engineering;FALSE;0

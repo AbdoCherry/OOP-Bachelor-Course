@@ -42,20 +42,20 @@ public class Date {
 
     public static Date createReturnDate() {
 
-        Scanner borrowScanner = new Scanner(System.in);
+        try (Scanner borrowScanner = new Scanner(System.in)) {
+            System.out.println("\nPlease choose your desired period to borrow the book");
+            System.out.println("[1 = 1 Week]\t[5 = 5 Weeks]");
+            System.out.println("[2 = 2 Week]\t[6 = 6 Weeks]");
+            System.out.println("[3 = 3 Week]\t[7 = 7 Weeks]");
+            System.out.println("[4 = 4 Week]\t[8 = 8 Weeks]");
 
-        System.out.println("\nPlease choose your desired period to borrow the book");
-        System.out.println("[1 = 1 Week]\t[5 = 5 Weeks]");
-        System.out.println("[2 = 2 Week]\t[6 = 6 Weeks]");
-        System.out.println("[3 = 3 Week]\t[7 = 7 Weeks]");
-        System.out.println("[4 = 4 Week]\t[8 = 8 Weeks]");
+            System.out.print("\nWeeks to borror: ");
+            int weeks = borrowScanner.nextInt();
 
-        System.out.print("\nWeeks to borror: ");
-        int weeks = borrowScanner.nextInt();
+            LocalDate returnAt = LocalDate.now().plusWeeks(weeks);
 
-        LocalDate returnAt = LocalDate.now().plusWeeks(weeks);
-
-        return new Date(returnAt.getDayOfMonth(), String.valueOf(returnAt.getMonthValue()));
+            return new Date(returnAt.getDayOfMonth(), String.valueOf(returnAt.getMonthValue()));
+        }
 
     }
 
