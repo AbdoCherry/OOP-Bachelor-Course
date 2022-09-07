@@ -64,7 +64,8 @@ Keep in mind, that some parts could be confusing because the task description we
 
 ### 3.3.) About me
 I´ve started studying Business Informatics Systems at the University of applied Sciences in Frankfurt (Germany) and accomplished my Bachelor of Science Degree on this study program. After all I have continued my study for the master degree program at the University of Mannheim.
-If you are interested in more tasks of the listed topics, leave me a comment on ![__Twitter__](twitter.png) and follow me for more:
+If you are interested in more tasks of the listed topics, leave me a comment on ![__Twitter__](twitter.png "https://twitter.com/AbdoCharrade") and follow me for more:
+<a href="https://twitter.com/AbdoCharrade" rel = "Twitter">![Twitter](twitter.png)</a></a>
 
 
 
