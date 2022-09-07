@@ -49,6 +49,7 @@ To simplify your coding exercises and using your IDE/Editor more efficiently you
 I highly recommend the AI assisted free version of [__TabNine__](https://www.tabnine.com/). Of course you can select the desirable options like,
 - [__Kite__](https://www.kite.com/)
 - [__GitHub-Copilot__](https://github.com/features/copilot)
+
 Of course every one of them has a built-in plugin which has to be installed on your IDE/Editor, just like the Java Extension Package in Section 1.2)
 It is not a must have but a very nice to have tool during your journey through the exercises
 
@@ -63,12 +64,19 @@ Every week has it´s own readme file which summarizes all tasks. The task descri
 Keep in mind, that some parts could be confusing because the task description were translated from german to english. But in total you should understand every task.
 
 ### 3.3.) About me
-I´ve started studying Business Informatics Systems at the University of applied Sciences in Frankfurt (Germany) and accomplished my Bachelor of Science Degree on this study program. After all I have continued my study for the master degree program at the University of Mannheim during my employment as a full-time DevOps & Cloud Engineer.
+I´ve started studying International Business Informatics Systems at the University of applied Sciences in Frankfurt (Germany) and accomplished my Bachelor of Science Degree on this study program. After all I have continued my study for the master degree program at the University of Mannheim during my employment as a full-time DevOps & Cloud Engineer.
 If you are interested in more tasks of the listed topics, leave me a comment on <a href="https://twitter.com/AbdoCharrade" rel = "Twitter">![Twitter](twitter.png)</a> and follow me for more:
 
-- Cross-Platform Development with Flutter and Java ![__Flutter__](flutter.png) & ![__Java__](java.png)
-- Data Science & Machine Learning with Python ![__Python__](python.png)
-- WebApp Developement and Web-Desing with Angular and Java ![__Angular__](Angular.png) & ![__Java__](java.png)
+- Cross-Platform Development with **Flutter** and **Java** ![__Flutter__](flutter.png) & ![__Java__](java.png)
+- Data Science & Machine Learning with **Python** ![__Python__](python.png)
+- WebApp Developement and Web-Desing with **Angular** and **Java** ![**Angular**](Angular.png) & ![__Java__](java.png)
+
+I hope that my input could encourage a few people to start a career as a developer. Please left some comments or questions if you wish, I´m always going to look to improve my skills and the best way to do so, is to get input from you. And if you want higher or more advanced developed projects, check my Full-Stack approaches and finished Web Applications.
+
+> *Every accomplishment starts with the decision to try*
+
+
+
 
 
 
