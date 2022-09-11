@@ -99,7 +99,7 @@ public class Clerk extends Employee {
     public String createSsn(List<Clerk> clerk, List<Manager> manager) {
 
         // Creating an ordered set of all ssn of the clerks
-        TreeSet<Integer> mySsn = new TreeSet<Integer>();
+        TreeSet<Integer> mySsn = new TreeSet<>();
 
         for (Manager m : manager) {
             mySsn.add(Integer.parseInt(m.getSsn()));
@@ -108,15 +108,14 @@ public class Clerk extends Employee {
             mySsn.add(Integer.parseInt(c.getSsn()));
         }
 
-        String randomSsn = String.valueOf(mySsn.last() + 1);
-        return randomSsn;
+        return String.valueOf(mySsn.last() + 1);
     }
 
     @Override
     public List<Clerk> readCSV() {
 
-        List<Clerk> staff = new ArrayList<Clerk>();
-        String line = null;
+        List<Clerk> staff = new ArrayList<>();
+        String line;
 
         try {
             BufferedReader readCSVStaff = new BufferedReader(new FileReader(super.pathImport()));
@@ -133,8 +132,6 @@ public class Clerk extends Employee {
 
             readCSVStaff.close();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
