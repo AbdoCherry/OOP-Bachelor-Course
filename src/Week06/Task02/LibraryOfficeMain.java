@@ -24,7 +24,7 @@ public class LibraryOfficeMain {
                 System.out.println("[Get Book = 'G'/'g']\t[Display Books = 'D'/'d']");
                 System.out.println("\t\t[Exit Program = 'E'/'e']");
 
-                System.out.print("Menu: ");
+                System.out.print("\nMenu: ");
 
                 char menu = Character.toUpperCase(scanner.next().charAt(0));
 
