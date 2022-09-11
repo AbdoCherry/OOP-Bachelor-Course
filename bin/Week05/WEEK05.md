@@ -1,7 +1,7 @@
 # Task collection of Week 5
 
 ## Task 01:
-Create the class shirt with the following attributes
+Create the class shirt with the following attributes'
 int shirtId,
 string description,
 char colorCode,
