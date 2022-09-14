@@ -155,12 +155,12 @@ public class Department {
                 Random random = new Random();
                 int randIndex = random.nextInt(0, emps.length);
 
-                teamLead = emps[randIndex].getFullName();
+                newTeamLead = emps[randIndex].getFullName();
             }
 
             departments.add(new Department(
                     newDepartment,
-                    teamLead,
+                    newTeamLead,
                     newEmployees,
                     newBudget
             ));
@@ -169,6 +169,7 @@ public class Department {
             System.out.println(sizeBefore < sizeAfter ? "Department created successfully\n" : "Department not successfully created\n");
 
         }
+        scannerCreate.close();
 
     }
 
