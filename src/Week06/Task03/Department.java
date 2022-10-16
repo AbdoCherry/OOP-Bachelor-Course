@@ -3,33 +3,29 @@ package Week06.Task03;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Department {
-    private String depName, teamLead;
-    private Set<Employee> employees;
+    private String department, teamLead;
+    private Set<Employee> staff;
     private double budget;
 
     public Department() {
     }
 
-    public Department(String depName, String teamLead, Set<Employee> employees, double budget) {
-        this.depName = depName;
+    public Department(String department, String teamLead, Set<Employee> staff, double budget) {
+        this.department = department;
         this.teamLead = teamLead;
-        this.employees = employees;
         this.budget = budget;
+        this.staff = staff;
     }
 
-    public String getDepName() {
-        return depName;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepName(String depName) {
-        this.depName = depName;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getTeamLead() {
@@ -40,12 +36,12 @@ public class Department {
         this.teamLead = teamLead;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Employee> getStaff() {
+        return staff;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setStaff(Set<Employee> staff) {
+        this.staff = staff;
     }
 
     public double getBudget() {
@@ -56,89 +52,70 @@ public class Department {
         this.budget = budget;
     }
 
-    public static List<Department> loadDepartments() {
+    public static List<Department> readCSV(Map<String, List<Employee>> assignedEmployees) {
 
-        List<Department> departments = new ArrayList<>();
-        Set<Employee> employees = new HashSet<>();
+        List<Department> departments = new ArrayList<Department>();
 
-        String pathDepMac = "src/Week06/Task03/Departments.csv";
-        String pathDepWin = "src\\Week06\\Task03\\Departments.csv";
-        String pathDep, lineDep;
-
-        String pathEmpMac = "src/Week06/Task03/Employees.csv";
-        String pathEmpWin = "src\\Week06\\Task03\\Employees.csv";
-        String pathEmp, lineEmp;
+        String path, pathMacOS = "src/Week06/Task03/Departments.csv", pathWin = "src\\Week06Task03\\Departments.csv", line;
 
         if (System.getProperty("os.name").startsWith("Mac")) {
-            pathDep = pathDepMac;
-            pathEmp = pathEmpMac;
+            path = pathMacOS;
         } else if (System.getProperty("os.name").startsWith("Win")) {
-            pathDep = pathDepWin;
-            pathEmp = pathEmpWin;
+            path = pathWin;
         } else {
-            pathDep = null;
-            pathEmp = null;
-            System.out.println("\nError: Unknown OS: " + System.getProperty("os.name") + " not supported." +
-                    "\nPlease restart program or use it from different Operating System");
-            System.exit(1);
+            path = null;
         }
 
         try {
-            BufferedReader readerDep = new BufferedReader(new FileReader(pathDep));
-            BufferedReader readerEmp = new BufferedReader(new FileReader(pathEmp));
+            BufferedReader readDeps = new BufferedReader(new FileReader(path));
+            readDeps.readLine();
 
-            readerDep.readLine();
-            readerEmp.readLine();
+            while ((line = readDeps.readLine()) != null) {
+                String[] depVals = line.split(";");
 
-            while ((lineDep = readerDep.readLine()) != null) {
-                String[] valuesDep = lineDep.split(";");
-
-                departments.add(new Department(valuesDep[0],
-                        valuesDep[1],
-                        null,
-                        Double.parseDouble(valuesDep[2])));
+                departments.add(new Department(
+                                depVals[0],
+                                depVals[1],
+                                null,
+                                Double.parseDouble(depVals[2])
+                        )
+                );
             }
-            readerDep.close();
-
-            for (int i = 0; i < departments.size(); i++) {
-                while ((lineEmp = readerEmp.readLine()) != null) {
-                    String[] valuesEmp = lineEmp.split(";");
-
-                    if (valuesEmp[0].equals(departments.get(i).getDepName())) {
-                        employees.add(new Employee(
-                                Integer.parseInt(valuesEmp[1]),
-                                valuesEmp[2],
-                                valuesEmp[3]
-                        ));
-                    }
-                }
-                departments.get(i).setEmployees(employees);
-            }
-
-            readerEmp.close();
+            readDeps.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(
-                departments.size() > 0 ? "\n================================ IMPORT SUCCESSFUL ================================\n"
-                        : "\n================================ IMPORT FAILED ================================\n");
+        for (Department d : departments) {
+            for (Map.Entry<String, List<Employee>> e : assignedEmployees.entrySet()) {
+                if (d.getDepartment().equals(e.getKey())) {
+                    Set<Employee> createStaff = new HashSet<Employee>(e.getValue());
+                    d.setStaff(createStaff);
+                }
+            }
+        }
 
         return departments;
     }
 
-    public static void displayAll(List<Department> departments) {
+    public static void display(List<Department> departments) {
+
+        System.out.println("\nAll departments and employees");
 
         departments.forEach(d -> {
-            System.out.println("\n|===========================================================================================================================|");
-            System.out.printf("%-2s%-10s%-40s%-2s%-10s%-20s%-2s%-10s%-25.2f%-2s\n", "|", "Department: ", d.getDepName(), "|", "Team Lead: ", d.getTeamLead(), "|", "Budget: ", d.getBudget(), "|");
-            System.out.println("|---------------------------------------------------------------------------------------------------------------------------|");
-            d.getEmployees().forEach(e -> {
-                System.out.printf("%-2s%-8s%-5d%-2s%-10s%-10s%-2s%-10s%-10s%-2s\n", "|", "Emp-ID: ", e.getEmpID(), "|", "First Name: ", e.getFirstName(), "|", "Last Name: ", e.getLastName(), "|");
-
-            });
+            System.out.println("\nDepartment: " + d.getDepartment() + "\tTeamlead: " + d.getTeamLead() + "\tBudget: " + d.getBudget() + " $");
+            System.out.println("------------------------------------------------------------------------------------------------");
+            d.getStaff().forEach(e -> System.out.println("EmployeeID: " + e.getEmpID() + "\tName: " + e.getFirstName() + " " + e.getLastName()));
         });
+    }
 
+    @Override
+    public String toString() {
+        return "Department {" +
+                " department = '" + department + '\'' +
+                ", teamLead = '" + teamLead + '\'' +
+                ", budget = " + budget +
+                '}';
     }
 }

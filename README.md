@@ -69,7 +69,7 @@ If you are interested in more tasks of the listed topics, leave me a comment on 
 
 - Cross-Platform Development with **Flutter** and **Java** ![__Flutter__](flutter.png) & ![__Java__](java.png)
 - Data Science & Machine Learning with **Python** ![__Python__](python.png)
-- WebApp Developement and Web-Desing with **Angular** and **Java** ![**Angular**](Angular.png) & ![__Java__](java.png)
+- WebApp Developement and Web-Desing with **Angular** and **Java** ![**Angular**](angular.png) & ![__Java__](java.png)
 
 I hope that my input could encourage a few people to start a career as a developer. Please left some comments or questions if you wish, I´m always going to look to improve my skills and the best way to do so, is to get input from you. And if you want higher or more advanced developed projects, check my Full-Stack approaches and finished Web Applications.
 
