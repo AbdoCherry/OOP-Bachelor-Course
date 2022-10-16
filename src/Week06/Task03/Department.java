@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Department {
     private String department, teamLead;
@@ -56,7 +57,8 @@ public class Department {
 
         List<Department> departments = new ArrayList<Department>();
 
-        String path, pathMacOS = "src/Week06/Task03/Departments.csv", pathWin = "src\\Week06Task03\\Departments.csv", line;
+        String path, pathMacOS = "src/Week06/Task03/Departments.csv", pathWin = "src\\Week06Task03\\Departments.csv",
+                line;
 
         if (System.getProperty("os.name").startsWith("Mac")) {
             path = pathMacOS;
@@ -73,13 +75,7 @@ public class Department {
             while ((line = readDeps.readLine()) != null) {
                 String[] depVals = line.split(";");
 
-                departments.add(new Department(
-                                depVals[0],
-                                depVals[1],
-                                null,
-                                Double.parseDouble(depVals[2])
-                        )
-                );
+                departments.add(new Department(depVals[0], depVals[1], null, Double.parseDouble(depVals[2])));
             }
             readDeps.close();
 
@@ -99,23 +95,61 @@ public class Department {
         return departments;
     }
 
+    public void createDepartment(List<Department> departments) {
+
+        Scanner createDepScanner = new Scanner(System.in);
+
+        System.out.println("\nPlease enter the necessary informations in the fields below");
+        Department newDepartment = new Department();
+
+        System.out.print("\nName of Department to create: ");
+        String newDepName = createDepScanner.nextLine();
+
+        Boolean depExists = false;
+        for (Department d : departments) {
+            if (d.getDepartment().equalsIgnoreCase(newDepName)) {
+                depExists = true;
+                break;
+            }
+        }
+
+        if (!depExists) {
+            System.out.println(
+                    "\nPlease select Team lead for this new department\nChoose from the list below by entering employee number");
+
+            int min = 1, max = 10, indexCounter = 0;
+            ;
+            int[] randomSelection = new int[10];
+
+            while (randomSelection[9] == 0) {
+
+                randomSelection[indexCounter] = ThreadLocalRandom.current().nextInt(min, max + 1);
+                indexCounter++;
+            }
+
+            
+
+        }
+
+    }
+
     public static void display(List<Department> departments) {
 
         System.out.println("\nAll departments and employees");
 
         departments.forEach(d -> {
-            System.out.println("\nDepartment: " + d.getDepartment() + "\tTeamlead: " + d.getTeamLead() + "\tBudget: " + d.getBudget() + " $");
-            System.out.println("------------------------------------------------------------------------------------------------");
-            d.getStaff().forEach(e -> System.out.println("EmployeeID: " + e.getEmpID() + "\tName: " + e.getFirstName() + " " + e.getLastName()));
+            System.out.println("\nDepartment: " + d.getDepartment() + "\tTeamlead: " + d.getTeamLead() + "\tBudget: "
+                    + d.getBudget() + " $");
+            System.out.println(
+                    "------------------------------------------------------------------------------------------------");
+            d.getStaff().forEach(e -> System.out
+                    .println("EmployeeID: " + e.getEmpID() + "\tName: " + e.getFirstName() + " " + e.getLastName()));
         });
     }
 
     @Override
     public String toString() {
-        return "Department {" +
-                " department = '" + department + '\'' +
-                ", teamLead = '" + teamLead + '\'' +
-                ", budget = " + budget +
-                '}';
+        return "Department {" + " department = '" + department + '\'' + ", teamLead = '" + teamLead + '\''
+                + ", budget = " + budget + '}';
     }
 }
