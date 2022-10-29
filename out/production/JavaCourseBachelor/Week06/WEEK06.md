@@ -35,7 +35,7 @@ No user interface programming or similar is required to solve the task.
 ## Task 03:
 A program is to be developed that is to manage different departments. For this the following classes are to be implemented.
 
-__Class department__ with the attributes: String department, String teamLead, employee employee, double budget
+__Class department__ with the attributes: String department, String teamLead, Employee employees (We will use a HashSet for this), double budget
 __Class employee__ with the attributes: int empId, String name, String first name
 - A department should contain at least information about, b e designation, nameLtr, budget.
 - A maximum of 5 employees are assigned to a department

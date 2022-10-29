@@ -87,16 +87,16 @@ public class Employee {
      */
     public void increaseSalary(double salaryNew) {
 
-        // We want to work with the monthly salary
-        double salaryBefore = this.salary / 12;
+        // We want to work with the yearly salary
+        double salaryBefore = this.salary;
         double difference = salaryNew - salaryBefore;
         double validator = difference / salaryBefore * 100;
         double exceeded = salaryNew - (salaryBefore * 1.1);
 
         if (validator <= 10) {
             System.out.println("\nYour requested salary increase has been approved");
-            System.out.println("Salary before\tSalary after\tIncrease by %\t\tIncrease by $");
-            System.out.printf("%.2f $\t%.2f $\t%.2f %%\t%.2f %%\n", salaryBefore, salaryNew, validator, difference);
+            System.out.printf("%-20s%-20s%-20s%-20s\n", "Salary before", "Salary after", "Increasy by", "Increased by");
+            System.out.printf("%-20.2f$%-20.2f$%-20.2f%%%-20.2f%%\n", salaryBefore, salaryNew, validator, difference);
         } else {
             System.out.println(
                     "\nWe have to regretfully decline your desired salary increase because it exceeds the maximum of 10 % from the current salary");
@@ -129,6 +129,7 @@ public class Employee {
         System.out.println("\n\n****** Stock options per Employee ******");
 
         System.out.printf("\n%-6s%-20s%-6s\n", "ID", "Employee", "Stock Options");
+        System.out.println("----------------------------------------------------");
         for (Employee e : employees) {
             if (e != null) {
                 if (e instanceof Admin | e instanceof Admin) {
