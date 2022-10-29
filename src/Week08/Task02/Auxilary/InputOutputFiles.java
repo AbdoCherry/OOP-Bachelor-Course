@@ -29,7 +29,7 @@ public class InputOutputFiles {
         String myOS = System.getProperty("os.name");
         String line = null; // Preventing reader to read the headers of csv
 
-        // Lets find out which os we do have
+        // Let's find out which os we do have
         if (myOS.startsWith("Win")) {
             path = pathWindows;
         } else if (myOS.startsWith("Mac")) {
@@ -54,8 +54,6 @@ public class InputOutputFiles {
             success = customers.size() > 0;
 
             readCSV.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,7 +148,7 @@ public class InputOutputFiles {
 
                 sbCustomer.append(c.getCustomerID());
                 sbCustomer.append(";");
-                sbCustomer.append(c.getFirstName() + " " + c.getLastName());
+                sbCustomer.append(c.getFirstName()).append(" ").append(c.getLastName());
                 sbCustomer.append(";");
                 sbCustomer.append(c.getCustomerSince());
                 sbCustomer.append("\n");
@@ -158,7 +156,7 @@ public class InputOutputFiles {
                 if (c.getChecking() != null) {
                     sbChecking.append(c.getCustomerID());
                     sbChecking.append(";");
-                    sbChecking.append(c.getFirstName() + " " + c.getLastName());
+                    sbChecking.append(c.getFirstName()).append(" ").append(c.getLastName());
                     sbChecking.append(";");
                     sbChecking.append(c.getCustomerSince());
                     sbChecking.append(";");
@@ -196,8 +194,6 @@ public class InputOutputFiles {
             System.out.println(
                     "\n================================ EXPORT DEPOSIT FILE SUCCESSFUL ================================\n");
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
