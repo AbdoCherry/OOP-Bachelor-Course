@@ -79,10 +79,15 @@ public class Employee {
         return randomEmployees;
     }
 
-    private static Boolean checkExistence(Set<Employee> allEmps, String firstName, String lastName) {
+    private static Boolean checkExistence(Set<Employee> allEmps, int empID, String firstName, String lastName) {
 
-        return allEmps.stream()
-                .anyMatch(e -> e.getFirstName().equalsIgnoreCase(firstName) && e.getLastName().equalsIgnoreCase(lastName));
+        if (empID == 0) {
+            return allEmps.stream()
+                    .anyMatch(e -> e.getFirstName().equalsIgnoreCase(firstName) && e.getLastName().equalsIgnoreCase(lastName));
+        } else {
+            return allEmps.stream()
+                    .anyMatch(e -> e.getEmpID() == empID);
+        }
     }
 
     private static int maxIDincr(Set<Employee> allEmps) {
@@ -105,7 +110,7 @@ public class Employee {
 
         Set<Employee> allEmployees = allEmployees(departments);
 
-        if (!checkExistence(allEmployees, firstName, lastName)) {
+        if (!checkExistence(allEmployees, 0, firstName, lastName)) {
             newEmployee.setEmpID(maxIDincr(allEmployees));
             newEmployee.setFirstName(firstName);
             newEmployee.setLastName(lastName);
@@ -119,6 +124,62 @@ public class Employee {
         }
 
         return newEmployee;
+    }
+
+    public void removeEmployee(List<Department> departments) {
+
+        Scanner remEmpScanner = new Scanner(System.in);
+        System.out.println("\nPlease enter the necessary information in the fields below\n");
+        System.out.println("Please select input variant to get employee\n[1 = By Employee - ID]\t[2 = By Name]");
+        System.out.print("\nInput: ");
+        int input = remEmpScanner.nextInt();
+
+        // Display all Employees
+        displayAllEmployees(departments);
+
+        // By user input we select our employee
+        switch (input) {
+            case 1:
+                System.out.print("\nEmployee - ID: ");
+                int empID = remEmpScanner.nextInt();
+
+                while (checkExistence(allEmployees(departments), empID, null, null)) {
+                    for (Department d : departments) {
+                        d.getStaff().removeIf(e -> e.getEmpID() == empID);
+                    }
+                    break;
+                }
+                break;
+            case 2:
+                System.out.println("");
+                System.out.print("First Name: ");
+                String firstName = remEmpScanner.nextLine();
+                System.out.print("\nLast Name: ");
+                String lastName = remEmpScanner.nextLine();
+
+                while (checkExistence(allEmployees(departments), 0, firstName, lastName)) {
+                    for (Department d : departments) {
+                        d.getStaff().removeIf(e -> e.getFirstName().equalsIgnoreCase(firstName) && e.getLastName().equalsIgnoreCase(lastName));
+                        break;
+                    }
+                }
+                break;
+            default:
+                System.out.println("\nError input.\nPlease restart removing employee again");
+                System.exit(1);
+        }
+        System.out.println("\nEmployee ");
+    }
+
+    public void displayAllEmployees(List<Department> departments) {
+        List<Employee> allEmpsSorted = new ArrayList<>(allEmployees(departments));
+        allEmpsSorted.sort(Comparator.comparing(Employee::getFirstName));
+        System.out.println("|========================================================|");
+        System.out.printf("\n\033[1m%-2s%-15s%-20s%-20s%-2s\033[0m\n", "|", "Employee-ID", "First Name", "Last Name", "|");
+        System.out.println("|========================================================|");
+        allEmpsSorted.forEach(e -> {
+            System.out.printf("%-2s%-15d%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
+        });
     }
 
 

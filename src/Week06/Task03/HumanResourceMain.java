@@ -4,7 +4,6 @@ import Week06.Task03.IOFile.FileIO;
 import Week06.Task03.Model.Department;
 import Week06.Task03.Model.Employee;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +13,7 @@ public class HumanResourceMain {
         Scanner scanner = new Scanner(System.in);
         List<Department> departments = FileIO.readCSV();
         Department d = new Department();
+        Employee e = new Employee();
 
 
         int menu;
@@ -34,25 +34,33 @@ public class HumanResourceMain {
 
             switch (menu) {
                 case 1:
-                    d.createEmployeeProcess(departments);
+                    d.assignEmployeeToDepartment(departments);
                     break;
-
+                case 2:
+                    e.removeEmployee(departments);
+                    break;
                 case 3:
                     d.createDepartment(departments);
                     break;
+                case 4:
+                    d.removeDepartment(departments);
+                    break;
                 case 0:
                     System.out.println("\nThanks for using the program\n");
-                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("\nError input.\nPlease restart program, input could not be recognized by program.\n");
+                    System.exit(1);
             }
 
             System.out.println("\nContinue Program\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]");
             scanner.nextLine();
             System.out.print("Decision: ");
 
-
             continueProgram = Character.toUpperCase(scanner.nextLine().charAt(0));
         } while (continueProgram == 'Y');
 
+        // Display whole dataset -> All department and their attribute values
         Department.displayAll(departments);
     }
 }

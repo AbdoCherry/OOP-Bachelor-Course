@@ -1,5 +1,6 @@
 package Week06.Task03.Model;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Department {
@@ -7,6 +8,8 @@ public class Department {
     private String teamLead;
     private Set<Employee> staff;
     private double budget;
+
+    private static DecimalFormat df = new DecimalFormat("#.##");
 
     public Department() {
     }
@@ -63,8 +66,9 @@ public class Department {
         System.out.println("\nPlease select department below by ID");
         int counter = 1;
 
-        System.out.printf("%-2s%-5s%25s%-2s\n", "|", "ID", "Department", "|");
-        System.out.println("|--------------------------------------------------------|");
+        System.out.println("\n|===============================|");
+        System.out.printf("\033[1m%-2s%-5s%-25s%-2s\033[0m\n", "|", "ID", "Department", "|");
+        System.out.println("|===============================|");
         for (Department d : departments) {
             System.out.printf("%-2s%-5d%-25s%-2s\n", "|", counter, d.getDepartment(), "|");
             counter++;
@@ -73,13 +77,11 @@ public class Department {
         System.out.print("\nSelect: ");
         int selection = selectDepartment.nextInt() - 1;
 
-        selectDepartment.close();
-
         return departments.get(selection).getDepartment();
 
     }
 
-    public void createEmployeeProcess(List<Department> departments) {
+    public void assignEmployeeToDepartment(List<Department> departments) {
 
         Employee newEmployee = Employee.createEmployee(departments);
 
@@ -186,27 +188,35 @@ public class Department {
         departments.add(newDepartment);
 
         System.out.println(sizeBefore < departments.size() ? "\nDepartment created successfully\n" : "\nDepartment not created successfully");
-
     }
+
+    public void removeDepartment(List<Department> departments) {
+        Scanner remDepScanner = new Scanner(System.in);
+        System.out.println("\nPlease enter the necessary information in the fields below");
+
+        String depName = selectDepartment(departments);
+        departments.removeIf(d -> d.getDepartment().equalsIgnoreCase(depName));
+
+        System.out.println("\nDepartment removed successfully\n");
+    }
+
 
     public static void displayAll(List<Department> departments) {
 
+        // \033[1m //\033[0m
 
         departments.forEach(d -> {
-            System.out.println("\n\033[1m|==================================================================================================================================|\033[0m");
-            System.out.printf("\033[1m%-5s%-12s%-35s%-12s%-35s%-12s%-20.2f%-5s\033[0m\n", "|", "Department: ", d.getDepartment(), "Team Lead: ", d.getTeamLead(), "Budget: ", d.getBudget(), "|");
-            System.out.println("|----------------------------------------------------------------------------------------------------------------------------------|");
-            System.out.printf("\033[1m%-5s%-63s%-63s%-5s\033[0m\n", "|", "Emp-ID", "Name", "|");
-            System.out.println("|----------------------------------------------------------------------------------------------------------------------------------|");
-
-            if (d.getStaff() != null) {
-                d.getStaff().forEach(e -> {
-
-                    System.out.printf("\033[1m%-5s%-63s%-63s%-5s\033[0m\n", "|", e.getEmpID(), e.getFirstName() + " " + e.getLastName(), "|");
-
-
-                });
-            }
+            System.out.println("\n|============================================================================|");
+            System.out.printf("\033[1m%-2s%-25s%-25s%-25s%-2s\033[0m\n", "|", "Department", "Teamlead", "Budget", "|");
+            String formattedBudget = df.format(d.getBudget()) + " $";
+            System.out.printf("%-2s%-25s%-25s%-25s%-2s\n", "|", d.getDepartment(), d.getTeamLead(), formattedBudget, "|");
+            System.out.println("|============================================================================|");
+            System.out.printf("\033[1m%-2s%-25s%-25s%-25s%-2s\033[0m\n", "|", "Employee - ID", "First Name", "Last Name", "|");
+            System.out.println("|----------------------------------------------------------------------------|");
+            d.getStaff().forEach(e -> {
+                System.out.printf("%-2s%-25d%-25s%-25s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
+            });
+            System.out.println("|----------------------------------------------------------------------------|");
         });
     }
 }
