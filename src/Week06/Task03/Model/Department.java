@@ -1,5 +1,6 @@
 package Week06.Task03.Model;
 
+import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -117,7 +118,6 @@ public class Department {
                 counter++;
             }
         }
-
         // Select a teamlead
         System.out.println("\nPlease select employee by ID");
         Set<Employee> selectTeamlead = Employee.randomEmployee(Employee.allEmployees(departments));
@@ -137,6 +137,8 @@ public class Department {
 
         // Select 5 distinct employees as staff
         Set<Employee> allEmployees = Employee.allEmployees(departments);
+        List<Employee> sortedEmps = new ArrayList<>(allEmployees);
+        sortedEmps.sort(Comparator.comparing(Employee::getFirstName));
         Employee[] selectStaff = new Employee[5];
         char stopSelection = 'Y';
 
@@ -144,7 +146,7 @@ public class Department {
         System.out.println("|-----------------------------------------------------|");
 
         while (stopSelection == 'Y' && selectStaff[4] == null) {
-            allEmployees.forEach(e -> {
+            sortedEmps.forEach(e -> {
                 System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
             });
 

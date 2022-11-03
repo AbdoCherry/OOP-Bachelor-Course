@@ -3,6 +3,7 @@ package Week06.Task03.IOFile;
 import Week06.Task03.Model.Department;
 import Week06.Task03.Model.Employee;
 
+import javax.swing.*;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -109,57 +110,64 @@ public class FileIO {
 
     public static void writeCSV(List<Department> departments) {
 
-        String pathDepartment = "src/Week06/Task03/Data/Department.csv", pathEmployees = "src/Week06/Task03/Data/Employee.csv";
+        String pathDep = "src/Week06/Task03/Data/Department.csv", pathEmp = "src/Week06/Task03/Data/Employee.csv";
 
         try {
-            PrintWriter writeDepartmentCSV = new PrintWriter(new File(pathConverter(pathDepartment)));
-            PrintWriter writeEmployeeCSV = new PrintWriter(new File(pathConverter(pathEmployees)));
+            PrintWriter writeDepCSV = new PrintWriter((new File(pathConverter(pathDep))));
+            PrintWriter writeEmpCSV = new PrintWriter((new File(pathConverter(pathEmp))));
 
-            StringBuilder dep = new StringBuilder();
-            StringBuilder emp = new StringBuilder();
+            StringBuilder sbDep = new StringBuilder();
+            StringBuilder sbEmp = new StringBuilder();
 
-            // Defining header for Department
-            dep.append("Department");
-            dep.append(";");
-            dep.append("Teamlead");
-            dep.append(";");
-            dep.append("Budget");
-            dep.append("\n");
+            // Headers for department csv
+            sbDep.append("Department");
+            sbDep.append(";");
+            sbDep.append("TeamLead");
+            sbDep.append(";");
+            sbDep.append("Budget");
+            sbDep.append("\n");
 
-            // Defining header for Employee
-            emp.append("EmployeeID");
-            emp.append(";");
-            emp.append("Name");
-            emp.append("Department Name");
-            dep.append("\n");
+            // Headers for employee csv
+            sbEmp.append("Employee ID");
+            sbEmp.append(";");
+            sbEmp.append("Name");
+            sbEmp.append(";");
+            sbEmp.append("Department Name");
+            sbEmp.append("\n");
 
             for (Department d : departments) {
-                dep.append(d.getDepartment());
-                dep.append(";");
-                dep.append(d.getTeamLead());
-                dep.append(";");
-                dep.append(df.format(d.getBudget()));
-                dep.append("\n");
-                for (Employee e : d.getStaff()) {
-                    emp.append(String.valueOf(e.getEmpID()));
-                    emp.append(";");
-                    emp.append(e.getFirstName()).append(" ").append(e.getLastName());
-                    emp.append(";");
-                    emp.append(d.getDepartment());
-                    emp.append("\n");
+                sbDep.append(d.getDepartment());
+                sbDep.append(";");
+                sbDep.append(d.getTeamLead());
+                sbDep.append(";");
+                String formattedBudget = df.format(d.getBudget());
+                sbDep.append(formattedBudget);
+                sbDep.append("\n");
+
+                List<Employee> empList = new ArrayList<>(d.getStaff());
+                empList.sort(Comparator.comparing(Employee::getEmpID));
+
+                for (Employee e : empList) {
+                    sbEmp.append(String.valueOf(e.getEmpID()));
+                    sbEmp.append(";");
+                    sbEmp.append(e.getFirstName()).append(" ").append(e.getLastName());
+                    sbEmp.append(";");
+                    sbEmp.append(d.getDepartment());
+                    sbEmp.append("\n");
                 }
+
             }
 
-            writeDepartmentCSV.write(dep.toString());
-            writeDepartmentCSV.close();
-            writeEmployeeCSV.write(emp.toString());
-            writeEmployeeCSV.close();
+            writeDepCSV.write(sbDep.toString());
+            writeEmpCSV.write(sbEmp.toString());
+            JOptionPane.showMessageDialog(null, "CSV Saved");
+
+            writeDepCSV.close();
+            writeEmpCSV.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 

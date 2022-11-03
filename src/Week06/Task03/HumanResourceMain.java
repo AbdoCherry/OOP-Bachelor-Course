@@ -62,5 +62,12 @@ public class HumanResourceMain {
 
         // Display whole dataset -> All department and their attribute values
         Department.displayAll(departments);
+
+        System.out.print("\nDo you want to save edited data\n[Yes = 'Y'/'y']\t[No =  'N'/'n']: ");
+        if (Character.toUpperCase(scanner.next().charAt(0)) == 'Y') {
+            FileIO.writeCSV(departments);
+        } else {
+            System.out.println("\nThanks for using the program\n");
+        }
     }
 }

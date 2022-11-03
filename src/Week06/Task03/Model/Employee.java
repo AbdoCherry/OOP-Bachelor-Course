@@ -151,24 +151,23 @@ public class Employee {
                 }
                 break;
             case 2:
-                System.out.println("");
-                System.out.print("First Name: ");
+                remEmpScanner.nextLine();
+                System.out.print("\nFirst Name: ");
                 String firstName = remEmpScanner.nextLine();
-                System.out.print("\nLast Name: ");
+                System.out.print("Last Name: ");
                 String lastName = remEmpScanner.nextLine();
 
-                while (checkExistence(allEmployees(departments), 0, firstName, lastName)) {
-                    for (Department d : departments) {
-                        d.getStaff().removeIf(e -> e.getFirstName().equalsIgnoreCase(firstName) && e.getLastName().equalsIgnoreCase(lastName));
-                        break;
-                    }
+                for (Department d : departments) {
+                    d.getStaff().removeIf(e -> e.getFirstName().equalsIgnoreCase(firstName) && e.getLastName().equalsIgnoreCase(lastName));
+                    System.out.println("\nEmployee " + firstName + " " + lastName + " successfully removed from staff.\n");
+                    break;
                 }
                 break;
             default:
                 System.out.println("\nError input.\nPlease restart removing employee again");
                 System.exit(1);
         }
-        System.out.println("\nEmployee ");
+
     }
 
     public void displayAllEmployees(List<Department> departments) {
