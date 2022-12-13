@@ -3,6 +3,8 @@ package Week06.Task01;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Date {
@@ -51,10 +53,13 @@ public class Date {
 
         Date createDate = new Date();
 
-        System.out.print("Day of trip: ");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        System.out.println("Please beware of our Policy\nTrip must be at least 5 days in future of current date: " + dtf.format(LocalDateTime.now()) + "\n");
+
+        System.out.print("Day of trip -> Format {dd}: ");
         createDate.setDay(scanner.nextInt());
 
-        System.out.print("Month of trip: ");
+        System.out.print("Month of trip -> Format {MM}: ");
         createDate.setMonth(scanner.nextInt());
 
         return createDate;

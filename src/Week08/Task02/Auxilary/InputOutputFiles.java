@@ -20,11 +20,11 @@ public class InputOutputFiles {
     public static List<Customer> readCSV() {
 
         // Declaring our List where we store our records from CSV
-        List<Customer> customers = new ArrayList<Customer>();
+        List<Customer> customers = new ArrayList<>();
 
         // Depending on our operating system we have to define the path
-        String pathWindows = "src\\Week08\\Task2\\Data\\input.csv";
-        String pathMacOS = "src/Week08/Task2/Data/input.csv";
+        String pathWindows = "src\\Week08\\Task02\\Data\\input.csv";
+        String pathMacOS = "src/Week08/Task02/Data/input.csv";
         String path = "";
         String myOS = System.getProperty("os.name");
         String line = null; // Preventing reader to read the headers of csv
@@ -38,8 +38,6 @@ public class InputOutputFiles {
             path = null;
         }
 
-        boolean success = false; // Nice to have. Look below before return statement
-
         try {
             BufferedReader readCSV = new BufferedReader(new FileReader(path));
             readCSV.readLine();
@@ -51,15 +49,13 @@ public class InputOutputFiles {
 
             }
 
-            success = customers.size() > 0;
-
             readCSV.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         System.out.println(
-                success ? "\n================================ IMPORT SUCCESSFUL ================================\n"
+                customers.size() > 0 ? "\n================================ IMPORT SUCCESSFUL ================================\n"
                         : "\n================================ IMPORT FAILED ================================\n");
 
         return customers;
@@ -69,19 +65,19 @@ public class InputOutputFiles {
 
         Date today = new Date();
 
-        String pathWindowsCustomer = "src\\Week08\\Task2\\Data\\Customer_" + DateConverter.sdfParser.format(today)
+        String pathWindowsCustomer = "src\\Week08\\Task02\\Data\\Customer_" + DateConverter.sdfParser.format(today)
                 + "_.csv";
-        String pathMacOSCustomer = "src/Week08/Task2/Data/Customer_" + DateConverter.sdfParser.format(today)
+        String pathMacOSCustomer = "src/Week08/Task02/Data/Customer_" + DateConverter.sdfParser.format(today)
                 + ".csv";
         String pathCustomer = "";
-        String pathWindowsChecking = "src\\Week08\\Task2\\Data\\Checking_" + DateConverter.sdfParser.format(today)
+        String pathWindowsChecking = "src\\Week08\\Task02\\Data\\Checking_" + DateConverter.sdfParser.format(today)
                 + "_.csv";
-        String pathMacOSChecking = "src/Week08/Task2/Data/Checking_" + DateConverter.sdfParser.format(today)
+        String pathMacOSChecking = "src/Week08/Task02/Data/Checking_" + DateConverter.sdfParser.format(today)
                 + ".csv";
         String pathChecking = "";
-        String pathWindowsDeposit = "src\\Week08\\Task2\\Data\\Deposit_" + DateConverter.sdfParser.format(today)
+        String pathWindowsDeposit = "src\\Week08\\Task02\\Data\\Deposit_" + DateConverter.sdfParser.format(today)
                 + "_.csv";
-        String pathMacOSDeposit = "src/Week08/Task2/Data/Deposit_" + DateConverter.sdfParser.format(today)
+        String pathMacOSDeposit = "src/Week08/Task02/Data/Deposit_" + DateConverter.sdfParser.format(today)
                 + ".csv";
         String pathDeposit = "";
 

@@ -46,10 +46,14 @@ public class TravelAgencyMain {
             }
 
             System.out.println("\nRestart program?\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]");
+            scanner.nextLine();
             System.out.print("Restart: ");
+
+
             continueProgram = Character.toUpperCase(scanner.next().charAt(0));
 
         } while (continueProgram == 'Y');
+
 
         c.displayAll(customers);
 

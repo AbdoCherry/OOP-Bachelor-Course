@@ -82,11 +82,9 @@ public class Customer {
 
     public List<Customer> myAccounts(List<Customer> customers, String[] customer) {
 
-        // Searching user by First- and Lastname and return list with all of his
-        // accounts
+        // Searching user by First- and Lastname and return list with all of his accounts
         List<Customer> myAccounts = customers.stream()
-                .filter(c -> c.getFirstName().equals(customer[0]))
-                .filter(c -> c.getLastName().equals(customer[1]))
+                .filter(c -> c.getFirstName().equalsIgnoreCase(customer[0]) && c.getLastName().equalsIgnoreCase(customer[1]))
                 .collect(Collectors.toList());
 
         return myAccounts;

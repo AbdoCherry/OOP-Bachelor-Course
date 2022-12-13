@@ -115,25 +115,31 @@ public class Customer {
     /*
     We want to return only the selected trips of one queried customer
      */
+    /**
+     * @param customers
+     * @return
+     */
     public List<Customer> selectCustomers(List<Customer> customers) {
 
-        Scanner select = new Scanner(System.in);
+        Scanner selectCustomerScanner = new Scanner(System.in);
 
         List<Customer> selectedCustomers = new ArrayList<>();
 
         System.out.println("\nPlease enter the necessary information in the fields below");
 
         System.out.print("First Name: ");
-        String searchFirstName = select.nextLine();
+        String searchFirstName = selectCustomerScanner.nextLine();
 
         System.out.print("Last Name: ");
-        String searchLastName = select.nextLine();
+        String searchLastName = selectCustomerScanner.nextLine();
 
         for (Customer c : customers) {
             if (c.getFirstName().equals(searchFirstName) && c.getLastName().equals(searchLastName)) {
                 selectedCustomers.add(c);
             }
         }
+
+        selectCustomerScanner.close();
 
         return selectedCustomers;
     }
@@ -187,16 +193,16 @@ public class Customer {
 
     public void bookTrip(List<Customer> customers) {
 
-        Scanner createScanner = new Scanner(System.in);
+        Scanner createCustomerScanner = new Scanner(System.in);
 
         Customer createCustomer = new Customer();
         System.out.println("\nPlease enter the necessary information in the fields below\n");
 
         System.out.print("First Name: ");
-        String createFirstName = createScanner.nextLine();
+        String createFirstName = createCustomerScanner.nextLine();
 
         System.out.print("Last Name: ");
-        String createLastName = createScanner.nextLine();
+        String createLastName = createCustomerScanner.nextLine();
 
         Trip createTrip = Trip.createTrip();
         Date createToday = Date.createToday();

@@ -199,8 +199,7 @@ public class Customer {
      */
     public static void getAccount(List<Account> accounts) throws ParseException {
 
-        // Get an Array of deposit accounts from user if he already possess deposit
-        // accounts
+        // Get an Array of deposit accounts from user if he already posess deposit accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();

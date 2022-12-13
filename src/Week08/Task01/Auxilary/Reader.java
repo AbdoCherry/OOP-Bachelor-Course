@@ -19,8 +19,8 @@ public class Reader {
         List<Account> accounts = new ArrayList<Account>();
 
         // Filepath of our csv. Depending on your OS I´ve built these branching
-        String windowsPath = "src\\Week08\\Task1\\Data\\input.csv";
-        String macOsPath = "src/Week08/Task1/Data/input.csv";
+        String windowsPath = "src\\Week08\\Task01\\Data\\input.csv";
+        String macOsPath = "src/Week08/Task01/Data/input.csv";
         String myOS = System.getProperty("os.name");
         String path;
         String line = null; // To prevent not reading the header
