@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class TravelAgencyMain {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+
 
         // Reading csv-file into ArrayList
         List<Customer> customers = Customer.readObjectsFromCSV();
@@ -18,6 +18,7 @@ public class TravelAgencyMain {
         char continueProgram;
 
         do {
+            Scanner scanner = new Scanner(System.in);
             System.out.println("\nPlease choose menu below");
             System.out.println("[Alter Trip = 'A'/'a']\t[Book Trip = 'B'/'b']");
             System.out.println("[Cancel Trip = 'C'/'c']\t[Display Trip = 'D'/'d']");

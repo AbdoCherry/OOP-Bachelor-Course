@@ -33,6 +33,10 @@ public class HumanResourceMain {
 
 
             switch (menu) {
+                case 0:
+                    System.out.println("\nThanks for using the program\n");
+                    System.exit(0);
+                    break;
                 case 1:
                     d.assignEmployeeToDepartment(departments);
                     break;
@@ -45,9 +49,7 @@ public class HumanResourceMain {
                 case 4:
                     d.removeDepartment(departments);
                     break;
-                case 0:
-                    System.out.println("\nThanks for using the program\n");
-                    break;
+
                 default:
                     System.out.println("\nError input.\nPlease restart program, input could not be recognized by program.\n");
                     System.exit(1);

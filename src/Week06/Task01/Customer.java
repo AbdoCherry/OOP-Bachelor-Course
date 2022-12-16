@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Customer {
 
-    public Scanner scanner = new Scanner(System.in);
+    private final Scanner customerScanner = new Scanner(System.in);
 
     private String firstName, lastName;
     private Trip bookedTrip;
@@ -115,15 +116,14 @@ public class Customer {
     /*
     We want to return only the selected trips of one queried customer
      */
+
     /**
-     * @param customers
-     * @return
+     * @param customers Gets as input parameter a list from where it selects the filtered customers
+     * @return filtered list of customers by first- and lastname
      */
     public List<Customer> selectCustomers(List<Customer> customers) {
 
         Scanner selectCustomerScanner = new Scanner(System.in);
-
-        List<Customer> selectedCustomers = new ArrayList<>();
 
         System.out.println("\nPlease enter the necessary information in the fields below");
 
@@ -133,15 +133,9 @@ public class Customer {
         System.out.print("Last Name: ");
         String searchLastName = selectCustomerScanner.nextLine();
 
-        for (Customer c : customers) {
-            if (c.getFirstName().equals(searchFirstName) && c.getLastName().equals(searchLastName)) {
-                selectedCustomers.add(c);
-            }
-        }
-
-        selectCustomerScanner.close();
-
-        return selectedCustomers;
+        return customers.stream()
+                .filter(c -> c.getFirstName().equalsIgnoreCase(searchFirstName) && c.getLastName().equalsIgnoreCase(searchLastName))
+                .collect(Collectors.toList());
     }
 
     public Customer returnSelectedCustomer(List<Customer> customers) {
@@ -169,7 +163,7 @@ public class Customer {
 
             System.out.println("\nPlease choose trip by ID");
             System.out.print("Decision: ");
-            decision = scanner.nextInt();
+            decision = customerScanner.nextInt();
             decision--;
 
         } else if (searchedCustomer.size() == 0) {
@@ -230,7 +224,7 @@ public class Customer {
         System.out.println("[Destination = 'D'/'d']\t\t[Date of Trip = 'T'/'t']");
         System.out.print("Property: ");
 
-        char property = Character.toUpperCase(scanner.next().charAt(0));
+        char property = Character.toUpperCase(customerScanner.next().charAt(0));
         Customer testCustomer = new Customer();
 
         switch (property) {
@@ -320,7 +314,7 @@ public class Customer {
         System.out.printf("\n%-25s%-25s", "[Name = 'N'/'n']", "[Destination = 'D/'d']");
         System.out.printf("\n%-25s%-25s", "[Month of Trip = 'T'/'t']", "[Month of booking = 'B'/'b']\n");
         System.out.print("Property: ");
-        char property = Character.toUpperCase(scanner.next().charAt(0));
+        char property = Character.toUpperCase(customerScanner.next().charAt(0));
 
         int counter = 1;
         switch (property) {
@@ -455,7 +449,9 @@ public class Customer {
                     validator);
             counter++;
         }
+        customerScanner.close();
     }
+
 }
 
 

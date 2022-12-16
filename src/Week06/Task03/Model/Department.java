@@ -145,12 +145,12 @@ public class Department {
         System.out.printf("\033[1m%-2s%-12s%-20s%-20s%-2s\033[0m\n", "|", "Emp-ID", "First Name", "Last Name", "|");
         System.out.println("|-----------------------------------------------------|");
 
+        int freeSpace = 0;
         while (stopSelection == 'Y' && selectStaff[4] == null) {
             sortedEmps.forEach(e -> {
                 System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
             });
 
-            int freeSpace = 0;
             System.out.print("\nEmployee ID: ");
             int staffMemberSelect = createDepartment.nextInt();
 
@@ -162,8 +162,6 @@ public class Department {
                     freeSpace++;
                     break;
                 }
-
-
             }
 
             System.out.println("Continue Selection. You can add up to " + (5 - freeSpace) + " members for staff\n");
@@ -210,6 +208,7 @@ public class Department {
         departments.forEach(d -> {
             System.out.println("\n|============================================================================|");
             System.out.printf("\033[1m%-2s%-25s%-25s%-25s%-2s\033[0m\n", "|", "Department", "Teamlead", "Budget", "|");
+            System.out.println("|----------------------------------------------------------------------------|");
             String formattedBudget = df.format(d.getBudget()) + " $";
             System.out.printf("%-2s%-25s%-25s%-25s%-2s\n", "|", d.getDepartment(), d.getTeamLead(), formattedBudget, "|");
             System.out.println("|============================================================================|");
