@@ -2,7 +2,6 @@ package Week08.Task02.Auxilary;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -174,7 +173,6 @@ public class InputOutputFiles {
                     sbDeposit.append(c.getDeposit().getExpirationDate());
                     sbDeposit.append("\n");
                 }
-
             }
 
             writeCSVCustomer.write(sbCustomer.toString());
