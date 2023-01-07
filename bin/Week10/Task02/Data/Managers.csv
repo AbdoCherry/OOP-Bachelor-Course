@@ -1,21 +1,21 @@
-﻿EmployeeID;FirstName;LastName;Salary;Department;Budget
-1;Sheikh;Yerbouti;100000;Sales and Marketing;2734280
-2;Maposi;Nmakrak;89000;Mergers and Aquisition;6698200
-3;Ben;Dover;120000;Distribution and Shipping;2575303
-4;Tess;Tickles;200000;Financial Services;3942738
-5;Dickins;Cyder;400000;Human Resources;7868174
-6;Twork;Hadah;130000;Business Analysis;2379443
-7;Amin;Yahouse;90000;Key-Account-Group;870850
-8;Hugh;Jass;75000;Customer Relationship Management;4755892
-9;Nick;Gur;100000;Diversity;3857992
-10;Justin;Herass;60000;Controlling;6270776
-11;Ramit;Inmas-hool;85000;Investigation;670150
-12;Willie;B. Hardigan;88000;Research;2985501
-13;Mike;Litoris;90500;Social and Charity;3314422
-14;Jack;Goff;100500;Internal Communication;8776603
-15;Jyant;Deck;200450;Externam Communication;1266760
-16;G. Norma;Stits;150000;Executive Support & Management Board;1964185
-17;Cris P.;Bacon;40000;Cantine & Beverage Management;486409
-18;Pastor;Sempa;300250;Strategic Communication;592178
-19;Pepe J.;Enzima;100000;Liberterian Relationship;9878724
-20;Andrew;Tate;300000;Alpha-Department;5449422
+EmployeeID;FirstName;LastName;Salary;Department;Budget;StaffSize
+1;Sheikh;Yerbouti;100000.0;Sales and Marketing;2734280.0;491
+2;Maposi;Nmakrak;89000.0;Mergers and Aquisition;6698200.0;507
+3;Ben;Dover;120000.0;Distribution and Shipping;2575303.0;477
+4;Tess;Tickles;200000.0;Financial Services;3942738.0;491
+5;Dickins;Cyder;400000.0;Human Resources;7868174.0;460
+6;Twork;Hadah;130000.0;Business Analysis;2379443.0;515
+7;Amin;Yahouse;90000.0;Key-Account-Group;870850.0;504
+8;Hugh;Jass;75000.0;Customer Relationship Management;4755892.0;526
+9;Nick;Gur;100000.0;Diversity;3857992.0;474
+10;Justin;Herass;60000.0;Controlling;6270776.0;470
+11;Ramit;Inmas-hool;85000.0;Investigation;670150.0;535
+12;Willie;B. Hardigan;88000.0;Research;2985501.0;505
+13;Mike;Litoris;90500.0;Social and Charity;3314422.0;484
+14;Jack;Goff;100500.0;Internal Communication;8776603.0;533
+15;Jyant;Deck;200450.0;External Communication;1266760.0;516
+16;G. Norma;Stits;150000.0;Executive Support & Management Board;1964185.0;511
+17;Cris P.;Bacon;40000.0;Cantine & Beverage Management;486409.0;489
+18;Pastor;Sempa;300250.0;Strategic Communication;592178.0;507
+19;Pepe J.;Enzima;100000.0;Liberterian Relationship;9878724.0;492
+20;Andrew;Tate;300000.0;Alpha-Department;5449422.0;515

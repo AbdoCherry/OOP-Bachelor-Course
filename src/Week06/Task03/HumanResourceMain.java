@@ -15,44 +15,43 @@ public class HumanResourceMain {
         Department d = new Department();
         Employee e = new Employee();
 
-
         int menu;
         char continueProgram = 'Y';
 
-        System.out.println("=============================== Welcome to the Human Resource Program ===============================");
+        System.out.println(
+                "=============================== Welcome to the Human Resource Program ===============================");
 
         do {
             System.out.println("Please select from menu");
             System.out.println("[1  =   Add Employee]\t  [3 = Create Department]");
             System.out.println("[2 = Remove Employee]\t  [4 = Remove Department]");
-            System.out.println("\t\t\t  [0 = Exit Program]");
+            System.out.println("\t\t[0 = Exit Program]");
             System.out.print("\nMenu: ");
-
 
             menu = scanner.nextInt();
 
-
             switch (menu) {
-                case 0:
-                    System.out.println("\nThanks for using the program\n");
-                    System.exit(0);
-                    break;
-                case 1:
-                    d.assignEmployeeToDepartment(departments);
-                    break;
-                case 2:
-                    e.removeEmployee(departments);
-                    break;
-                case 3:
-                    d.createDepartment(departments);
-                    break;
-                case 4:
-                    d.removeDepartment(departments);
-                    break;
+            case 0:
+                System.out.println("\nThanks for using the program\n");
+                System.exit(0);
+                break;
+            case 1:
+                d.assignEmployeeToDepartment(departments);
+                break;
+            case 2:
+                e.removeEmployee(departments);
+                break;
+            case 3:
+                d.createDepartment(departments);
+                break;
+            case 4:
+                d.removeDepartment(departments);
+                break;
 
-                default:
-                    System.out.println("\nError input.\nPlease restart program, input could not be recognized by program.\n");
-                    System.exit(1);
+            default:
+                System.out
+                        .println("\nError input.\nPlease restart program, input could not be recognized by program.\n");
+                System.exit(1);
             }
 
             System.out.println("\nContinue Program\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]");
@@ -71,5 +70,6 @@ public class HumanResourceMain {
         } else {
             System.out.println("\nThanks for using the program\n");
         }
+
     }
 }

@@ -1,6 +1,5 @@
 package Week06.Task03.Model;
 
-import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -74,6 +73,7 @@ public class Department {
             System.out.printf("%-2s%-5d%-25s%-2s\n", "|", counter, d.getDepartment(), "|");
             counter++;
         }
+        System.out.println("|-------------------------------|");
 
         System.out.print("\nSelect: ");
         int selection = selectDepartment.nextInt() - 1;
@@ -191,7 +191,6 @@ public class Department {
     }
 
     public void removeDepartment(List<Department> departments) {
-        Scanner remDepScanner = new Scanner(System.in);
         System.out.println("\nPlease enter the necessary information in the fields below");
 
         String depName = selectDepartment(departments);

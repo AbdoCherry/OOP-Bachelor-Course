@@ -61,8 +61,7 @@ public class Book {
                 System.out.printf("%-10s%-10s%-65s%-25s\n", counter++, b.getRackNo(), b.getTitle(), b.getPublisher());
             }
 
-            System.out.println("\nPlease select book by ID: ");
-            System.out.print("ID: ");
+            System.out.print("\nPlease select book by ID: ");
             bookDecision = selectBook.nextInt();
             return extractedBooksList.get(bookDecision - 1);
         } else {

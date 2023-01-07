@@ -284,8 +284,7 @@ public class Customer {
         int sizeBefore = customers.size();
         int sizeAfter = 0;
 
-        System.out.println("\nYou are sure? The whole record will be deleted from database");
-        System.out.println("[Yes = 'Y'/'y']\t[No = 'N'/'n]");
+        System.out.println("\nYou are sure? The whole record will be deleted from database\t[Yes = 'Y'/'y']\t[No = 'N'/'n]");
         System.out.print("Are you sure?: ");
         char cancelConfirmation = Character.toUpperCase(cancel.next().charAt(0));
 
@@ -311,9 +310,9 @@ public class Customer {
         Scanner newScanner = new Scanner(System.in);
 
         System.out.println("\nPlease choose property below");
-        System.out.printf("\n%-25s%-25s", "[Name = 'N'/'n']", "[Destination = 'D/'d']");
+        System.out.printf("\n%-25s%-25s", "[Name          = 'N'/'n']", "[Destination      = 'D/'d']");
         System.out.printf("\n%-25s%-25s", "[Month of Trip = 'T'/'t']", "[Month of booking = 'B'/'b']\n");
-        System.out.print("Property: ");
+        System.out.print("\nProperty: ");
         char property = Character.toUpperCase(customerScanner.next().charAt(0));
 
         int counter = 1;

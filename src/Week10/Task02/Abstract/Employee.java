@@ -86,7 +86,7 @@ public abstract class Employee<T> {
 
     public void findEmp() {
 
-        if (this != null) {
+        if (this.getEmpID() != 0) {
             System.out.println("\n=========== EMPLOYEE FOUND ===========");
             System.out.println("Employee-ID: " + this.empID);
             System.out.println("Name: " + this.firstName + " " + this.lastName);
@@ -95,8 +95,6 @@ public abstract class Employee<T> {
         } else {
             System.out.println("\nEmployee not in company\n");
         }
-
-
     }
 
 }

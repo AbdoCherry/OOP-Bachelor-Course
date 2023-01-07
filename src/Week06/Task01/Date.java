@@ -54,7 +54,7 @@ public class Date {
         Date createDate = new Date();
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        System.out.println("Please beware of our Policy\nTrip must be at least 5 days in future of current date: " + dtf.format(LocalDateTime.now()) + "\n");
+        System.out.println("\nPlease beware of our Policy\nTrip must be at least 5 days in future of current date: " + dtf.format(LocalDateTime.now()) + "\n");
 
         System.out.print("Day of trip -> Format {dd}: ");
         createDate.setDay(scanner.nextInt());

@@ -1,4 +1,4 @@
-# Task collection of Week 5
+# Task collection of Week 6
 
 ## Task 01:
 A program is to be developed that is to simulate the process of a travel booking by a customer in a travel agency.

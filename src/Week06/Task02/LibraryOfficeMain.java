@@ -46,7 +46,7 @@ public class LibraryOfficeMain {
                     System.out.println("\nError input. Please restart program\n");
             }
 
-            System.out.println("\nDo you want to restart the program?\n[Yes = 'Y'/'y'] - [No = 'N'/'n']");
+            System.out.println("\nDo you want to restart the program?\t[Yes = 'Y'/'y'] - [No = 'N'/'n']");
             System.out.print("Restart: ");
             continueProgram = Character.toUpperCase(scanner.next().charAt(0));
 

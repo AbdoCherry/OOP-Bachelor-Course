@@ -20,9 +20,9 @@ public class TravelAgencyMain {
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.println("\nPlease choose menu below");
-            System.out.println("[Alter Trip = 'A'/'a']\t[Book Trip = 'B'/'b']");
+            System.out.println("[Alter Trip  = 'A'/'a']\t[Book Trip    = 'B'/'b']");
             System.out.println("[Cancel Trip = 'C'/'c']\t[Display Trip = 'D'/'d']");
-            System.out.println("\t\t\t[Exit Program = 'E'/'e']");
+            System.out.println("\t [Exit Program = 'E'/'e']");
 
             System.out.print("Menu: ");
             char menu = Character.toUpperCase(scanner.next().charAt(0));
