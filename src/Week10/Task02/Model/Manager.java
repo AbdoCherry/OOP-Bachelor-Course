@@ -1,163 +1,194 @@
 package Week10.Task02.Model;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import Week10.Task02.Abstract.Employee;
 import Week10.Task02.Auxiliary.FileDialog;
+import Week10.Task02.Generic.Employee;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Manager extends Employee<Manager> {
 
-    private final Scanner scannerManager = new Scanner(System.in);
+    Scanner scannerManager = new Scanner(System.in);
 
-    private double budget;
-    private int staffSize;
+    private String depName;
+    private double depBudget;
+    private Set<Clerk> staffSize;
 
     public Manager() {
     }
 
-    public Manager(int empID, String firstName, String lastName, double salary, String department, double budget,
-                   int staffSize) {
-        super(empID, firstName, lastName, salary, department);
-        this.budget = budget;
+    public Manager(int empId, String firstName, String lastName, String ssn, double salary, String depName, double depBudget, Set<Clerk> staffSize) {
+        super(empId, firstName, lastName, ssn, salary);
+        this.depName = depName;
+        this.depBudget = depBudget;
         this.staffSize = staffSize;
     }
 
-    public double getBudget() {
-        return budget;
+    public String getDepName() {
+        return depName;
     }
 
-    public void setBudget(double budget) {
-        this.budget = budget;
+    public void setDepName(String depName) {
+        this.depName = depName;
     }
 
-    public int getStaffSize() {
+    public double getDepBudget() {
+        return depBudget;
+    }
+
+    public void setDepBudget(double depBudget) {
+        this.depBudget = depBudget;
+    }
+
+    public Set<Clerk> getStaffSize() {
         return staffSize;
     }
 
-    public static Map<Integer, String> departments(List<Manager> managers) {
-        // Extracting only the departments and the employee-id of the manager as their key
-        /*
-         * BEHOLD THAT USING THE ID OF EMPLOYEE AS ID FOR DEPARTMENT IS NOT A BEST PRACTICE
-         */
-        return managers.stream().collect(Collectors.toMap(Manager::getEmpID, Manager::getDepartment));
+    public void setStaffSize(Set<Clerk> staffSize) {
+        this.staffSize = staffSize;
     }
 
+    public String createDepartment(@NotNull List<Manager> managers) {
+        System.out.println("\nPlease enter name of department");
+        String newDepartment;
+        boolean approval;
 
-    public boolean approveRequest(Clerk c, double newSalary) {
+        // Creation of department
+        do {
+            System.out.print("Department: ");
+            scannerManager.nextLine();
+            String inputDepartment = scannerManager.nextLine();
+            approval = managers.stream()
+                    .anyMatch(m -> m.getDepName().equals(inputDepartment));
 
-        System.out.println("\nPlease check the request of your clerk and approve or reject salary raise");
-        System.out.printf("\n\033[1m%-5s%-15s%-30s%-15s%-15s%-5s\033[0m\n", "|", "Employee-ID", "Name", "Actual Salary",
-                "Req. Salary", "|");
-        System.out.println("|--------------------------------------------------------------------|");
-        System.out.printf("%-5s%-15d%-30s%-15.2f%-15.2f%-5s\n", "|", c.getEmpID(),
-                c.getFirstName() + " " + c.getLastName(), c.getSalary(), newSalary, "|");
+            if (approval) {
+                System.out.println("\nDepartment already exists. Please retry entering department name");
+                newDepartment = null;
+            } else {
+                System.out.println("\nThank you for entering valid department name");
+                newDepartment = inputDepartment;
+                approval = false;
+            }
 
-        System.out.println("[Approve = 'A'/'a']\t[Reject = 'R'/'r']");
-        System.out.print("Answer: ");
+        } while (approval);
 
-        return Character.toUpperCase(scannerManager.next().charAt(0)) == 'A';
-
+        return newDepartment;
     }
 
-    @Override
-    public void findEmp() {
+    public double createDepBudget(@NotNull List<Manager> managers) {
+        // Creation of department budget
+        boolean approval = false;
+        double newDepBudget = 0;
+        System.out.println("\nPlease enter budget for department");
+        do {
+            System.out.print("Budget: ");
+            newDepBudget = scannerEmp.nextDouble();
+            double avgDepBudget = managers.stream()
+                    .mapToDouble(Manager::getDepBudget).average().orElse(.0);
+            double maxDepBudget = avgDepBudget * 1.5;
 
-        if (this != null) {
-            super.findEmp();
-            System.out.println("Budget: " + this.budget + " $");
-            System.out.println("Staff size: " + this.staffSize);
-            System.out.println("-----------------------------------");
+            if (newDepBudget > maxDepBudget) {
+                System.out.println("\nWe cannot approve this budget.\nPlease enter new one");
+                approval = true;
+            }
+
+        } while (approval);
+
+        return newDepBudget;
+    }
+
+    public void addManager(@NotNull List<Manager> managers, List<Clerk> clerks) {
+        int sizeBefore = managers.size();
+        Manager manager = super.createEmp(managers);
+
+        System.out.println("\nPlease choose existing department or type '0' to create a new one\n");
+        System.out.printf("%-5s%-10s%-50s%-5s\n", "|", "#", "Department", "|");
+        System.out.println("|==========================================================|");
+        for (int i = 0; i < managers.size(); i++) {
+            System.out.printf("%-5s%-10d%-50s%-5s\n", "|", (i + 1), managers.get(i).getDepName(), "|");
         }
-    }
+        System.out.print("\nDepartment - or new one '0': ");
+        int depSelection = scannerManager.nextInt();
+        String department = null;
 
-    @Override
-    public Manager singleObject(List<Manager> list) {
-        // TODO Auto-generated method stub
-
-        String[] fullName = name();
-
-        Manager manager = list.stream().filter(
-                        m -> m.getFirstName().equalsIgnoreCase(fullName[0]) && m.getLastName().equalsIgnoreCase(fullName[1]))
-                .findFirst().orElse(null);
-
-        if (manager == null) {
-            manager = new Manager();
-            manager.setEmpID(0);
-            manager.setFirstName(fullName[0]);
-            manager.setLastName(fullName[1]);
+        if (depSelection == 0) {
+            manager.setDepName(createDepartment(managers));
+            manager.setDepBudget(createDepBudget(managers));
+        } else {
+            manager.setDepName(managers.get(depSelection).getDepName());
+            manager.setDepBudget(managers.get(depSelection).getDepBudget());
         }
-        return manager;
+
+        manager.setStaffSize(Clerk.selectClerks(clerks));
+        managers.add(manager);
+
+        System.out.println(sizeBefore < managers.size() ?
+                "Manager added successfully: " + manager.toString() + "\n"
+                : "Manager not added successfully\n");
     }
 
-    public void updateManager(List<Clerk> clerks) {
+    public void removeManager(List<Manager> managers, List<Clerk> clerks) {
+        super.removeEmp(managers);
+        updateLists(managers, clerks);
+    }
 
-        int staffSizeBefore = this.staffSize;
-
-        Map<Integer, Long> groupedByManager = clerks.stream()
-                .collect(Collectors.groupingBy(Clerk::getManagerID, Collectors.counting()));
-
-        this.staffSize = Integer.parseInt(String.valueOf(groupedByManager.get(this.getEmpID())));
-
-        System.out.println(staffSizeBefore < this.staffSize ? "\nStaff update successfully to Manager" + this.toString()
-                : "Staff update failed to Manager\n");
+    public void findManager(List<Manager> managers) {
+        super.findEmployee(managers);
     }
 
     @Override
-    public void displayAll(List<Manager> list) {
-        // TODO Auto-generated method stub
-
-        list.sort(Comparator.comparing(Manager::getEmpID));
-        System.out.printf("\n\033[1m%-5s%-15s%-30s%-15s%-40s%-15s%-10s%-5s\033[0m\n", "|", "Emp-ID", "Name", "Salary",
-                "Department", "Budget", "Staff-Size", "|");
-        System.out.println(
-                "|-------------------------------------------------------------------------------------------------------------------------------------|");
-        list.forEach(m -> System.out.printf("%-5s%-15s%-30s%-15.2f%-40s%-15.2f%-10d%-5s\n", "|", m.getEmpID(),
-                m.getFirstName() + " " + m.getLastName(), m.getSalary(), m.getDepartment(), m.getBudget(),
-                m.getStaffSize(), "|"));
-    }
-
     public String toString() {
-
-        return "\n[Employee-ID: '" + this.getEmpID() + "' - Name: '" + this.getFirstName() + " " + this.getLastName()
-                + "' - Salary: '" + this.getSalary() + "' - Department: '" + this.getDepartment() + "' - Staff Size: '"
-                + this.getStaffSize() + "']";
+        DecimalFormat df = new DecimalFormat("#.##");
+        return super.toString() +
+                ", depName = '" + depName + '\'' +
+                ", depBudget = " + df.format(depBudget) + " $" +
+                ", staffSize = " + staffSize.size() +
+                "} ";
     }
 
     @Override
     public List<Manager> readCSV() {
-        // TODO Auto-generated method stub
-
-        String line;
         List<Manager> managers = new ArrayList<>();
+        String line = null;
 
         try {
-            BufferedReader readCSVReader = new BufferedReader(
-                    new FileReader(FileDialog.FileChooser(this.getClass().getSimpleName())));
-            readCSVReader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader("src/Week10/Task02/Data/Manager.csv")); // FileDialog.FileChooser(this.getClass().getSimpleName())
+            reader.readLine();
 
-            while ((line = readCSVReader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
-                managers.add(new Manager(Integer.parseInt(values[0]), values[1], values[2],
-                        Double.parseDouble(values[3]), values[4], Double.parseDouble(values[5]), Integer.parseInt(values[6])));
+                managers.add(new Manager(
+                        Integer.parseInt(values[0]),
+                        values[1],
+                        values[2],
+                        values[3],
+                        Double.parseDouble(values[4]),
+                        values[5],
+                        Double.parseDouble(values[6]),
+                        null
+
+                ));
             }
+            reader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(managers.size() > 0 ? "================ IMPORT MANAGER SUCCESSFULLY ================"
-                : "================ IMPORT MANAGER FAILED ================");
-
+        System.out.println(managers.size() > 0 ? "=========== IMPORT MANAGER SUCCESSFULLY ===========" : "=========== IMPORT MANAGER FAILED ===========");
         return managers;
     }
 
     @Override
-    public void writeCSV(List<Manager> managers) {
+    public void writeCsv(List<Manager> managers) {
 
         try {
             PrintWriter writeCSV = new PrintWriter(FileDialog.FileChooser(this.getClass().getSimpleName()));
@@ -169,6 +200,8 @@ public class Manager extends Employee<Manager> {
             sbManager.append(";");
             sbManager.append("LastName");
             sbManager.append(";");
+            sbManager.append("SSN");
+            sbManager.append(";");
             sbManager.append("Salary");
             sbManager.append(";");
             sbManager.append("Department");
@@ -176,10 +209,11 @@ public class Manager extends Employee<Manager> {
             sbManager.append("Budget");
             sbManager.append(";");
             sbManager.append("StaffSize");
+            sbManager.append(";");
             sbManager.append("\n");
 
             for (Manager m : managers) {
-                sbManager.append(m.getEmpID());
+                sbManager.append(String.valueOf(m.getEmpId()));
                 sbManager.append(";");
                 sbManager.append(m.getFirstName());
                 sbManager.append(";");
@@ -187,12 +221,13 @@ public class Manager extends Employee<Manager> {
                 sbManager.append(";");
                 sbManager.append(m.getSalary());
                 sbManager.append(";");
-                sbManager.append(m.getDepartment());
+                sbManager.append(m.getDepName());
                 sbManager.append(";");
-                sbManager.append(m.getBudget());
+                sbManager.append(m.getDepBudget());
                 sbManager.append(";");
-                sbManager.append(m.getStaffSize());
+                sbManager.append(m.getStaffSize().size());
                 sbManager.append("\n");
+
             }
 
             writeCSV.write(sbManager.toString());
@@ -203,5 +238,4 @@ public class Manager extends Employee<Manager> {
             e.printStackTrace();
         }
     }
-
 }

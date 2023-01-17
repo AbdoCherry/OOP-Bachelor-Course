@@ -1,276 +1,131 @@
 package Week10.Task02.Model;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
-import Week10.Task02.Abstract.Employee;
 import Week10.Task02.Auxiliary.FileDialog;
+import Week10.Task02.Generic.Employee;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 
 public class Clerk extends Employee<Clerk> {
 
-    private final Scanner scannerClerk = new Scanner(System.in);
+    static Scanner scannerClerk = new Scanner(System.in);
 
-    private int managerID;
+    private int manId;
 
     public Clerk() {
     }
 
-    public Clerk(int empID, String firstName, String lastName, double salary, String department, int managerID) {
-        super(empID, firstName, lastName, salary, department);
-        this.managerID = managerID;
+    public Clerk(int empId, String firstName, String lastName, String ssn, double salary, int manId) {
+        super(empId, firstName, lastName, ssn, salary);
+        this.manId = manId;
     }
 
-    public int getManagerID() {
+    public int getManId() {
+        return manId;
+    }
+
+    public void setManId(int manId) {
+        this.manId = manId;
+    }
+
+    private int chooseManager(@NotNull List<Manager> managers) {
+        System.out.println("\nPlease select Manager by his ID");
+
+        System.out.printf("%-5s%-10s%-30s%-5s\n", "|", "ID", "Manager", "|");
+        managers.forEach(m -> {
+            System.out.printf("%-5s%-10d%-30s%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), "|");
+        });
+
+        boolean declined = false;
+        int managerID = 0;
+
+        do {
+            System.out.print("\nID: ");
+            managerID = scannerClerk.nextInt();
+
+            int finalManagerID = managerID;
+            if (managers.stream().filter(m -> m.getEmpId() == finalManagerID).findFirst().isEmpty()) {
+                System.out.println("\nID not found in manager staff\nPlease retry\n");
+                declined = true;
+            }
+            declined = false;
+
+        } while (declined);
+
         return managerID;
     }
 
-    public void setManagerID(int managerID) {
-        this.managerID = managerID;
-    }
+    public void addClerk(List<Clerk> clerks, List<Manager> managers) {
+        Clerk newClerk = createEmp(clerks);
+        newClerk.setManId(chooseManager(managers));
+        clerks.add(newClerk);
+        updateLists(managers, clerks);
 
-    public int incEmpID(List<Clerk> clerks) {
+        System.out.println("\n" + newClerk.toString());
 
-        return clerks.stream().max(Comparator.comparing(Clerk::getEmpID)).orElseThrow(NoSuchElementException::new)
-                .getEmpID() + 1;
-    }
-
-    private double averageSalary(List<Clerk> clerks, Clerk clerk) {
-
-        return (clerks.stream().filter(c -> c.getDepartment().equals(clerk.getDepartment()))
-                .max(Comparator.comparing(Clerk::getSalary)).orElseThrow(NoSuchElementException::new).getSalary()
-                - clerks.stream().filter(c -> c.getDepartment().equals(clerk.getDepartment()))
-                .min(Comparator.comparing(Clerk::getSalary)).orElseThrow(NoSuchElementException::new)
-                .getSalary())
-                / 2;
-    }
-
-    public void addClerk(List<Clerk> clerks, List<Manager> managers, Map<Integer, String> departments) {
-
-        // Check if clerk are already in company
-        Clerk newClerk = singleObject(clerks);
-
-        if (newClerk.getEmpID() != 0) {
-            System.out.println("\nEmployee does exist in our company");
-            System.exit(1);
-        }
-        newClerk.setEmpID(incEmpID(clerks));
-
-        System.out.println("\nPlease select department you want to join by ID\n");
-        System.out.printf("\033[1m%-5s%-15s%-40s%-5s\033[0m\n", "|", "ID", "Department", "|");
-        System.out.println("|-----------------------------------------------------------|");
-
-        // Assign department to new clerk
-        for (Map.Entry<Integer, String> entry : departments.entrySet()) {
-            System.out.printf("%-5s%-15d%-40s%-5s\n", "|", entry.getKey(), entry.getValue(), "|");
-        }
-        System.out.print("\nSelection of department: ");
-        int selection = scannerClerk.nextInt();
-        Manager manager = managers.stream().filter(m -> m.getEmpID() == selection).findFirst().orElse(null);
-
-        System.out.println("\nYour successfully joined department: " + departments.get(selection)
-                + "\nYour manager is: " + manager.getFirstName() + " " + manager.getLastName() + "\n");
-        newClerk.setDepartment(departments.get(selection));
-        newClerk.setManagerID(manager.getEmpID());
-
-        // Assign salary to new clerk
-        System.out.println(
-                "\nPlease enter your desired salary\nBehold, that we can only accept up to 20% of the average salary of your department");
-        System.out.print("Input: ");
-        double newSalary = scannerClerk.nextDouble();
-
-        double avrgSalary = averageSalary(clerks, newClerk);
-        if (newSalary > avrgSalary) {
-            System.out.println(
-                    "\nYour desired salary is higher than the average salary by more than 20%.\nYou will get assigned the average salary + 20% by default. For any salary raise please request this officially from your manager\n");
-            newClerk.setSalary(avrgSalary);
-        } else {
-            newClerk.setSalary(newSalary);
-        }
-
-        // Update both lists
-        newClerk.updateClerk(clerks, 'a');
-        manager.updateManager(clerks);
     }
 
     public void removeClerk(List<Clerk> clerks, List<Manager> managers) {
-
-        // Check if clerk exists
-        Clerk rmClerk = singleObject(clerks);
-
-        if (rmClerk.getEmpID() == 0) {
-            System.out.println("\nClerk not existing in company\n");
-            System.exit(1);
-        }
-
-        Manager myManager = managers.stream().filter(m -> m.getEmpID() == rmClerk.getManagerID()).findFirst()
-                .orElse(null);
-        rmClerk.updateClerk(clerks, 'r');
-        myManager.updateManager(clerks);
+        super.removeEmp(clerks);
+        updateLists(managers, clerks);
     }
 
-    public void requestPromotion(List<Clerk> clerks, List<Manager> managers) {
+    public static Set<Clerk> selectClerks(List<Clerk> clerks) {
+        System.out.println("\nPlease select ID from clerks below. You can add up to 10");
 
-        //Check if clerk exists
-        int indexOfClerk = clerks.indexOf(singleObject(clerks));
-        if (indexOfClerk == -1) {
-            System.out.println("\nClerk does not exist in company\n");
-            System.exit(1);
-        }
+        System.out.printf("%-5s%-10s%-30s%-5s\n", "|", "ID", "Name", "|");
+        System.out.println("|============================================|");
+        clerks.forEach(c -> {
+            System.out.printf("%-5s%-10d%-30s%-5s\n", "|", c.getEmpId(), c.getFirstName() + " " + c.getLastName(), "|");
+        });
 
-        double salaryBeforePromotion = clerks.get(indexOfClerk).getSalary();
-        double salaryAfterPromotion;
+        Set<Clerk> selectedClerks = new HashSet<>();
+        char continueSelection = 'Y';
+        int i = 0;
 
-        // Let clerk choose kind of promotion
-        System.out.println("\nPlease choose kind of promotion");
-        System.out.println("[Selection: 'S'/'s']\t[Entering = 'E'/'e']");
-        System.out.print("Decision: ");
-        char decision = Character.toUpperCase(scannerClerk.next().charAt(0));
+        do {
+            System.out.print("\nID: ");
+            int selection = scannerClerk.nextInt();
+            Clerk selectClerk = clerks.stream()
+                    .filter(c -> c.getEmpId() == selection).findFirst()
+                    .orElse(null);
 
-        switch (decision) {
-            case 'S':
-                System.out.println("\nPlease select raise by percentage");
-                System.out.println("[Raise by 5%  = 10]\t[Raise by 10% = 10]");
-                System.out.println("[Raise by 15% = 15]\t[Raise by 20% = 20]");
-                System.out.print("Select rate: ");
-                int selection = scannerClerk.nextInt();
-                salaryAfterPromotion = salaryBeforePromotion * (1 + (double) selection / 100);
-                break;
+            if (selectClerk == null) {
+                System.out.println("\nClerk not found");
+                i--;
+            } else if (selectedClerks.contains(selectClerk)) {
+                System.out.println("\nClerk already selected");
+                i--;
+            } else {
+                selectedClerks.add(selectClerk);
+                i++;
+            }
 
-            case 'E':
-                System.out.println("\nPlease enter your desired salary");
-                System.out.print("Enter new salary: ");
-                double newSalary = scannerClerk.nextDouble();
+            System.out.print("\nContinue selection?\n[Yes = 'Y'/'y']\t[No = 'N'/'n']: ");
+            continueSelection = Character.toUpperCase(scannerClerk.next().charAt(0));
+        } while (continueSelection == 'Y' && (i < 10));
 
-                if (averageSalary(clerks, clerks.get(indexOfClerk)) < newSalary) {
-                    Manager manager = managers.stream()
-                            .filter(m -> m.getEmpID() == clerks.get(indexOfClerk).getManagerID()).findFirst().orElse(null);
-
-                    System.out.println("\nDesired salary exceeds our policy and has to be approved by your manager " + manager.getFirstName() + " " + manager.getLastName());
-
-                    if (manager.approveRequest(clerks.get(indexOfClerk), newSalary)) {
-                        System.out.println("\nYour salary request was approved by your manager: " + manager.getFirstName() + " " + manager.getLastName());
-                        salaryAfterPromotion = newSalary;
-                    } else {
-                        System.out.println("\nWe are sorry to inform you that your salary request was rejected by your manager: " + manager.getFirstName() + " " + manager.getLastName());
-                        salaryAfterPromotion = averageSalary(clerks, clerks.get(indexOfClerk)) * 1.2;
-
-                    }
-                } else {
-                    salaryAfterPromotion = newSalary;
-                }
-                break;
-            default:
-                System.out.println("\nError. Wrong entry\n");
-                salaryAfterPromotion = 0;
-                System.exit(1);
-        }
-        clerks.get(indexOfClerk).setSalary(salaryAfterPromotion);
-        System.out.printf("\033[1m%-5s%-20s%-20s%-5s\033[0m\n", "|", "Salary before", "Salary after", "|");
-        System.out.println("|--------------------------------------------|");
-        System.out.printf("%-5s%-20.2f%-20.2f%-5s\n", "|", salaryBeforePromotion, salaryAfterPromotion, "|");
+        return selectedClerks;
     }
 
-    public void updateClerk(List<Clerk> clerks, char decision) {
-        int sizeBefore = clerks.size();
-        switch (decision) {
-            case 'a':
-                clerks.add(this);
-
-                System.out.println(sizeBefore < clerks.size() ? "Clerk added successfully to company" + this.toString()
-                        : "Employee not added successfully, please check source code\n");
-                break;
-            case 'r':
-                clerks.remove(this);
-                System.out.println(sizeBefore > clerks.size() ? "Clerk removed successfully to company\n " + this.toString()
-                        : "Clerk not removed successfully, please check source code");
-                break;
-
-            default:
-                System.out.println("\nError: '" + decision + "' decision not clear\n");
-        }
+    public void findClerk(List<Clerk> clerks) {
+        super.findEmployee(clerks);
     }
 
+    @Override
     public String toString() {
 
-        return "\n[Employee-ID: '" + this.getEmpID() + "' - Name: '" + this.getFirstName() + " " + this.getLastName()
-                + "' - Salary: '" + this.getSalary() + "'' - Department: '" + this.getDepartment() + "' - Manager-ID: '"
-                + this.getManagerID() + "']";
+        return super.toString()
+                + " manId = " + manId +
+                "} ";
     }
 
     @Override
-    public void findEmp() {
-        if (this != null) {
-            super.findEmp();
-            System.out.println("Manager-ID: " + this.managerID);
-            System.out.println("-----------------------------------");
-        }
-    }
-
-    @Override
-    public Clerk singleObject(List<Clerk> list) {
-        // TODO Auto-generated method stub
-
-        String[] fullName = name();
-
-        Clerk clerk = list.stream().filter(
-                        c -> c.getFirstName().equalsIgnoreCase(fullName[0]) && c.getLastName().equalsIgnoreCase(fullName[1]))
-                .findFirst().orElse(null);
-
-        if (clerk == null) {
-            clerk = new Clerk();
-            clerk.setEmpID(0);
-            clerk.setFirstName(fullName[0]);
-            clerk.setLastName(fullName[1]);
-        }
-        return clerk;
-    }
-
-    @Override
-    public void displayAll(List<Clerk> list) {
-        list.sort(Comparator.comparing(Clerk::getEmpID));
-        System.out.printf("\n\033[1m%-5s%-15s%-30s%-15s%-40s%-15s%-5s\033[0m\n", "|", "Emp-ID", "Name", "Salary",
-                "Department", "Manager-ID", "|");
-        System.out.println(
-                "|---------------------------------------------------------------------------------------------------------------------------|");
-        list.forEach(c -> System.out.printf("%-5s%-15d%-30s%-15.2f%-40s%-15d%-5s\n", "|", c.getEmpID(),
-                c.getFirstName() + " " + c.getLastName(), c.getSalary(), c.getDepartment(), c.getManagerID(), "|"));
-
-    }
-
-    @Override
-    public List<Clerk> readCSV() {
-        // TODO Auto-generated method stub
-        String line;
-        List<Clerk> clerks = new ArrayList<>();
-
-        try {
-            BufferedReader readCSVReader = new BufferedReader(
-                    new FileReader(FileDialog.FileChooser(this.getClass().getSimpleName())));
-            readCSVReader.readLine();
-
-            while ((line = readCSVReader.readLine()) != null) {
-                String[] values = line.split(";");
-                clerks.add(new Clerk(Integer.parseInt(values[0]), values[1], values[2], Double.parseDouble(values[3]),
-                        values[4], Integer.parseInt(values[5])));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(clerks.size() > 0 ? "================ IMPORT CLERK SUCCESSFULLY ================"
-                : "================ IMPORT CLERK FAILED ================");
-
-        return clerks;
-    }
-
-    @Override
-    public void writeCSV(List<Clerk> clerks) {
-
+    public void writeCsv(List<Clerk> clerks) {
         try {
             PrintWriter writeCSV = new PrintWriter(FileDialog.FileChooser(this.getClass().getSimpleName()));
             StringBuilder sbClerk = new StringBuilder();
@@ -281,38 +136,63 @@ public class Clerk extends Employee<Clerk> {
             sbClerk.append(";");
             sbClerk.append("LastName");
             sbClerk.append(";");
+            sbClerk.append("SSN");
+            sbClerk.append(";");
             sbClerk.append("Salary");
             sbClerk.append(";");
-            sbClerk.append("Department");
-            sbClerk.append(";");
-            sbClerk.append("Manager");
-            sbClerk.append(";");
+            sbClerk.append("ManagerID");
             sbClerk.append("\n");
 
             for (Clerk c : clerks) {
-                sbClerk.append(c.getEmpID());
+                sbClerk.append(String.valueOf(c.getEmpId()));
                 sbClerk.append(";");
                 sbClerk.append(c.getFirstName());
                 sbClerk.append(";");
                 sbClerk.append(c.getLastName());
                 sbClerk.append(";");
-                sbClerk.append(c.getSalary());
+                sbClerk.append(c.getSsn());
                 sbClerk.append(";");
-                sbClerk.append(c.getDepartment());
+                sbClerk.append(String.valueOf(c.getSalary()));
                 sbClerk.append(";");
-                sbClerk.append(c.getManagerID());
+                sbClerk.append(String.valueOf(c.getManId()));
                 sbClerk.append("\n");
 
             }
 
             writeCSV.write(sbClerk.toString());
             writeCSV.close();
-            System.out.println("================== EXPORT CLERK SUCCESSFULLY ==================");
+            System.out.println("================== EXPORT MANAGER SUCCESSFULLY ==================");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-}
+    @Override
+    public List<Clerk> readCSV() {
 
+        List<Clerk> clerks = new ArrayList<>();
+        String line;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/Week10/Task02/Data/Clerk.csv"));//FileDialog.FileChooser(this.getClass().getSimpleName()))
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                clerks.add(new Clerk(
+                        Integer.parseInt(values[0]),
+                        values[1],
+                        values[2],
+                        values[3],
+                        Double.parseDouble(values[4]),
+                        Integer.parseInt(values[5])
+                ));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(clerks.size() > 0 ? "=========== IMPORT CLERK SUCCESSFULLY ===========" : "=========== IMPORT CLERK FAILED ===========");
+        return clerks;
+    }
+}
