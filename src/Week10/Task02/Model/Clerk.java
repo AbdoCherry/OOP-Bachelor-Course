@@ -60,7 +60,7 @@ public class Clerk extends Employee<Clerk> {
     }
 
     public void addClerk(List<Clerk> clerks, List<Manager> managers) {
-        Clerk newClerk = createEmp(clerks);
+        Clerk newClerk = addEmp(clerks);
         newClerk.setManId(chooseManager(managers));
         clerks.add(newClerk);
         updateLists(managers, clerks);
@@ -175,7 +175,7 @@ public class Clerk extends Employee<Clerk> {
         String line;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/Week10/Task02/Data/Clerk.csv"));//FileDialog.FileChooser(this.getClass().getSimpleName()))
+            BufferedReader reader = new BufferedReader(new FileReader(FileDialog.FileChooser(this.getClass().getSimpleName())));
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");

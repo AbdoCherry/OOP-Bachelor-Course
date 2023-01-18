@@ -9,10 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Manager extends Employee<Manager> {
 
@@ -54,6 +52,26 @@ public class Manager extends Employee<Manager> {
 
     public void setStaffSize(Set<Clerk> staffSize) {
         this.staffSize = staffSize;
+    }
+
+    private void allDepartments(@NotNull List<Manager> managers) {
+        // Collect all unique departments into Collection `Set` of String
+        Set<String> departments = managers.stream()
+                .map(Manager::getDepName)
+                .collect(Collectors.toSet());
+
+        // Building Iterator to iterate through
+        Iterator<String> iterator = departments.iterator();
+
+        // Print all departments formatted
+        System.out.printf("\n%-5s%-10s%-40s%-5s\n", "|", "ID", "Department", "|");
+        System.out.println("|=====================================================|");
+        int i = 0;
+        while (iterator.hasNext()) {
+            System.out.printf("%-5s%-10s%-40s%-5s\n", "|", (i + 1), (iterator.next()), "|");
+            i++;
+        }
+
     }
 
     public String createDepartment(@NotNull List<Manager> managers) {
@@ -107,14 +125,11 @@ public class Manager extends Employee<Manager> {
 
     public void addManager(@NotNull List<Manager> managers, List<Clerk> clerks) {
         int sizeBefore = managers.size();
-        Manager manager = super.createEmp(managers);
+        Manager manager = super.addEmp(managers);
 
-        System.out.println("\nPlease choose existing department or type '0' to create a new one\n");
-        System.out.printf("%-5s%-10s%-50s%-5s\n", "|", "#", "Department", "|");
-        System.out.println("|==========================================================|");
-        for (int i = 0; i < managers.size(); i++) {
-            System.out.printf("%-5s%-10d%-50s%-5s\n", "|", (i + 1), managers.get(i).getDepName(), "|");
-        }
+        // Display all departments
+        allDepartments(managers);
+
         System.out.print("\nDepartment - or new one '0': ");
         int depSelection = scannerManager.nextInt();
         String department = null;
@@ -123,8 +138,8 @@ public class Manager extends Employee<Manager> {
             manager.setDepName(createDepartment(managers));
             manager.setDepBudget(createDepBudget(managers));
         } else {
-            manager.setDepName(managers.get(depSelection).getDepName());
-            manager.setDepBudget(managers.get(depSelection).getDepBudget());
+            manager.setDepName(managers.get(depSelection - 1).getDepName());
+            manager.setDepBudget(managers.get(depSelection - 1).getDepBudget());
         }
 
         manager.setStaffSize(Clerk.selectClerks(clerks));
@@ -160,7 +175,7 @@ public class Manager extends Employee<Manager> {
         String line = null;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/Week10/Task02/Data/Manager.csv")); // FileDialog.FileChooser(this.getClass().getSimpleName())
+            BufferedReader reader = new BufferedReader(new FileReader(FileDialog.FileChooser(this.getClass().getSimpleName())));
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {

@@ -7,6 +7,7 @@ import java.io.File;
 
 public class FileDialog {
 
+    // Let user choose file. Default directory is our data folder in same directory
     public static @Nullable String FileChooser(String className) {
         JButton chooser = new JButton();
         final JFileChooser fc = new JFileChooser();

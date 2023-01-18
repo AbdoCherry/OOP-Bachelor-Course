@@ -3,8 +3,7 @@ package Week10.Task02;
 import Week10.Task02.Model.Clerk;
 import Week10.Task02.Model.Manager;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class HumanResource {
     public static void main(String[] args) {
@@ -67,7 +66,6 @@ public class HumanResource {
 
                             scannerManager.close();
                     }
-
                     break;
 
                 case 'C':
@@ -107,9 +105,7 @@ public class HumanResource {
                             System.out.println("\nError. Input is invalid\n");
                             scannerClerk.close();
                             System.exit(1);
-
                     }
-
                     break;
 
                 case 'X':
@@ -122,9 +118,8 @@ public class HumanResource {
                     System.exit(1);
             }
 
-
             System.out.println("\nContinue Program?\n[Yes = 'Y'/'y']\t[No = 'N'/'n']");
-            System.out.print("Contiue: ");
+            System.out.print("Continue: ");
             continueProgram = Character.toUpperCase(scanner.next().charAt(0));
 
         } while (continueProgram == 'Y');
@@ -133,5 +128,4 @@ public class HumanResource {
         c.writeCsv(clerks);
         m.writeCsv(managers);
     }
-
 }

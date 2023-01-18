@@ -76,8 +76,9 @@ public abstract class Employee<T> {
         String firstName = scannerEmp.nextLine();
         System.out.print("Last Name: ");
         String lastName = scannerEmp.nextLine();
-
+        scannerEmp.nextLine();
         return new String[]{firstName, lastName};
+
     }
 
     // Almost every function requires an object / element of our employees lists
@@ -103,7 +104,7 @@ public abstract class Employee<T> {
 
         do {
             for (int i = 0; i < 3; i++) {
-                sbSsn.append(String.valueOf(random.nextInt(999))).append("-");
+                sbSsn.append(String.valueOf(random.nextInt(999)));
             }
             sbSsn.deleteCharAt(sbSsn.length() - 1);
 
@@ -141,6 +142,7 @@ public abstract class Employee<T> {
             System.out.printf("\nPlease enter the desired amount of yearly gross compensation.\nBehold that you cannot exceed the average salary of %.2f $ by %.1f %%\n", averageSalary, (maxRaise * 100));
             System.out.print("Salary: ");
             newSalary = scannerEmp.nextDouble();
+            declined = false;
 
             if ((newSalary - averageSalary) / averageSalary * 100 > (maxRaise * 100)) {
 
@@ -149,14 +151,14 @@ public abstract class Employee<T> {
                 System.out.println("You are allowed to enter again");
                 declined = true;
             }
-            declined = false;
+
         } while (declined);
 
         return newSalary;
     }
 
     // Generic method to create object of type generic 'Manager' / 'Clerk'
-    public T createEmp(@NotNull List<? extends Employee> t) {
+    public T addEmp(@NotNull List<? extends Employee> t) {
 
         Scanner createScanner = new Scanner(System.in);
 
@@ -223,6 +225,16 @@ public abstract class Employee<T> {
         t.remove(obj);
     }
 
+    // Find explicit employee of givent type
+    public void findEmployee(List<T> t) {
+        T obj = selecObject((List<? extends Employee>) t, fullName());
+        if (obj != null) {
+            System.out.println(obj.toString());
+        } else {
+            System.out.println("\nEmployee not in staff\n");
+        }
+    }
+
     // Display all elements of given list
     public void displayAll(@NotNull List<T> t) {
         List<Manager> managers;
@@ -248,22 +260,6 @@ public abstract class Employee<T> {
         }
     }
 
-    // Reading csv file int arraylist
-    public abstract List<T> readCSV();
-
-    // Writing arraylist to into csv file
-    public abstract void writeCsv(List<T> t);
-
-    // Find explicit employee of givent type
-    public void findEmployee(List<T> t) {
-        T obj = selecObject((List<? extends Employee>) t, fullName());
-        if (obj != null) {
-            System.out.println(obj.toString());
-        } else {
-            System.out.println("\nEmployee not in staff\n");
-        }
-    }
-
     // Update and refresh manager list
     public void updateLists(@NotNull List<Manager> managers, List<Clerk> clerks) {
 
@@ -283,6 +279,12 @@ public abstract class Employee<T> {
             System.out.printf("%-5s%-10d%-30s%-20d%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), m.getStaffSize().size(), "|");
         });
     }
+
+    // Reading csv file int arraylist
+    public abstract List<T> readCSV();
+
+    // Writing arraylist to into csv file
+    public abstract void writeCsv(List<T> t);
 
     // Simple toString method for output
     @Override
