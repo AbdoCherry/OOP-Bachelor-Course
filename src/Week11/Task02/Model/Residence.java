@@ -1,12 +1,9 @@
 package Week11.Task02.Model;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 import java.util.Set;
 
 public class Residence {
-
     Scanner scannerResidence = new Scanner(System.in);
 
     private String street;
@@ -46,22 +43,17 @@ public class Residence {
         this.city = city;
     }
 
-    public Residence createResidence(@NotNull Set<Customer> customers) {
+    public Residence createResidence(Set<Customer> customers) {
 
-        Residence newResidence = new Residence();
+        System.out.println("\nPlease enter residence information in the fields below\n");
 
         System.out.print("Street: ");
-        newResidence.setCity(scannerResidence.nextLine());
-
-        System.out.print("HouseNo: ");
-        newResidence.setHouseNo(scannerResidence.nextInt());
-
+        String street = scannerResidence.nextLine();
+        System.out.print("House No: ");
+        int houseNo = scannerResidence.nextInt();
         System.out.print("City: ");
-        newResidence.setCity(scannerResidence.nextLine());
+        String city = scannerResidence.nextLine();
 
-        boolean exists = customers.stream()
-                .anyMatch(c -> c.getResidence().equals(newResidence));
-
-        return newResidence;
+        return new Residence(street, houseNo, city);
     }
 }
