@@ -1,13 +1,12 @@
 package Week11.Task02.Model;
 
-import Week11.Task02.Crud;
-import Week11.Task02.Shop;
+import Week11.Task02.Abstract.Crud;
+import Week11.Task02.Abstract.Shop;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
 public class Customer extends Shop<Customer> implements Crud<Customer> {
-
     private Residence residence;
 
     public Customer() {
@@ -26,17 +25,26 @@ public class Customer extends Shop<Customer> implements Crud<Customer> {
         this.residence = residence;
     }
 
+    public Set<Customer> parseToSet(Set<Order> orders) {
+        return super.parseToSet(orders);
+    }
+
     @Override
     public void create(@NotNull Set<Customer> customers) {
         int sizeBefore = customers.size();
-        Customer newCustomer = getObj(customers);
+        String name = name();
+        Customer newCustomer = getObj(customers, name);
 
         if (newCustomer != null) {
             System.out.println("Customer already exists: " + newCustomer.toString() + "\n");
             System.exit(0);
         }
+        newCustomer = new Customer();
+        newCustomer.setName(name);
         newCustomer.setId(maxIdIncr((Set<Customer>) customers));
-        newCustomer.setResidence(residence.createResidence(customers));
+
+        Residence newResidence = new Residence();
+        newCustomer.setResidence(newResidence.createResidence(customers));
         customers.add(newCustomer);
 
         System.out.println(sizeBefore < customers.size() ?
@@ -48,7 +56,7 @@ public class Customer extends Shop<Customer> implements Crud<Customer> {
     public void remove(@NotNull Set<Customer> customers) {
 
         int sizeBefore = customers.size();
-        Customer remCustomer = getObj(customers);
+        Customer remCustomer = getObj(customers, name());
 
         if (remCustomer == null) {
             System.out.println("\nCustomer not in database\n");
@@ -65,7 +73,8 @@ public class Customer extends Shop<Customer> implements Crud<Customer> {
 
     @Override
     public String toString() {
-        return "residence = " + residence.getStreet() + " " + residence.getHouseNo() + " " + residence.getCity() +
-                " } " + super.toString();
+        return super.toString() +
+                " residence = { Street: " + residence.getStreet() + " House No.: " + residence.getHouseNo() + " City: " + residence.getCity() +
+                " } ";
     }
 }

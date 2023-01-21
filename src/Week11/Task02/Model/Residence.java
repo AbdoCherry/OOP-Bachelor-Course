@@ -1,10 +1,11 @@
 package Week11.Task02.Model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Residence {
-    Scanner scannerResidence = new Scanner(System.in);
+public class Residence implements Serializable {
+    transient Scanner scannerResidence = new Scanner(System.in);
 
     private String street;
     private int houseNo;
@@ -52,6 +53,7 @@ public class Residence {
         System.out.print("House No: ");
         int houseNo = scannerResidence.nextInt();
         System.out.print("City: ");
+        scannerResidence.nextLine();
         String city = scannerResidence.nextLine();
 
         return new Residence(street, houseNo, city);

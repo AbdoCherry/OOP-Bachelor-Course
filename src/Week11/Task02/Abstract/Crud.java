@@ -1,4 +1,4 @@
-package Week11.Task02;
+package Week11.Task02.Abstract;
 
 import java.util.Set;
 
