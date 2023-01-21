@@ -81,12 +81,10 @@ public class Customer {
 
     public static List<Deposit> myDeposits(List<Deposit> deposits, String[] customer) {
 
-        List<Deposit> myDeposits = deposits.stream()
+        return deposits.stream()
                 .filter(d -> d.getFirstName().equals(customer[0]))
                 .filter(d -> d.getLastName().equals(customer[1]))
                 .collect(Collectors.toList());
-
-        return myDeposits;
 
     }
 

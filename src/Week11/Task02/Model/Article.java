@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+import static java.util.Collections.*;
+
 public class Article extends Shop<Article> implements Crud<Article>{
 
     transient Scanner scannerArticle = new Scanner(System.in);
@@ -38,7 +40,7 @@ public class Article extends Shop<Article> implements Crud<Article>{
     }
 
     public Set<Article> parseToSet(Set<Order> orders) {
-        return super.parseToSet(orders);
+        return unmodifiableSet(super.parseToSet(orders));
     }
 
 

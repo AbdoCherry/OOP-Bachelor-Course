@@ -2,7 +2,6 @@ package Week11.Task02.Model;
 
 import java.io.Serializable;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Residence implements Serializable {
     transient Scanner scannerResidence = new Scanner(System.in);
@@ -24,27 +23,15 @@ public class Residence implements Serializable {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public int getHouseNo() {
         return houseNo;
-    }
-
-    public void setHouseNo(int houseNo) {
-        this.houseNo = houseNo;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Residence createResidence(Set<Customer> customers) {
+    public Residence createResidence() {
 
         System.out.println("\nPlease enter residence information in the fields below\n");
 

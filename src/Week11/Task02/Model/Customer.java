@@ -44,7 +44,7 @@ public class Customer extends Shop<Customer> implements Crud<Customer> {
         newCustomer.setId(maxIdIncr(customers));
 
         Residence newResidence = new Residence();
-        newCustomer.setResidence(newResidence.createResidence(customers));
+        newCustomer.setResidence(newResidence.createResidence());
         customers.add(newCustomer);
 
         System.out.println(sizeBefore < customers.size() ?

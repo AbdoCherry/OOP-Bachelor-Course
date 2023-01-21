@@ -69,10 +69,11 @@ public abstract class Shop<T> implements Serializable {
         if (this instanceof Order) {
             DecimalFormat df = new DecimalFormat("#.##");
             Set<Order> orders = (Set<Order>) t;
-            System.out.printf("\n%-5s%-10s%-10s%-30s%-30s%-20s%-30s%-5s\n", "|", "Order ID", "Customer ID", "Name", "Street", "House No", "City", "|");
-            System.out.println("|==================================================================================================================================================|");
             orders.forEach(o -> {
-                System.out.printf("%-5s%-10d%-10d%-30s%-30s%-20d%-30s%-5s\n", "|",
+                System.out.println("\n| Orders --------------- Orders --------------- Orders -------------- Orders -------------- Orders --------------- Orders --------------- Orders |");
+                System.out.printf("%-5s%-15s%-15s%-30s%-30s%-20s%-30s%-5s\n", "|", "Order ID", "Customer ID", "Name", "Street", "House No", "City", "|");
+                System.out.println("|================================================================================================================================================|");
+                System.out.printf("%-5s%-15d%-15d%-30s%-30s%-20d%-30s%-5s\n", "|",
                         o.getId(),
                         o.getCustomer().getId(),
                         o.getCustomer().getName(),
@@ -80,16 +81,18 @@ public abstract class Shop<T> implements Serializable {
                         o.getCustomer().getResidence().getHouseNo(),
                         o.getCustomer().getResidence().getCity(), "|");
 
-                System.out.printf("\n%-5s%-10s%-10s%-30s%-10s%-10s%-10s%-5s\n", "|", " ", "ID", "Name", "Price", "Quantity", "Total", "|");
-                System.out.println("|--------------------------------------------------------------------------------------------------|");
+                System.out.println("\n| OrderedArticles ------- OrderedArticles ------- OrderedArticles ------- OrderedArticles |");
+                System.out.printf("%-5s%-10s%-10s%-30s%-10s%-15s%-10s%-5s\n", "|", " ", "ID", "Name", "Price", "Quantity", "Total", "|");
+                System.out.println("|=========================================================================================|");
                 o.getMyBasket().forEach(a -> {
                     String totalPrice = df.format(a.getPrice() * a.getQuantity()) + " $";
-                    System.out.printf("%-5s%-10s%-10d%-30s%-10.2f $%-10d%-10s%-5s\n",
+                    String price = df.format(a.getPrice()) + " $";
+                    System.out.printf("%-5s%-10s%-10d%-30s%-10s%-15d%-10s%-5s\n",
                             "|",
                             " ",
                             a.getId(),
                             a.getName(),
-                            a.getPrice(),
+                            price,
                             a.getQuantity(),
                             totalPrice,
                             "|");
@@ -98,7 +101,8 @@ public abstract class Shop<T> implements Serializable {
             });
         } else if (this instanceof Customer) {
             Set<Customer> customers = (Set<Customer>) t;
-            System.out.printf("\n%-5s%-10s%-30s%-30s%-20s%-30s%-5s\n", "|", "ID", "Name", "Street", "HouseNo", "City", "|");
+            System.out.println("\n| Customers ----------- Customers ------------ Customers ------------ Customers ----------- Customers ------------ Customers |");
+            System.out.printf("%-5s%-10s%-30s%-30s%-20s%-30s%-5s\n", "|", "ID", "Name", "Street", "HouseNo", "City", "|");
             System.out.println("|============================================================================================================================|");
             customers.forEach(c -> System.out.printf("%-5s%-10d%-30s%-30s%-20d%-30s%-5s\n", "|",
                     c.getId(),
@@ -107,11 +111,14 @@ public abstract class Shop<T> implements Serializable {
                     c.getResidence().getHouseNo(),
                     c.getResidence().getCity(),
                     "|"));
+            System.out.println("|============================================================================================================================|");
         } else if (this instanceof Article) {
             Set<Article> articles = (Set<Article>) t;
+            System.out.println("\n| Articles ------------ Articles ------------ Articles |");
             System.out.printf("%-5s%-10s%-30s%-10s%-5s\n", "|", "ID", "Name", "Price", "|");
             System.out.println("|======================================================|");
             articles.forEach(a -> System.out.printf("%-5s%-10d%-30s%-10.2f%-5s\n", "|", a.getId(), a.getName(), a.getPrice(), "|"));
+            System.out.println("|======================================================|");
         } else {
             System.out.println("\nObject not assigned to known type\n");
             System.exit(1);
@@ -158,49 +165,29 @@ public abstract class Shop<T> implements Serializable {
 
     public Set<T> parseToSet(Set<Order> orders) {
 
-        Set<T> newSet = new HashSet<>();
 
         if (this instanceof Article) {
+            Set<Article> articles = new HashSet<>();
             for (Order o : orders) {
-                if (o != null) {
-                    newSet.add((T) o.getMyBasket());
+                if (o.getMyBasket() != null) {
+                    articles.addAll(o.getMyBasket());
                 }
             }
+            return (Set<T>) articles;
+
         } else if (this instanceof Customer) {
+            Set<Customer> customers = new HashSet<>();
             for (Order o : orders) {
-                if (o != null) {
-                    newSet.add((T) o.getCustomer());
+                if (o.getCustomer() != null) {
+                    customers.add(o.getCustomer());
                 }
             }
+            return (Set<T>) customers;
         } else {
             System.out.println("\nType not known\n");
             System.exit(1);
         }
-
-
-        return newSet;
-    }
-
-    public static Set<Order> readObjects() {
-
-        String filePath = "src/Week11/Task02/Data/Orders.bin";
-        final File fileOrder = new File(filePath);
-        Set<Order> orders = new HashSet<>();
-
-        if (!fileOrder.exists()) {
-            System.out.println("\nFile does not exists\n");
-            System.exit(1);
-        }
-
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileOrder));
-            while (ois.readObject() != null) orders.add((Order) ois.readObject());
-            ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        return orders;
+        return null;
     }
 
 }
