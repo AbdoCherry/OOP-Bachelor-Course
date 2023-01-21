@@ -41,7 +41,7 @@ public class Customer extends Shop<Customer> implements Crud<Customer> {
         }
         newCustomer = new Customer();
         newCustomer.setName(name);
-        newCustomer.setId(maxIdIncr((Set<Customer>) customers));
+        newCustomer.setId(maxIdIncr(customers));
 
         Residence newResidence = new Residence();
         newCustomer.setResidence(newResidence.createResidence(customers));

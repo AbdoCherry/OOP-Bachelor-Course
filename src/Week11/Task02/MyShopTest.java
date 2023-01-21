@@ -4,9 +4,6 @@ import Week11.Task02.Model.Article;
 import Week11.Task02.Model.Customer;
 import Week11.Task02.Model.Order;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class MyShopTest {
@@ -32,7 +29,7 @@ public class MyShopTest {
                 new Article(6, "Barber-Voucher", 49)
         ));
 
-        Set<Order> orders = new HashSet<Order>();
+        Set<Order> orders = new HashSet<>();
 
         // Reading from object file
 

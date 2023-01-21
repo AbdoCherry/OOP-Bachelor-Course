@@ -4,9 +4,7 @@ import Week11.Task02.Abstract.Crud;
 import Week11.Task02.Abstract.Shop;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Article extends Shop<Article> implements Crud<Article>{
 
@@ -21,12 +19,6 @@ public class Article extends Shop<Article> implements Crud<Article>{
     public Article(int id, String name, double price) {
         super(id, name);
         this.price = price;
-    }
-
-    public Article(int id, String name, double price, int quantity) {
-        super(id, name);
-        this.price = price;
-        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -59,9 +51,7 @@ public class Article extends Shop<Article> implements Crud<Article>{
 
         System.out.printf("\n%-5s%-10s%-35s%-10s%-5s\n", "|", "ID", "Article", "Price", "|");
         System.out.println("|===========================================================|");
-        myArticles.forEach(a -> {
-            System.out.printf("%-5s%-10d%-35s%-10.2f%-5s\n", "|", a.getId(), a.getName(), a.getPrice(), "|");
-        });
+        myArticles.forEach(a -> System.out.printf("%-5s%-10d%-35s%-10.2f%-5s\n", "|", a.getId(), a.getName(), a.getPrice(), "|"));
 
         char continueSelection;
         do {

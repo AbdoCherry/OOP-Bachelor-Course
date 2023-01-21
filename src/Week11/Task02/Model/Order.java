@@ -32,10 +32,6 @@ public class Order extends Shop<Order> implements Serializable {
         return myBasket;
     }
 
-    public void setMyBasket(Set<Article> myBasket) {
-        this.myBasket = myBasket;
-    }
-
     public void placeOrder(@NotNull Set<Order> orders, Set<Customer> customers, Set<Article> articles) {
 
         int sizeBefore = orders.size();
