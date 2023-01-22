@@ -83,11 +83,10 @@ public class Customer {
     public List<Customer> myAccounts(List<Customer> customers, String[] customer) {
 
         // Searching user by First- and Lastname and return list with all of his accounts
-        List<Customer> myAccounts = customers.stream()
+
+        return customers.stream()
                 .filter(c -> c.getFirstName().equalsIgnoreCase(customer[0]) && c.getLastName().equalsIgnoreCase(customer[1]))
                 .collect(Collectors.toList());
-
-        return myAccounts;
     }
 
     public String maxID(List<Customer> customers) {
@@ -131,7 +130,7 @@ public class Customer {
             // If customer doesn´t exists
         } else {
 
-            /**
+            /*
              * Ask user again if he wants to create an account at our Bank
              * (not necessary, but better user experience)
              */
@@ -237,7 +236,7 @@ public class Customer {
             case 'D':
 
                 maxAmount = myDeposits.stream()
-                        .mapToDouble(c -> c.getDepositBalance())
+                        .mapToDouble(Account::getDepositBalance)
                         .sum();
 
                 customers.removeIf((c -> c.getFirstName().equals(customer[0]) && c.getLastName().equals(customer[1])
@@ -272,9 +271,8 @@ public class Customer {
 
                 maxAmount = myDeposits.get(inputDeposit - 1).getDepositBalance();
                 for (int i = 0; i < customers.size(); i++) {
-                    if (customers.get(i).getDeposit().equals(myDeposits.get(inputDeposit - 1))) {
+                    if (customers.get(i).getDeposit().equals(myDeposits.get(inputDeposit - 1)))
                         customers.remove(i);
-                    }
                 }
 
                 System.out.println(
@@ -285,7 +283,7 @@ public class Customer {
             case 'C':
 
                 maxAmount = myCheckings.stream()
-                        .mapToDouble(c -> c.getDepositBalance())
+                        .mapToDouble(Account::getDepositBalance)
                         .sum();
 
                 customers.removeIf((c -> c.getFirstName().equals(customer[0]) && c.getLastName().equals(customer[1])
@@ -410,8 +408,8 @@ public class Customer {
         groupByCustomer.forEach((customer, accounts) -> {
             System.out.println("\n\t\t\t\033[1m***** Customers: " + customer + " *****\033[0m");
 
-            List<Deposit> deposits = new ArrayList<Deposit>();
-            List<Checking> checkings = new ArrayList<Checking>();
+            List<Deposit> deposits = new ArrayList<>();
+            List<Checking> checkings = new ArrayList<>();
 
             double maxAmount = 0.0;
 

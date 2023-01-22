@@ -29,10 +29,6 @@ public class Customer {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -51,10 +47,6 @@ public class Customer {
 
     public String getCustomerSince() {
         return customerSince;
-    }
-
-    public void setCustomerSince(String customerSince) {
-        this.customerSince = customerSince;
     }
 
     public static Scanner getScanner() {
@@ -97,9 +89,7 @@ public class Customer {
             }
         }
 
-        String maxID = String.valueOf(max + 1);
-
-        return maxID;
+        return String.valueOf(max + 1);
     }
 
     public static void addAccount(List<Deposit> deposits) {
@@ -181,12 +171,12 @@ public class Customer {
             }
 
             // Intitialize object newDeposit
-            newDeposit = new Deposit(customerID, customer[1], customer[0], customerSince, description, depositBalance,
+            newDeposit = new Deposit(customerID, customer[1], customer[0], customerSince, depositBalance,
                     investmentDate, maturityDate);
 
             deposits.add(newDeposit);
         } else if (createDeposit == 'N' || createDeposit == 'n') {
-            deposits.add(new Deposit(customerID, customer[1], customer[0], customerSince, "", 0.0, "", ""));
+            deposits.add(new Deposit(customerID, customer[1], customer[0], customerSince, 0.0, "", ""));
             System.out.println("\nThanks for using the program. Account was created without any deposits\n");
 
         } else {
@@ -220,7 +210,7 @@ public class Customer {
                 case 'a':
 
                     maxAmount = myDeposits.stream()
-                            .mapToDouble(d -> d.getDepositBalance())
+                            .mapToDouble(Deposit::getDepositBalance)
                             .sum();
 
                     deposits.removeIf(

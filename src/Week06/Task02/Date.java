@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Date {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
-    private static SimpleDateFormat parser = new SimpleDateFormat("dd.MMM");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+    private static final SimpleDateFormat parser = new SimpleDateFormat("dd.MMM");
     private int day;
     private String month;
 
@@ -67,7 +67,7 @@ public class Date {
         } else {
 
             try {
-                java.util.Date parseDate = sdf.parse(String.valueOf(returnDate.getDay()) + "." + returnDate.getMonth());
+                java.util.Date parseDate = sdf.parse(returnDate.getDay() + "." + returnDate.getMonth());
                 formatted = parser.format(parseDate);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -2,9 +2,6 @@ package Week05.Task05;
 
 public class TruckTest {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Truck[] truck = new Truck[10];

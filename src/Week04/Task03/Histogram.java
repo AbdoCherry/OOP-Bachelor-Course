@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public class Histogram {
 
-    /**
-     * @param accountBalance
-     */
     static void hist(double[] accountBalance) {
 
         String star = "*";
@@ -24,15 +21,11 @@ public class Histogram {
         }
     }
 
-    /**
-     * @param args
-     * @throws FileNotFoundException
-     */
     public static void main(String[] args) throws FileNotFoundException {
 
         String pathMacOs = "src/Week4/Task3/CheckingBalance.txt";
         String pathWin = "src\\Week4\\Task3\\CheckingBalance.txt";
-        String path = "";
+        String path;
         String myOS = System.getProperty("os.name");
 
         if (myOS.startsWith("Win")) {

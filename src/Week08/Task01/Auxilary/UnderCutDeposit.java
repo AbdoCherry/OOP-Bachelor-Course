@@ -6,8 +6,4 @@ public class UnderCutDeposit extends Exception {
         super("\nYou have undercut the amount by " + (100 - amount) + " $\nPlease enter amount again: ");
     }
 
-    public UnderCutDeposit(String message) {
-        super(message);
-    }
-
 }

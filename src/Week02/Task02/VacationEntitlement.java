@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 public class VacationEntitlement {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

@@ -13,16 +13,10 @@ public class Manager extends Employee {
         this.department = department;
     }
 
-    /**
-     * @return String
-     */
     public String getDepartment() {
         return department;
     }
 
-    /**
-     * @param department
-     */
     public void setDepartment(String department) {
         this.department = department;
     }

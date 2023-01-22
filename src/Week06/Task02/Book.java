@@ -18,24 +18,12 @@ public class Book {
         return rackNo;
     }
 
-    public void setRackNo(String rackNo) {
-        this.rackNo = rackNo;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getPublisher() {
         return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
     }
 
     public static Book searchBook(List<BookInventory> books) {
@@ -82,13 +70,8 @@ public class Book {
         System.out.printf("\n\033[1m%-5s%-15s\033[0m\n", "Key", "Genre");
         System.out.println("--------------------------------");
 
-        for (String[] genre : genres) {
-            for (String s : genre) {
-                System.out.printf("%-5s%-10s", s, " ");
-            }
-            System.out.println("");
-
-        }
+        for (String[] genre : genres)
+            for (String s : genre) System.out.printf("%-5s%-10s", s, " \n");
 
         System.out.print("\nChoose genres: ");
         int index = genreScanner.nextInt();

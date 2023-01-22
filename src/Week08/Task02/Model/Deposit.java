@@ -21,12 +21,10 @@ public class Deposit extends Account {
 
     public static List<Deposit> myDeposits(List<Customer> customers, String[] customer) {
 
-        List<Deposit> myDeposits = customers.stream()
+        return customers.stream()
                 .filter(c -> c.getFirstName().equals(customer[0]))
                 .filter(c -> c.getLastName().equals(customer[1])).map(Customer::getDeposit)
                 .collect(Collectors.toList());
-
-        return myDeposits;
     }
 
     public Deposit createDeposit() {
@@ -139,7 +137,7 @@ public class Deposit extends Account {
             System.out.print("Choose options above: ");
             amount = Account.scanner.nextInt();
 
-            // If customer chooses amount from left hand side of displayed options
+            // If customer chooses amount from left-hand side of displayed options
             if (amount == 0) {
                 System.out.print("Enter amount: ");
                 amount = Account.scanner.nextDouble();
@@ -149,7 +147,7 @@ public class Deposit extends Account {
                 amount = amount * 10;
                 depositAfter = depositBefore - amount * 10;
 
-                // If customer chooses amount from right hand side of displayed options
+                // If customer chooses amount from right-hand side of displayed options
             } else if (amount > 5) {
 
                 depositAfter = depositBefore - (amount * 100 - 500);
@@ -176,12 +174,12 @@ public class Deposit extends Account {
             Account.scanner.nextLine();
 
             // Initialize new Deposit values in correct record
-            for (int i = 0; i < customers.size(); i++) {
-                if (customers.get(i).getDeposit().getDepositBalance() == depositBefore) {
+            for (Customer value : customers) {
+                if (value.getDeposit().getDepositBalance() == depositBefore) {
                     Deposit newDeposit = new Deposit(depositAfter,
-                            customers.get(i).getDeposit().getInvestmentDate(),
-                            customers.get(i).getDeposit().getExpirationDate());
-                    customers.get(i).setDeposit(newDeposit);
+                            value.getDeposit().getInvestmentDate(),
+                            value.getDeposit().getExpirationDate());
+                    value.setDeposit(newDeposit);
                     break;
                 }
             }
@@ -228,7 +226,7 @@ public class Deposit extends Account {
                 maturityDate = DateConverter.dateFormatter(myDeposits.get(i).getExpirationDate());
                 depositBalance = digit.format(myDeposits.get(i).getDepositBalance()) + " $";
 
-                System.out.printf("%-30s%-30s%-30s%-25s\n", depositAccountNo, investmentDate,
+                System.out.printf("%-30s%-30s%-30s%-25s%-25s\n", depositAccountNo, investmentDate,
                         maturityDate, depositBalance, depositBalance);
             }
 
@@ -275,7 +273,7 @@ public class Deposit extends Account {
         System.out.print("Choose options above: ");
         amount = Account.scanner.nextInt();
 
-        // If customer chooses amount from left hand side of displayed options
+        // If customer chooses amount from left-hand side of displayed options
         if (amount == 0) {
             System.out.print("Enter amount: ");
             amount = Account.scanner.nextDouble();
@@ -285,7 +283,7 @@ public class Deposit extends Account {
             amount = amount * 10;
             depositAfter = depositBefore + amount;
 
-            // If customer chooses amount from right hand side of displayed options
+            // If customer chooses amount from right-hand side of displayed options
         } else if (amount > 5) {
             amount = amount * 100 - 500;
             depositAfter = depositBefore + amount;

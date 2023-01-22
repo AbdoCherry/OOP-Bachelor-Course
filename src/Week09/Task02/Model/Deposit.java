@@ -1,7 +1,5 @@
 package Week09.Task02.Model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -18,35 +16,26 @@ public class Deposit extends Customer {
     static DecimalFormat digit = new DecimalFormat("#");
     static DecimalFormat df = new DecimalFormat("#0.00");
 
-    private String description, investmentDate, maturityDate;
+    private String investmentDate;
+    private String maturityDate;
     private double depositBalance;
 
     public Deposit() {
 
     }
 
-    public Deposit(String description, double depositBalance, String investmentDate, String maturityDate) {
-        this.description = description;
+    public Deposit(double depositBalance, String investmentDate, String maturityDate) {
         this.depositBalance = depositBalance;
         this.investmentDate = investmentDate;
         this.maturityDate = maturityDate;
     }
 
-    public Deposit(String customerID, String lastName, String firstName, String customerSince, String description,
-            double depositBalance, String investmentDate, String maturityDate) {
+    public Deposit(String customerID, String lastName, String firstName, String customerSince,
+                   double depositBalance, String investmentDate, String maturityDate) {
         super(customerID, lastName, firstName, customerSince);
-        this.description = description;
         this.depositBalance = depositBalance;
         this.investmentDate = investmentDate;
         this.maturityDate = maturityDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getInvestmentDate() {
@@ -153,7 +142,7 @@ public class Deposit extends Customer {
             System.out.print("Choose options above: ");
             amount = Customer.getScanner().nextInt();
 
-            // If customer chooses amount from left hand side of displayed options
+            // If customer chooses amount from left-hand side of displayed options
             if (amount == 0) {
                 System.out.print("Enter amount: ");
                 amount = Customer.getScanner().nextDouble();
@@ -162,7 +151,7 @@ public class Deposit extends Customer {
                 amount = amount * 10;
                 depositAfter = depositBefore - amount;
 
-                // If customer chooses amount from right hand side of displayed options
+                // If customer chooses amount from right-hand side of displayed options
             } else if (amount > 5) {
                 amount = amount * 100 - 500;
                 depositAfter = depositBefore - amount;
@@ -189,9 +178,9 @@ public class Deposit extends Customer {
             System.out.printf("%-30s%-30s%-11s\n", depositBeforeString, depositAfterString, amountString);
 
             // Initializing new deposit balance to account
-            for (int i = 0; i < deposits.size(); i++) {
-                if (deposits.get(i).getDepositBalance() == depositBefore) {
-                    deposits.get(i).setDepositBalance(depositAfter);
+            for (Deposit value : deposits) {
+                if (value.getDepositBalance() == depositBefore) {
+                    value.setDepositBalance(depositAfter);
                     break;
                 }
             }
@@ -278,7 +267,7 @@ public class Deposit extends Customer {
         System.out.print("Choose options above: ");
         amount = Customer.getScanner().nextInt();
 
-        // If customer chooses amount from left hand side of displayed options
+        // If customer chooses amount from left-hand side of displayed options
         if (amount == 0) {
             System.out.print("Enter amount: ");
             amount = Customer.getScanner().nextDouble();
@@ -287,7 +276,7 @@ public class Deposit extends Customer {
             amount = amount * 10;
             depositAfter = depositBefore + amount;
 
-            // If customer chooses amount from right hand side of displayed options
+            // If customer chooses amount from right-hand side of displayed options
         } else if (amount > 5) {
             amount = amount * 100 - 500;
             depositAfter = depositBefore + amount;
@@ -313,9 +302,9 @@ public class Deposit extends Customer {
         System.out.printf("%-30s%-30s%-11s\n", depositBeforeString, depositAfterString, amountString);
 
         // Initialize new deposit balance to account
-        for (int i = 0; i < deposits.size(); i++) {
-            if (deposits.get(i).getDepositBalance() == depositBefore) {
-                deposits.get(i).setDepositBalance(depositAfter);
+        for (Deposit value : deposits) {
+            if (value.getDepositBalance() == depositBefore) {
+                value.setDepositBalance(depositAfter);
                 break;
             }
         }
@@ -381,13 +370,9 @@ public class Deposit extends Customer {
         groupByCustomer.forEach((customer, accounts) -> {
             System.out.println("\n\t\t\t\t\033[1m***** Customer: " + customer + " *****\033[0m");
 
-            List<Deposit> myDeposits = new ArrayList<Deposit>();
-
             double maxAmount = 0.0;
 
-            for (Deposit d : accounts) {
-                myDeposits.add(d);
-            }
+            List<Deposit> myDeposits = new ArrayList<>(accounts);
 
             System.out.printf("\n\033[1m%-30s%-30s%-30s%-30s%-15s\033[0m\n", "Deposit", "Investment Date",
                     "Maturity Date",
@@ -433,7 +418,7 @@ public class Deposit extends Customer {
         try {
 
             digit.setMaximumFractionDigits(10);
-            PrintWriter writeCSVDeposit = new PrintWriter(new File(path));
+            PrintWriter writeCSVDeposit = new PrintWriter(path);
             StringBuilder sbDeposit = new StringBuilder();
 
             sbDeposit.append("Customer ID");
@@ -457,7 +442,7 @@ public class Deposit extends Customer {
             for (Deposit d : deposits) {
                 sbDeposit.append(d.getCustomerID());
                 sbDeposit.append(";");
-                sbDeposit.append(d.getFirstName() + " " + d.getLastName());
+                sbDeposit.append(d.getFirstName()).append(" ").append(d.getLastName());
                 sbDeposit.append(";");
                 sbDeposit.append(d.getCustomerSince());
                 sbDeposit.append(";");
@@ -476,8 +461,6 @@ public class Deposit extends Customer {
             writeCSVDeposit.close();
             System.out.println(
                     "\n================================ EXPORT DEPOSIT FILE SUCCESSFUL ================================\n");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

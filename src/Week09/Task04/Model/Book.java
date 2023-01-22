@@ -14,53 +14,18 @@ public class Book {
         this.publisher = publisher;
     }
 
-    /**
-     * @return String
-     */
     public String getRackID() {
         return rackID;
     }
 
-    /**
-     * @param rackID
-     */
-    public void setRackID(String rackID) {
-        this.rackID = rackID;
-    }
-
-    /**
-     * @return String
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * @param title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return String
-     */
     public String getPublisher() {
         return publisher;
     }
 
-    /**
-     * @param publisher
-     */
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    /**
-     * @param books
-     * @param title
-     * @return Book[]
-     */
     public static Book[] countBooks(BookInventory[] books, String title) {
 
         int index = 0;
@@ -88,10 +53,6 @@ public class Book {
         return extractedBook;
     }
 
-    /**
-     * @param books
-     * @return int
-     */
     public static int maxRacks(BookInventory[] books) {
 
         int max = 0;
@@ -106,10 +67,6 @@ public class Book {
         return max;
     }
 
-    /**
-     * @param books
-     * @return int
-     */
     public static int minRacks(BookInventory[] books) {
 
         int min = Integer.parseInt(books[0].getBook().getRackID());

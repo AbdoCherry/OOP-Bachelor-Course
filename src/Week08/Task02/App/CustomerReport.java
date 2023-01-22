@@ -159,7 +159,7 @@ public class CustomerReport {
                 .println(
                         "\n========================================================== DISPLAY ALL CUSTOMERS IN BANK ==========================================================\n");
         customer.displayAll(customers);
-        //InputOutputFiles.writeCSV(customers);
+        InputOutputFiles.writeCSV(customers);
 
     }
 

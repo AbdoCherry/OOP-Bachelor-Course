@@ -13,16 +13,10 @@ public class Director extends Manager {
         this.budget = budget;
     }
 
-    /**
-     * @return double
-     */
     public double getBudget() {
         return budget;
     }
 
-    /**
-     * @param budget
-     */
     public void setBudget(double budget) {
         this.budget = budget;
     }

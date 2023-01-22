@@ -143,6 +143,7 @@ public class Employee {
                 System.out.print("\nEmployee - ID: ");
                 int empID = remEmpScanner.nextInt();
 
+                //noinspection LoopStatementThatDoesntLoop
                 while (checkExistence(allEmployees(departments), empID, null, null)) {
                     for (Department d : departments) {
                         d.getStaff().removeIf(e -> e.getEmpID() == empID);
@@ -176,9 +177,7 @@ public class Employee {
         System.out.println("|========================================================|");
         System.out.printf("\n\033[1m%-2s%-15s%-20s%-20s%-2s\033[0m\n", "|", "Employee-ID", "First Name", "Last Name", "|");
         System.out.println("|========================================================|");
-        allEmpsSorted.forEach(e -> {
-            System.out.printf("%-2s%-15d%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
-        });
+        allEmpsSorted.forEach(e -> System.out.printf("%-2s%-15d%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|"));
     }
 
 

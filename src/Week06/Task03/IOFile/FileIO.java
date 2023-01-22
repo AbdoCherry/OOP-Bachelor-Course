@@ -113,8 +113,8 @@ public class FileIO {
         String pathDep = "src/Week06/Task03/Data/Department.csv", pathEmp = "src/Week06/Task03/Data/Employee.csv";
 
         try {
-            PrintWriter writeDepCSV = new PrintWriter((new File(pathConverter(pathDep))));
-            PrintWriter writeEmpCSV = new PrintWriter((new File(pathConverter(pathEmp))));
+            PrintWriter writeDepCSV = new PrintWriter((pathConverter(pathDep)));
+            PrintWriter writeEmpCSV = new PrintWriter((pathConverter(pathEmp)));
 
             StringBuilder sbDep = new StringBuilder();
             StringBuilder sbEmp = new StringBuilder();
@@ -148,7 +148,7 @@ public class FileIO {
                 empList.sort(Comparator.comparing(Employee::getEmpID));
 
                 for (Employee e : empList) {
-                    sbEmp.append(String.valueOf(e.getEmpID()));
+                    sbEmp.append(e.getEmpID());
                     sbEmp.append(";");
                     sbEmp.append(e.getFirstName()).append(" ").append(e.getLastName());
                     sbEmp.append(";");

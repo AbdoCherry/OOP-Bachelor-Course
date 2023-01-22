@@ -36,9 +36,7 @@ public class Clerk extends Employee<Clerk> {
         System.out.println("\nPlease select Manager by his ID");
 
         System.out.printf("%-5s%-10s%-30s%-5s\n", "|", "ID", "Manager", "|");
-        managers.forEach(m -> {
-            System.out.printf("%-5s%-10d%-30s%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), "|");
-        });
+        managers.forEach(m -> System.out.printf("%-5s%-10d%-30s%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), "|"));
 
         boolean declined = false;
         int managerID = 0;
@@ -79,9 +77,7 @@ public class Clerk extends Employee<Clerk> {
 
         System.out.printf("%-5s%-10s%-30s%-5s\n", "|", "ID", "Name", "|");
         System.out.println("|============================================|");
-        clerks.forEach(c -> {
-            System.out.printf("%-5s%-10d%-30s%-5s\n", "|", c.getEmpId(), c.getFirstName() + " " + c.getLastName(), "|");
-        });
+        clerks.forEach(c -> System.out.printf("%-5s%-10d%-30s%-5s\n", "|", c.getEmpId(), c.getFirstName() + " " + c.getLastName(), "|"));
 
         Set<Clerk> selectedClerks = new HashSet<>();
         char continueSelection = 'Y';
@@ -144,7 +140,7 @@ public class Clerk extends Employee<Clerk> {
             sbClerk.append("\n");
 
             for (Clerk c : clerks) {
-                sbClerk.append(String.valueOf(c.getEmpId()));
+                sbClerk.append(c.getEmpId());
                 sbClerk.append(";");
                 sbClerk.append(c.getFirstName());
                 sbClerk.append(";");
@@ -152,9 +148,9 @@ public class Clerk extends Employee<Clerk> {
                 sbClerk.append(";");
                 sbClerk.append(c.getSsn());
                 sbClerk.append(";");
-                sbClerk.append(String.valueOf(c.getSalary()));
+                sbClerk.append(c.getSalary());
                 sbClerk.append(";");
-                sbClerk.append(String.valueOf(c.getManId()));
+                sbClerk.append(c.getManId());
                 sbClerk.append("\n");
 
             }

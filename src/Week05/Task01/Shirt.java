@@ -2,15 +2,11 @@ package Week05.Task01;
 
 public class Shirt {
 
-    private int shirtID;
-    private String description;
-    private char colCode;
+    private final int shirtID;
+    private final String description;
+    private final char colCode;
     private double price;
-    private int quantity;
-
-    public Shirt() {
-
-    }
+    private final int quantity;
 
     public Shirt(int shirtID, String description, char colCode, double price, int quantity) {
         this.shirtID = shirtID;
@@ -21,78 +17,19 @@ public class Shirt {
     }
 
     /**
-     * @return int
-     */
-    public int getShirtID() {
-        return shirtID;
-    }
-
-    /**
-     * @param shirtID
-     */
-    public void setShirtID(int shirtID) {
-        this.shirtID = shirtID;
-    }
-
-    /**
-     * @return String
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * @return char
-     */
-    public char getColCode() {
-        return colCode;
-    }
-
-    /**
-     * @param colCode
-     */
-    public void setColCode(char colCode) {
-        this.colCode = colCode;
-    }
-
-    /**
      * @return double
      */
     public double getPrice() {
         return price;
     }
 
-    /**
-     * @param price
-     */
     public void setPrice(double price) {
         this.price = price;
     }
 
-    /**
-     * @return int
-     */
-    public int getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * @param quantity
-     */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void displayInformation() {
 
-        String colorName = "";
+        String colorName;
 
         switch (this.colCode) {
             case 'r':

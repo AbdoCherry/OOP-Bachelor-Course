@@ -19,40 +19,23 @@ public class Date {
         this.month = month;
     }
 
-    /**
-     * @return int
-     */
     public int getDay() {
         return day;
     }
 
-    /**
-     * @param day
-     */
     public void setDay(int day) {
         this.day = day;
     }
 
-    /**
-     * @return String
-     */
     public String getMonth() {
         return month;
     }
 
-    /**
-     * @param month
-     */
     public void setMonth(String month) {
         this.month = month;
     }
 
-    /**
-     * @param input
-     * @return Date
-     * @throws ParseException
-     */
-    public static Date returnDate(int input) throws ParseException {
+    public static Date returnDate(int input) {
 
         int day = 0;
         String month = null;

@@ -5,9 +5,6 @@ import Week08.Task03.Model.Supplier;
 
 public class OrderApp {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
         Customer customer = new Customer("Mike Litoris", "Man-of-Steal Avn. 53-13", null, "DE55 1233 0000 5492 99",
                 "Evil Bank");

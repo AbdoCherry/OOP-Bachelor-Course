@@ -132,7 +132,6 @@ public class Manager extends Employee<Manager> {
 
         System.out.print("\nDepartment - or new one '0': ");
         int depSelection = scannerManager.nextInt();
-        String department = null;
 
         if (depSelection == 0) {
             manager.setDepName(createDepartment(managers));
@@ -228,7 +227,7 @@ public class Manager extends Employee<Manager> {
             sbManager.append("\n");
 
             for (Manager m : managers) {
-                sbManager.append(String.valueOf(m.getEmpId()));
+                sbManager.append(m.getEmpId());
                 sbManager.append(";");
                 sbManager.append(m.getFirstName());
                 sbManager.append(";");

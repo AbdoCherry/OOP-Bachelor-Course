@@ -12,7 +12,7 @@ public class SortingList {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nPlease enter random numbers into command line");
 
-        List<Integer> myInput = new ArrayList<Integer>();
+        List<Integer> myInput = new ArrayList<>();
         Random random = new Random();
 
         int randomInt = random.nextInt((10) + 1);

@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class MyUtil {
 
-    /**
-     * @param s
-     * @return int
-     */
     public static int lengthS(String s) {
 
         int lengthS = 0;
@@ -21,25 +17,18 @@ public class MyUtil {
         return lengthS;
     }
 
-    /**
-     * @param c
-     * @return String
-     */
     public static String letterS(char[] c) {
 
-        String myLetters = "";
+        StringBuilder myLetters = new StringBuilder();
         for (char l : c) {
             if (Character.isLetter(l)) {
-                myLetters += l;
+                myLetters.append(l);
             }
 
         }
-        return myLetters;
+        return myLetters.toString();
     }
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

@@ -9,7 +9,7 @@ public class Department {
     private Set<Employee> staff;
     private double budget;
 
-    private static DecimalFormat df = new DecimalFormat("#.##");
+    private static final DecimalFormat df = new DecimalFormat("#.##");
 
     public Department() {
     }
@@ -124,9 +124,7 @@ public class Department {
 
         System.out.printf("\033[1m%-2s%-12s%-20s%-20s%-2s\033[0m\n", "|", "Emp-ID", "First Name", "Last Name", "|");
         System.out.println("|-----------------------------------------------------|");
-        selectTeamlead.forEach(e -> {
-            System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
-        });
+        selectTeamlead.forEach(e -> System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|"));
         System.out.print("\nTeamlead: ");
         int teamlead = createDepartment.nextInt();
 
@@ -147,9 +145,7 @@ public class Department {
 
         int freeSpace = 0;
         while (stopSelection == 'Y' && selectStaff[4] == null) {
-            sortedEmps.forEach(e -> {
-                System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
-            });
+            sortedEmps.forEach(e -> System.out.printf("%-2s%-12s%-20s%-20s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|"));
 
             System.out.print("\nEmployee ID: ");
             int staffMemberSelect = createDepartment.nextInt();
@@ -213,9 +209,7 @@ public class Department {
             System.out.println("|============================================================================|");
             System.out.printf("\033[1m%-2s%-25s%-25s%-25s%-2s\033[0m\n", "|", "Employee - ID", "First Name", "Last Name", "|");
             System.out.println("|----------------------------------------------------------------------------|");
-            d.getStaff().forEach(e -> {
-                System.out.printf("%-2s%-25d%-25s%-25s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|");
-            });
+            d.getStaff().forEach(e -> System.out.printf("%-2s%-25d%-25s%-25s%-2s\n", "|", e.getEmpID(), e.getFirstName(), e.getLastName(), "|"));
             System.out.println("|----------------------------------------------------------------------------|");
         });
     }

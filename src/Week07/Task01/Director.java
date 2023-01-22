@@ -5,7 +5,6 @@ public class Director extends Manager {
     private double budget;
 
     public Director() {
-
     }
 
     public Director(int employeeID, String ssn, String name, double salary, String department, double budget) {
@@ -13,16 +12,10 @@ public class Director extends Manager {
         this.budget = budget;
     }
 
-    /**
-     * @return double
-     */
     public double getBudget() {
         return budget;
     }
 
-    /**
-     * @param budget
-     */
     public void setBudget(double budget) {
         this.budget = budget;
     }

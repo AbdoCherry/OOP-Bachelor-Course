@@ -22,53 +22,30 @@ public class BookInventory {
         this.returnDate = new Date(day, month);
     }
 
-    /**
-     * @return Book
-     */
     public Book getBook() {
         return book;
     }
 
-    /**
-     * @param book
-     */
     public void setBook(Book book) {
         this.book = book;
     }
 
-    /**
-     * @return Date
-     */
     public Date getReturnDate() {
         return returnDate;
     }
 
-    /**
-     * @param returnDate
-     */
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
 
-    /**
-     * @return Scanner
-     */
     public Scanner getScanner() {
         return scanner;
     }
 
-    /**
-     * @param scanner
-     */
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    /**
-     * @param books
-     * @param title
-     * @return boolean
-     */
     public static boolean checkAvailabilty(BookInventory[] books, String title) {
 
         boolean available = false;
@@ -88,9 +65,6 @@ public class BookInventory {
 
     }
 
-    /**
-     * @param books
-     */
     public void getBookByTitle(BookInventory[] books) {
 
         System.out.println("\nPlease enter the necessary information in the fields below");
@@ -114,9 +88,6 @@ public class BookInventory {
 
     }
 
-    /**
-     * @param books
-     */
     public void addBookToInventory(BookInventory[] books) {
 
         System.out.println("\nPlease enter the necessary information in the fields below");
@@ -168,10 +139,6 @@ public class BookInventory {
         }
     }
 
-    /**
-     * @param books
-     * @throws ParseException
-     */
     public void borrowBook(BookInventory[] books) throws ParseException {
 
         System.out.println("\nPlease enter the necessary information in the fields below");
@@ -179,9 +146,9 @@ public class BookInventory {
         String title = scanner.nextLine();
         boolean valid = false;
 
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null) {
-                if (books[i].getBook().getTitle().equals(title) && books[i].getReturnDate().getDay() == 0) {
+        for (BookInventory bookInventory : books) {
+            if (bookInventory != null) {
+                if (bookInventory.getBook().getTitle().equals(title) && bookInventory.getReturnDate().getDay() == 0) {
                     valid = BookInventory.checkAvailabilty(books, title);
 
                     if (valid) {
@@ -191,12 +158,12 @@ public class BookInventory {
                         System.out.print("Period of lend: ");
                         int input = scanner.nextInt();
                         Date returnDate = Date.returnDate(input);
-                        books[i].setReturnDate(returnDate);
+                        bookInventory.setReturnDate(returnDate);
                         System.out.println("\nBook successfully lent\n");
-                        System.out.println("Title: " + books[i].getBook().getTitle());
-                        System.out.println("Publisher: " + books[i].getBook().getPublisher());
-                        System.out.println("Return Date: " + books[i].getReturnDate().getDay() + " "
-                                + books[i].getReturnDate().getMonth());
+                        System.out.println("Title: " + bookInventory.getBook().getTitle());
+                        System.out.println("Publisher: " + bookInventory.getBook().getPublisher());
+                        System.out.println("Return Date: " + bookInventory.getReturnDate().getDay() + " "
+                                + bookInventory.getReturnDate().getMonth());
                         break;
 
                     }
@@ -204,12 +171,8 @@ public class BookInventory {
                 }
             }
         }
-
     }
 
-    /**
-     * @param books
-     */
     public void display(BookInventory[] books) {
         System.out.println("\nAll Books in Inventory");
 

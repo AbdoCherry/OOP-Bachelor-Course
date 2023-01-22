@@ -6,10 +6,6 @@ import java.util.Scanner;
 
 public class Textreader {
 
-    /**
-     * @param args
-     * @throws FileNotFoundException
-     */
     public static void main(String[] args) throws FileNotFoundException {
 
         String pathMacOs = "src/Week4/Task2/CheckingBalance.txt";

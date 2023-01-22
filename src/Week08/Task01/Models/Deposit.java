@@ -23,55 +23,33 @@ public class Deposit {
         this.maturityDate = maturityDate;
     }
 
-    /**
-     * @return double
-     */
     public double getDepositBalance() {
         return depositBalance;
     }
 
-    /**
-     * @param depositBalance
-     */
     public void setDepositBalance(double depositBalance) {
         this.depositBalance = depositBalance;
     }
 
-    /**
-     * @return String
-     */
     public String getInvestmentDate() {
         return investmentDate;
     }
 
-    /**
-     * @param investmentDate
-     */
     public void setInvestmentDate(String investmentDate) {
         this.investmentDate = investmentDate;
     }
 
-    /**
-     * @return String
-     */
     public String getMaturityDate() {
         return maturityDate;
     }
 
-    /**
-     * @param maturityDate
-     */
     public void setMaturityDate(String maturityDate) {
         this.maturityDate = maturityDate;
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
     public static void withdrawMoney(List<Account> accounts) throws ParseException {
 
-        // Get an Array of deposit accounts from user if he already possess deposit
+        // Get an Array of deposit accounts from user if he already possesses deposit
         // accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
@@ -145,13 +123,9 @@ public class Deposit {
 
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
     public static void depositMoney(List<Account> accounts) throws ParseException {
 
-        // Get an Array of deposit accounts from user if he already possess deposit
+        // Get an Array of deposit accounts from user if he already possesses deposit
         // accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
@@ -206,13 +180,9 @@ public class Deposit {
 
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
     public static void showTotalBalance(List<Account> accounts) throws ParseException {
 
-        // Get an Array of deposit accounts from user if he already possess deposit
+        // Get an Array of deposit accounts from user if he already possesses deposit
         // accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
@@ -244,9 +214,7 @@ public class Deposit {
                 counter++;
             }
 
-            double totalBalance = myAccounts.stream().mapToDouble(mapper -> {
-                return mapper.getDeposit().getDepositBalance();
-            }).sum();
+            double totalBalance = myAccounts.stream().mapToDouble(mapper -> mapper.getDeposit().getDepositBalance()).sum();
 
             System.out.println(
                     "\n--------------------------------------------------------------------------------------------------------------------------------\n");

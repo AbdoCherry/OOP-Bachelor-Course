@@ -15,38 +15,10 @@ public class DateConverter {
     public static SimpleDateFormat sdfSpecial = new SimpleDateFormat("dd.MMM.yyyy");
     public static SimpleDateFormat sdfFormatter = new SimpleDateFormat("MMM yyyy", Locale.US);
 
-    /**
-     * @return SimpleDateFormat
-     */
-    public static SimpleDateFormat getSdfParser() {
-        return sdfParser;
-    }
-
-    /**
-     * @param sdfParser
-     */
-    public static void setSdfParser(SimpleDateFormat sdfParser) {
-        DateConverter.sdfParser = sdfParser;
-    }
-
-    /**
-     * @return SimpleDateFormat
-     */
     public static SimpleDateFormat getSdfFormatter() {
         return sdfFormatter;
     }
 
-    /**
-     * @param sdfFormatter
-     */
-    public static void setSdfFormatter(SimpleDateFormat sdfFormatter) {
-        DateConverter.sdfFormatter = sdfFormatter;
-    }
-
-    /**
-     * @param day
-     * @return String
-     */
     public static String daySuffix(int day) {
 
         if (day >= 11 && day <= 13) {
@@ -62,22 +34,13 @@ public class DateConverter {
                     return "rd";
                 default:
                     return "th";
-
             }
-
         }
-
     }
 
-    /**
-     * @param date
-     * @return String[]
-     * @throws ParseException
-     */
     public static String[] dateFormatter(String date) throws ParseException {
 
         String[] myDate = new String[2];
-
         Date convertDate;
 
         try {
@@ -103,11 +66,6 @@ public class DateConverter {
         return myDate;
     }
 
-    /**
-     * @param controller
-     * @return String
-     * @throws ParseException
-     */
     public static String createDate(char controller) throws ParseException {
 
         Date myDate;
@@ -167,11 +125,6 @@ public class DateConverter {
         return date;
     }
 
-    /**
-     * @param investmentDay
-     * @return String
-     * @throws ParseException
-     */
     public static String maternityDay(String[] investmentDay) throws ParseException {
 
         System.out.println("\nHow long do you want to hold the investment?");
@@ -225,11 +178,6 @@ public class DateConverter {
         return date;
     }
 
-    /**
-     * @param maturityDate
-     * @return boolean
-     * @throws ParseException
-     */
     public static boolean checkDate(String maturityDate) throws ParseException {
 
         boolean valid = false;

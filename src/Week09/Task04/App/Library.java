@@ -7,10 +7,6 @@ import Week09.Task04.Model.BookInventory;
 
 public class Library {
 
-    /**
-     * @param args
-     * @throws ParseException
-     */
     public static void main(String[] args) throws ParseException {
 
         Scanner scanner = new Scanner(System.in);
@@ -24,7 +20,7 @@ public class Library {
         books[3] = new BookInventory("1", "Flutter Course - Beginner", "AbdoCherry", 0, null);
         books[4] = new BookInventory("2", "Nineteen Eighty Four - 1984", "George Orwell", 0, null);
         books[5] = new BookInventory("2", "New Brave World", "Aldous Huxley", 12, "May");
-        books[6] = new BookInventory("2", "New Brave World", "Aldous Huxley", 04, "Feb");
+        books[6] = new BookInventory("2", "New Brave World", "Aldous Huxley", 4, "Feb");
         books[7] = new BookInventory("2", "New Brave World", "Aldous Huxley", 0, null);
         books[8] = new BookInventory("3", "The Hitchhiker's Guide To The Galaxy", "Adams, Douglas et. al", 0, null);
         books[9] = new BookInventory("3", "The Hitchhiker's Guide To The Galaxy", "Adams, Douglas et. al", 0, null);

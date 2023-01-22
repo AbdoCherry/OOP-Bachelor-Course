@@ -23,30 +23,19 @@ public class Customer {
         this.customerSince = customerSince;
     }
 
-    /**
-     * @return String
-     */
+
     public String getCustomerID() {
         return customerID;
     }
 
-    /**
-     * @param customerID
-     */
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 
-    /**
-     * @return String
-     */
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * @param lastName
-     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -58,31 +47,18 @@ public class Customer {
         return firstName;
     }
 
-    /**
-     * @param firstName
-     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    /**
-     * @return String
-     */
     public String getCustomerSince() {
         return customerSince;
     }
 
-    /**
-     * @param customerSince
-     */
     public void setCustomerSince(String customerSince) {
         this.customerSince = customerSince;
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
     public static void addAccount(List<Account> accounts) throws ParseException {
 
         // Object placeholder
@@ -90,7 +66,7 @@ public class Customer {
         Deposit newDeposit = new Deposit();
         Account newAccount = new Account();
 
-        // Get an Array of deposit accounts from user if he already possess deposit accounts
+        // Get an Array of deposit accounts from user if he already possesses deposit accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
@@ -121,7 +97,7 @@ public class Customer {
 
         } else if (myAccounts.size() == 0) {
 
-            // If he is a brand new Customer
+            // If he is a brand-new Customer
             System.out.println("\nThanks for joining this bank as our new Customer. Please follow the instructions\n");
             createAccount = 'Y';
             customerID = Account.maxID(accounts);
@@ -193,11 +169,7 @@ public class Customer {
 
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
-    public static void getAccount(List<Account> accounts) throws ParseException {
+    public static void getAccount(List<Account> accounts) {
 
         // Get an Array of deposit accounts from user if he already posess deposit accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
@@ -260,13 +232,9 @@ public class Customer {
         }
     }
 
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
     public static void removeAccount(List<Account> accounts) throws ParseException {
 
-        // Get an Array of deposit accounts from user if he already possess deposit
+        // Get an Array of deposit accounts from user if he already possesses deposit
         // accounts
         System.out.println("\nPlease enter the necessary information in the fields below\n");
         System.out.print("First Name: ");
@@ -305,56 +273,6 @@ public class Customer {
             accounts.remove(myAccounts.get(input - 1));
 
             System.out.println("\nDeposit Account deleted successfully\n");
-        }
-
-    }
-
-    /**
-     * @param accounts
-     * @throws ParseException
-     */
-    public static void showTotalBalance(List<Account> accounts) throws ParseException {
-
-        // Get an Array of deposit accounts from user if he already possess deposit
-        // accounts
-        System.out.println("\nPlease enter the necessary information in the fields below\n");
-        System.out.print("First Name: ");
-        String firstName = scanner.nextLine();
-        System.out.print("Last Name: ");
-        String lastName = scanner.nextLine();
-        List<Account> myAccounts = Account.myAccounts(accounts, firstName, lastName);
-
-        if (myAccounts.size() > 0) {
-            System.out.println("\n***** Available Deposits - " + myAccounts.get(0).getCustomer().getFirstName() + " "
-                    + myAccounts.get(0).getCustomer().getLastName() + " *****\n");
-            System.out.printf("%-8s%-20s%-20s%-18s\n", "Account", "Investment Date", "Maturnaty Date", "Total Balance");
-            int counter = 1;
-            for (Account a : myAccounts) {
-
-                String[] investmentDateFormatted = DateConverter.dateFormatter(a.getDeposit().getInvestmentDate());
-                String[] maturnityDateFormatted = DateConverter.dateFormatter(a.getDeposit().getMaturityDate());
-                String investmentDate = investmentDateFormatted[0]
-                        + DateConverter.daySuffix(Integer.parseInt(investmentDateFormatted[0]))
-                        + " of " + investmentDateFormatted[1];
-                String maturnityDate = maturnityDateFormatted[0]
-                        + DateConverter.daySuffix(Integer.parseInt(maturnityDateFormatted[0]))
-                        + " of " + maturnityDateFormatted[1];
-
-                System.out.printf("%-8d%-20s%-20s%-10.2f$\n", counter, investmentDate, maturnityDate,
-                        a.getDeposit().getDepositBalance());
-
-                counter++;
-            }
-
-            double totalBalance = myAccounts.stream().mapToDouble(mapper -> {
-                return mapper.getDeposit().getDepositBalance();
-            }).sum();
-
-            System.out.println(
-                    "\n--------------------------------------------------------------------------------------------------------------------------------\n");
-            System.out.println("Total Balance for Customer " + myAccounts.get(0).getCustomer().getFirstName() + " "
-                    + myAccounts.get(1).getCustomer().getLastName() + ": " + totalBalance + " $");
-
         }
 
     }

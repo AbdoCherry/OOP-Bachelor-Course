@@ -6,13 +6,9 @@ import java.util.Scanner;
 
 public class CsvReader {
 
-    /**
-     * @param args
-     * @throws FileNotFoundException
-     */
     public static void main(String[] args) throws FileNotFoundException {
 
-        String path = "";
+        String path;
         String pathWindows = "src\\Week4\\Task7\\OrderList.csv";
         String pathMacOs = "src/Week4/Task7/OrderList.csv";
         String myOs = System.getProperty("os.name");

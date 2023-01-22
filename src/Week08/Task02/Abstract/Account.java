@@ -54,10 +54,6 @@ public abstract class Account {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     public static String[] customer() {
 
         // Collect basic information about user

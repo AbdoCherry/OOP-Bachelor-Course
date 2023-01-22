@@ -22,39 +22,20 @@ public class Customer {
         return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return String
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return String
-     */
     public String getMailaddress() {
         return mailaddress;
-    }
-
-    /**
-     * @param mailaddress
-     */
-    public void setMailaddress(String mailaddress) {
-        this.mailaddress = mailaddress;
     }
 
     public void displayCustomer() {
@@ -63,12 +44,8 @@ public class Customer {
         System.out.println("Customer mail: " + this.mailaddress);
     }
 
-    /**
-     * @param customer
-     * @return boolean
-     */
     public boolean isEqual(Customer customer) {
-        boolean isEqual = false;
+        boolean isEqual;
 
         isEqual = this.mailaddress.equals(customer.getMailaddress());
 

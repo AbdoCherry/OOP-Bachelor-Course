@@ -4,20 +4,11 @@ import java.util.Scanner;
 
 public class CalcMetricsMethods {
 
-    /**
-     * @param max
-     * @param min
-     * @param avg
-     */
     static void display(double max, double min, double avg) {
         System.out.println("\nMaximum\t\tMinimum\t\tAverage");
         System.out.printf("%.2f $\t%.2f $\t%.2f $\t%n", max, min, avg);
     }
 
-    /**
-     * @param accountBalance
-     * @return double
-     */
     static double maxVal(double[] accountBalance) {
 
         double result = 0;
@@ -31,10 +22,6 @@ public class CalcMetricsMethods {
         return result;
     }
 
-    /**
-     * @param accountBalance
-     * @return double
-     */
     static double minVal(double[] accountBalance) {
 
         double result = accountBalance[0];
@@ -47,10 +34,6 @@ public class CalcMetricsMethods {
         return result;
     }
 
-    /**
-     * @param accountBalance
-     * @return double
-     */
     static double avgVal(double[] accountBalance) {
 
         double result = 0;
@@ -61,9 +44,6 @@ public class CalcMetricsMethods {
         return result / accountBalance.length;
     }
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

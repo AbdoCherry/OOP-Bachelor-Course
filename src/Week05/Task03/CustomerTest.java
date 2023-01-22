@@ -2,9 +2,6 @@ package Week05.Task03;
 
 public class CustomerTest {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Customer customer1 = new Customer(1, "Sheikh Yerbouti", "sh.yerbouti@web.com");
@@ -16,7 +13,6 @@ public class CustomerTest {
         customer2.displayCustomer();
 
         // Trying with isEqual method
-
         Customer customer3 = new Customer(1, "Sheikh Yerbouti", "sh.yerbouti@web.com");
         Customer customer4 = new Customer(2, "Dover Ben", "sh.yerbouti@web.com");
 

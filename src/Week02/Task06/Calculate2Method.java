@@ -6,31 +6,16 @@ public class Calculate2Method {
 
     static final double EXCHANGERATE = 1.0971, RATE = 1.19;
 
-    /**
-     * @param amount
-     * @param RATE
-     * @return double
-     */
-    static double taxCalc(double amount, double RATE) {
+    static double taxCalc(double amount) {
 
-        double result = amount * (1 + RATE / 100);
-        return result;
+        return amount * (1 + Calculate2Method.RATE / 100);
     }
 
-    /**
-     * @param amount
-     * @param EXCHANGERATE
-     * @return double
-     */
-    static double exchangeCalc(double amount, double EXCHANGERATE) {
+    static double exchangeCalc(double amount) {
 
-        double result = amount * (1 + EXCHANGERATE / 100);
-        return result;
+        return amount * (1 + Calculate2Method.EXCHANGERATE / 100);
     }
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -39,8 +24,8 @@ public class Calculate2Method {
         System.out.print("Amount: ");
         double amount = scanner.nextDouble();
 
-        double taxedAmount = taxCalc(amount, RATE);
-        double exchangedAmount = exchangeCalc(taxedAmount, EXCHANGERATE);
+        double taxedAmount = taxCalc(amount);
+        double exchangedAmount = exchangeCalc(taxedAmount);
 
         System.out.println("\nNet amount\tGross amount\tExchanged");
         System.out.printf("%.2f €\t%.2f €\t%.2f $\n", amount, taxedAmount, exchangedAmount);

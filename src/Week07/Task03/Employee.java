@@ -1,4 +1,5 @@
 package Week07.Task03;
+
 public class Employee {
 
     private int employeeID;
@@ -6,7 +7,6 @@ public class Employee {
     private double salary;
 
     public Employee() {
-
     }
 
     public Employee(int employeeID, String ssn, String name, double salary) {
@@ -16,58 +16,34 @@ public class Employee {
         this.salary = salary;
     }
 
-    /**
-     * @return int
-     */
     public int getEmployeeID() {
         return employeeID;
     }
 
-    /**
-     * @param employeeID
-     */
     public void setEmployeeID(int employeeID) {
         this.employeeID = employeeID;
     }
 
-    /**
-     * @return String
-     */
     public String getSsn() {
         return ssn;
     }
 
-    /**
-     * @param ssn
-     */
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
-    /**
-     * @return String
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return double
-     */
     public double getSalary() {
         return salary;
     }
 
-    /**
-     * @param salary
-     */
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -82,9 +58,6 @@ public class Employee {
         System.out.printf("Employee Salary: %.2f $\n", this.salary);
     }
 
-    /**
-     * @param salaryNew
-     */
     public void increaseSalary(double salaryNew) {
 
         // We want to work with the yearly salary
@@ -103,12 +76,8 @@ public class Employee {
             System.out.printf("Exceeds with %.2f %% by %.2f $\n", validator, exceeded);
 
         }
-
     }
 
-    /**
-     * @param nameNew
-     */
     public void editName(String nameNew) {
 
         String nameBefore = this.name;
@@ -121,9 +90,6 @@ public class Employee {
         System.out.println(" ");
     }
 
-    /**
-     * @param employees
-     */
     public static void stockOptions(Employee[] employees) {
 
         System.out.println("\n\n****** Stock options per Employee ******");

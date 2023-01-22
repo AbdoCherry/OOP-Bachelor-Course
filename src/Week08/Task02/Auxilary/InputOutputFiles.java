@@ -1,7 +1,6 @@
 package Week08.Task02.Auxilary;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,9 +100,9 @@ public class InputOutputFiles {
             digit.setMaximumFractionDigits(10);
 
             // Defining writer for every type
-            PrintWriter writeCSVCustomer = new PrintWriter(new File(pathCustomer));
-            PrintWriter writeCSVChecking = new PrintWriter(new File(pathChecking));
-            PrintWriter writeCSVDeposit = new PrintWriter(new File(pathDeposit));
+            PrintWriter writeCSVCustomer = new PrintWriter(pathCustomer);
+            PrintWriter writeCSVChecking = new PrintWriter(pathChecking);
+            PrintWriter writeCSVDeposit = new PrintWriter(pathDeposit);
 
             // Defining stringbuilder for every type
             StringBuilder sbCustomer = new StringBuilder();
@@ -162,7 +161,7 @@ public class InputOutputFiles {
                 if (c.getDeposit() != null) {
                     sbDeposit.append(c.getCustomerID());
                     sbDeposit.append(";");
-                    sbDeposit.append(c.getFirstName() + " " + c.getLastName());
+                    sbDeposit.append(c.getFirstName()).append(" ").append(c.getLastName());
                     sbDeposit.append(";");
                     sbDeposit.append(c.getCustomerSince());
                     sbDeposit.append(";");

@@ -4,28 +4,18 @@ import java.util.Scanner;
 
 public class CesarEncryption {
 
-    /**
-     * @param plaintext
-     * @param key
-     * @return String
-     */
     // Encrypt plaintext with the key
     public static String code(String plaintext, int key) {
-        String ciphertext = "";
+        StringBuilder ciphertext = new StringBuilder();
         plaintext = plaintext.toLowerCase(); // Convert all to lowercase
         for (int i = 0; i < plaintext.length(); i++) {
             // Move letters and attach to ciphertext
             char next = plaintext.charAt(i);
-            ciphertext = ciphertext + shift(next, key);
+            ciphertext.append(shift(next, key));
         }
-        return ciphertext;
+        return ciphertext.toString();
     }
 
-    /**
-     * @param letter
-     * @param shift
-     * @return char
-     */
     // Moves the letter by the specified shift (key)
     public static char shift(char letter, int shift) {
         // Buchstaben als Zahl behandeln
@@ -38,26 +28,18 @@ public class CesarEncryption {
         return letter;
     }
 
-    /**
-     * @param ciphertext
-     * @param key
-     * @return String
-     */
     // Decrypts the ciphertext with the given key
     public static String decode(String ciphertext, int key) {
-        String decoded = "";
+        StringBuilder decoded = new StringBuilder();
         ciphertext = ciphertext.toLowerCase(); // Convert all to lowercase
         for (int i = 0; i < ciphertext.length(); i++) {
             // Shift each letter by (26-key) digits and append to decrypted text
             char next = ciphertext.charAt(i);
-            decoded = decoded + shift(next, 26 - key);
+            decoded.append(shift(next, 26 - key));
         }
-        return decoded;
+        return decoded.toString();
     }
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

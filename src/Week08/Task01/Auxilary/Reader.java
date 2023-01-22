@@ -1,22 +1,19 @@
 package Week08.Task01.Auxilary;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Week08.Task01.Models.Account;
+import org.jetbrains.annotations.NotNull;
 
 public class Reader {
 
-    /**
-     * @return List<Account>
-     */
-    public static List<Account> readCSV() {
+    public static @NotNull List<Account> readCSV() {
 
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
 
         // Filepath of our csv. Depending on your OS I´ve built these branching
         String windowsPath = "src\\Week08\\Task01\\Data\\input.csv";
@@ -48,8 +45,6 @@ public class Reader {
             readAccounts.close();
             System.out.println("\nCSV data was read successfully\nIn total " + accounts.size() + " are read\n");
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

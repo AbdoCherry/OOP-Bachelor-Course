@@ -2,9 +2,6 @@ package Week05.Task01;
 
 public class ShirtTest {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         Shirt[] myShirts = new Shirt[10];

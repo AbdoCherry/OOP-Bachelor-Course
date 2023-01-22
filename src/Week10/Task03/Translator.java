@@ -16,7 +16,7 @@ public class Translator {
 
     public static void printDictionary(Map<String, String> map) {
 
-        map = new TreeMap<String, String>(map);
+        map = new TreeMap<>(map);
         int counter = 0;
         System.out.printf("\033[1m%-5s%-15s%-15s\033[0m\n", "ID", "English", "Deutsch");
         System.out.println("------------------------------");
@@ -30,7 +30,7 @@ public class Translator {
 
         Scanner scanner = new Scanner(System.in);
 
-        Map<String, String> translator = new HashMap<String, String>();
+        Map<String, String> translator = new HashMap<>();
 
         // Translation from english to german
         translator.put("Boat", "Boot");

@@ -10,10 +10,6 @@ import Week08.Task01.Auxilary.Writer;
 
 public class CustomerReport {
 
-    /**
-     * @param args
-     * @throws ParseException
-     */
     public static void main(String[] args) throws ParseException {
 
         Scanner scanner = new Scanner(System.in);

@@ -8,21 +8,17 @@ import java.util.Scanner;
 
 public class FileReaderText {
 
-    /**
-     * @return String
-     * @throws FileNotFoundException
-     */
-    static String fileReader() throws FileNotFoundException {
+    static String fileReader() {
         String os = System.getProperty("os.name");
         String pathWindows = "src\\Week4\\Task5\\Textpassage.txt"; // On Windows the file convention looks like this
-        String pathMacOS = "src/Week4/Task5/Textpassage.txt"; // On MacOS the file convention looks like this
+        String pathMacOS = "src/Week4/Task5/Textpassage.txt"; // On macOS the file convention looks like this
         String path;
         if (os.startsWith("Mac")) {
             path = pathMacOS;
         } else {
             path = pathWindows;
         }
-        Scanner myFile = null; // Reading german umlauts with "utf-8"
+        Scanner myFile; // Reading german umlauts with "utf-8"
         try {
             myFile = new Scanner(new File(path), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -30,37 +26,38 @@ public class FileReaderText {
         }
         myFile.useDelimiter(" ");
 
-        String myText = "";
+        StringBuilder myText = new StringBuilder();
 
         while (myFile.hasNextLine()) {
-            myText += myFile.nextLine();
+            myText.append(myFile.nextLine());
 
         }
-        return myText;
+        return myText.toString();
     }
 
-    /**
-     * @param myText
-     * @param specialChar
-     */
     static void histogram(String[] myText, char[] specialChar) {
 
-        String digit = "", words = "", wordsStar = "", digitStar = "", special = "", specialStar = "";
+        StringBuilder digit = new StringBuilder();
+        StringBuilder words = new StringBuilder();
+        StringBuilder wordsStar = new StringBuilder();
+        StringBuilder digitStar = new StringBuilder();
+        StringBuilder special = new StringBuilder();
+        StringBuilder specialStar = new StringBuilder();
 
         for (String element : myText) {
             if (element.toLowerCase().equals(element.toUpperCase())) {
-                digit += element + " ";
-                digitStar += "*";
+                digit.append(element).append(" ");
+                digitStar.append("*");
             } else {
-                words += element + " ";
-                wordsStar += "*";
+                words.append(element).append(" ");
+                wordsStar.append("*");
 
             }
         }
         for (char c : specialChar) {
             if (!Character.isAlphabetic(c) && !Character.isDigit(c) && !Character.isWhitespace(c)) {
-                special += c;
-                specialStar += "*";
+                special.append(c);
+                specialStar.append("*");
             }
         }
 
@@ -73,10 +70,6 @@ public class FileReaderText {
 
     }
 
-    /**
-     * @param args
-     * @throws FileNotFoundException
-     */
     public static void main(String[] args) throws FileNotFoundException {
 
         String text = fileReader(); // Using our defined function above
@@ -84,7 +77,7 @@ public class FileReaderText {
 
         char[] specialChar = text.toCharArray();
 
-        // Strings are immutable => Thats why you need to assign manipulated Strings to
+        // Strings are immutable => That's why you need to assign manipulated Strings to
         // it´s own variable again
         // text.replace(",", ""); wouldn´t replace anything
         text = text.replace(",", " ");

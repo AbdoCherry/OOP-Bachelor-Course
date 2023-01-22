@@ -1,5 +1,6 @@
 package Week09.Task03;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class InputChecker {
@@ -7,16 +8,16 @@ public class InputChecker {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nPleae enter two inputs in the fields below");
-        System.out.print("\nInput 1: ");
-        String input1 = scanner.nextLine();
-        System.out.print("\nInput 2: ");
-        String input2 = scanner.nextLine();
-
-        try {
-            if (input1 == "" && input2 == "") {
+        String input1 = null, input2 = null;
+        try (scanner) {
+            System.out.println("\nPleae enter two inputs in the fields below");
+            System.out.print("\nInput 1: ");
+            input1 = scanner.nextLine();
+            System.out.print("\nInput 2: ");
+            input2 = scanner.nextLine();
+            if (Objects.equals(input1, "") && Objects.equals(input2, "")) {
                 throw new MissingParameter("\n**** Parameter missing ****");
-            } else if (input1 == "" || input2 == "") {
+            } else if (Objects.equals(input1, "") || Objects.equals(input2, "")) {
                 throw new MissingParameter("\n**** One more parameter missing");
             }
 
@@ -25,7 +26,6 @@ public class InputChecker {
         } finally {
             System.out.println("\nString input 1: " + input1);
             System.out.println("String input 2: " + input2);
-            scanner.close();
         }
 
     }

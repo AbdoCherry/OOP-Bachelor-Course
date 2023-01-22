@@ -13,32 +13,12 @@ public class Bank {
         this.bankName = bankName;
     }
 
-    /**
-     * @return String
-     */
     public String getIban() {
         return iban;
     }
 
-    /**
-     * @param iban
-     */
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
-    /**
-     * @return String
-     */
     public String getBankName() {
         return bankName;
-    }
-
-    /**
-     * @param bankName
-     */
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
     }
 
 }

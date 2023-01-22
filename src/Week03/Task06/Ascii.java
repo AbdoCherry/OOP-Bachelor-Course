@@ -2,9 +2,6 @@ package Week03.Task06;
 
 public class Ascii {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         System.out.println("\n");

@@ -19,13 +19,11 @@ public class Checking extends Account {
 
     public static List<Checking> myCheckings(List<Customer> customers, String[] customer) {
 
-        List<Checking> myCheckings = customers.stream()
+        return customers.stream()
                 .filter(c -> c.getFirstName().equals(customer[0]))
                 .filter(c -> c.getLastName().equals(customer[1]))
-                .filter(c -> c.getChecking().getCheckingBalance() > 0).map(Customer::getChecking)
+                .map(Customer::getChecking).filter(checking -> checking.getCheckingBalance() > 0)
                 .collect(Collectors.toList());
-
-        return myCheckings;
 
     }
 
@@ -107,7 +105,7 @@ public class Checking extends Account {
         System.out.print("Choose options above: ");
         amount = Account.scanner.nextDouble();
 
-        // If customer chooses amount from left hand side of displayed options
+        // If customer chooses amount from left-hand side of displayed options
         if (amount == 0) {
             System.out.print("Enter amount: ");
             amount = Account.scanner.nextDouble();
@@ -116,7 +114,7 @@ public class Checking extends Account {
         } else if (amount < 6) {
             checkingAfter = checkingBefore - amount * 10;
 
-            // If customer chooses amount from right hand side of displayed options
+            // If customer chooses amount from right-hand side of displayed options
         } else if (amount > 5) {
             checkingAfter = checkingBefore - (amount * 100 - 500);
 
@@ -131,10 +129,10 @@ public class Checking extends Account {
 
         // Check if withdrawal doesn´t undercuts the dispolimit of 0.- $
         if (checkingAfter > DISPOLIMIT) {
-            for (int i = 0; i < customers.size(); i++) { // Loop through main list of customers
-                if (customers.get(i).getChecking().getCheckingBalance() == checkingBefore) { // Search for record
+            for (Customer value : customers) { // Loop through main list of customers
+                if (value.getChecking().getCheckingBalance() == checkingBefore) { // Search for record
                     Checking newChecking = new Checking(checkingAfter); // Creating new Checking Objet with new Value
-                    customers.get(i).setChecking(newChecking); // Initializing Checking Object into founded record
+                    value.setChecking(newChecking); // Initializing Checking Object into founded record
                     break;
                 }
             }
@@ -232,10 +230,10 @@ public class Checking extends Account {
             System.exit(0);
         }
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getChecking().getCheckingBalance() == checkingBefore) {
+        for (Customer value : customers) {
+            if (value.getChecking().getCheckingBalance() == checkingBefore) {
                 Checking newChecking = new Checking(checkingAfter);
-                customers.get(i).setChecking(newChecking);
+                value.setChecking(newChecking);
                 break;
             }
 

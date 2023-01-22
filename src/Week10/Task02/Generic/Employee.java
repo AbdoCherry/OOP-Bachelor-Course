@@ -100,11 +100,10 @@ public abstract class Employee<T> {
 
         StringBuilder sbSsn = new StringBuilder();
         Random random = new Random();
-        String finalSsn = null;
 
         do {
             for (int i = 0; i < 3; i++) {
-                sbSsn.append(String.valueOf(random.nextInt(999)));
+                sbSsn.append(random.nextInt(999));
             }
             sbSsn.deleteCharAt(sbSsn.length() - 1);
 
@@ -116,7 +115,6 @@ public abstract class Employee<T> {
     // Create salary under certain condition
     public double generateSalary(@NotNull List<? extends Employee<T>> t) {
 
-        List<T> emps;
         double maxRaise;
         double averageSalary;
         double newSalary = 0;
@@ -124,12 +122,10 @@ public abstract class Employee<T> {
 
         // Determine which list we are dealing with
         if (t.get(0) instanceof Manager) {
-            emps = (List<T>) t;
-            averageSalary = t.stream().mapToDouble(Employee<T>::getSalary).average().orElse(0);
+            averageSalary = t.stream().mapToDouble(Employee::getSalary).average().orElse(0);
             maxRaise = 0.25;
         } else if (t.get(0) instanceof Clerk) {
-            emps = (List<T>) t;
-            averageSalary = t.stream().mapToDouble(Employee<T>::getSalary).average().orElse(0);
+            averageSalary = t.stream().mapToDouble(Employee::getSalary).average().orElse(0);
             maxRaise = 0.5;
         } else {
             System.out.println("\nType not identified\n");
@@ -182,7 +178,7 @@ public abstract class Employee<T> {
         String firstName, lastName;
         do {
             String[] fullName = fullName();
-            T obj = selecObject((List<? extends Employee>) t, fullName);
+            T obj = selecObject(t, fullName);
 
             if (obj != null) {
                 System.out.println("\n" + employeeType + " already exists\n");
@@ -244,19 +240,15 @@ public abstract class Employee<T> {
             // int empId, String firstName, String lastName, String ssn, double salary, String depName, double depBudget, Set<Clerk> staffSize
             System.out.printf("\n%-5s%-10s%-30s%-10s%-10s%-40s%-10s%-10s%-5s\n", "|", "ID", "Name", "SSN", "Salary", "Department", "Budget", "Staff-Size", "|");
             System.out.println("|===========================================================================================================================|");
-            managers.forEach(m -> {
-                System.out.printf("%-5s%-10d%-30s%-10s%-10.2f%-40s%-10.2f%-10s%-5s\n",
-                        "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), m.getSsn(), m.getSalary(), m.getDepName(), m.getDepBudget(), m.getStaffSize().size(), "|");
-            });
+            managers.forEach(m -> System.out.printf("%-5s%-10d%-30s%-10s%-10.2f%-40s%-10.2f%-10s%-5s\n",
+                    "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), m.getSsn(), m.getSalary(), m.getDepName(), m.getDepBudget(), m.getStaffSize().size(), "|"));
         } else if (t.get(0) instanceof Clerk) {
             clerks = (List<Clerk>) t;
             // int empId, String firstName, String lastName, String ssn, double salary, int manId
             System.out.printf("\n%-5s%-10s%-30s%-10s%-10s%-10s%-5s\n", "|", "ID", "Name", "SSN", "Salary", "Manager-ID", "|");
             System.out.println("|===============================================================|");
-            clerks.forEach(c -> {
-                System.out.printf("%-5s%-10d%-30s%-10s%-10.2f%-10d%-5s\n",
-                        "|", c.getEmpId(), c.getFirstName() + " " + c.getLastName(), c.getSsn(), c.getSalary(), c.getManId(), "|");
-            });
+            clerks.forEach(c -> System.out.printf("%-5s%-10d%-30s%-10s%-10.2f%-10d%-5s\n",
+                    "|", c.getEmpId(), c.getFirstName() + " " + c.getLastName(), c.getSsn(), c.getSalary(), c.getManId(), "|"));
         }
     }
 
@@ -275,9 +267,7 @@ public abstract class Employee<T> {
         System.out.println("\nStaffsize updated");
         System.out.printf("%-5s%-10s%-30s%-20s%-5s\n", "|", "ID", "Manager", "Size of Staff", "|");
         System.out.println("|===============================================================|");
-        managers.forEach(m -> {
-            System.out.printf("%-5s%-10d%-30s%-20d%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), m.getStaffSize().size(), "|");
-        });
+        managers.forEach(m -> System.out.printf("%-5s%-10d%-30s%-20d%-5s\n", "|", m.getEmpId(), m.getFirstName() + " " + m.getLastName(), m.getStaffSize().size(), "|"));
     }
 
     // Reading csv file int arraylist
