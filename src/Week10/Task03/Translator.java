@@ -18,7 +18,7 @@ public class Translator {
 
         map = new TreeMap<>(map);
         int counter = 0;
-        System.out.printf("\033[1m%-5s%-15s%-15s\033[0m\n", "ID", "English", "Deutsch");
+        System.out.printf("\033[1m%-5s%-15s%-15s\033[0m\n", "ID", "English", "Deutsch/German");
         System.out.println("------------------------------");
         for (Map.Entry<String, String> entry : map.entrySet()) {
             System.out.printf("%-5d%-15s%-15s\n", counter, entry.getKey(), entry.getValue());

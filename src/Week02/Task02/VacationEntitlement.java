@@ -17,27 +17,23 @@ public class VacationEntitlement {
             case 0:
 
                 System.out.println("\nWe´re sorry. But your entry wasn´t recognized\n");
-
                 break;
 
             case 1:
 
                 System.out.println("\nYou are entitled to 15 days of vacation in the year\n");
-
                 break;
 
             case 2:
             case 3:
 
                 System.out.println("\nYou are entitled to 20 days of vacation in the year\n");
-
                 break;
 
             case 4:
             case 5:
 
                 System.out.println("\nYou are entitled to 25 days of vacation in the year\n");
-
                 break;
 
             default:

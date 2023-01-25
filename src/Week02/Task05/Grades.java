@@ -51,8 +51,9 @@ public class Grades {
             }
 
             System.out.print("You want to keep adding grades?\t[Yes = \"Y\"/\"y\"] - [No = \"N\"/\"n\"]: ");
-            inputContinue = scanner.next().charAt(0); // User input gets converted to char
-        } while (inputContinue != 'N');
+            inputContinue = Character.toUpperCase(scanner.next().charAt(0)); // User input gets converted to char
+        } while (inputContinue == 'Y');
+        System.out.println("\nThank you for using the program\n");
 
         scanner.close();
 

@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class CalcMetricsMethods {
 
     static void display(double max, double min, double avg) {
-        System.out.println("\nMaximum\t\tMinimum\t\tAverage");
-        System.out.printf("%.2f $\t%.2f $\t%.2f $\t%n", max, min, avg);
+
+        System.out.printf("%-20s%-20s%-20s\n", "Maximum", "Minimum", "Average");
+        System.out.println("-------------------------------------------------");
+        System.out.printf("%-20s%-20s%-20s\n", String.valueOf(max), String.valueOf(min), String.valueOf(avg));
     }
 
     static double maxVal(double[] accountBalance) {

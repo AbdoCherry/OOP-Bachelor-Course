@@ -23,8 +23,8 @@ public class HumanResourceMain {
 
         do {
             System.out.println("Please select from menu");
-            System.out.println("[1  =   Add Employee]\t  [3 = Create Department]");
-            System.out.println("[2 = Remove Employee]\t  [4 = Remove Department]");
+            System.out.println("[1  =   Add Employee ]\t  [3 = Create Department]");
+            System.out.println("[2  = Remove Employee]\t  [4 = Remove Department]");
             System.out.println("\t\t[0 = Exit Program]");
             System.out.print("\nMenu: ");
 

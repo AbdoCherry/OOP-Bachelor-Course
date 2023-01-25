@@ -184,6 +184,9 @@ public class Clerk extends Employee<Clerk> {
                         Integer.parseInt(values[5])
                 ));
             }
+
+            reader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

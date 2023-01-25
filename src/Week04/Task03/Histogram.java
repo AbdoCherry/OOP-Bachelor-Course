@@ -23,8 +23,8 @@ public class Histogram {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String pathMacOs = "src/Week4/Task3/CheckingBalance.txt";
-        String pathWin = "src\\Week4\\Task3\\CheckingBalance.txt";
+        String pathMacOs = "src/Week04/Task03/CheckingBalance.txt";
+        String pathWin = "src\\Week04\\Task03\\CheckingBalance.txt";
         String path;
         String myOS = System.getProperty("os.name");
 

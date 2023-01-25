@@ -20,9 +20,7 @@ public class Calculate {
 
         // printf lets us format our numerical output
         System.out.printf("The amount you have entered has the dollar value of %.2f $", dollar);
-
         System.out.println("\n");
-
         scanner.close();
 
     }

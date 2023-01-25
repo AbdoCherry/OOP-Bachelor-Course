@@ -6,14 +6,14 @@ public class CalculateMethods {
 
     static void display(double gazRange1, double gazRange2, double dieselRange1, double dieselRange2) {
 
-        System.out.println("\nVehicle\t\tRange = 17000 KM\tRange = 25000 KM\tMore favorable");
-        String range1 = (gazRange1 < dieselRange1) ? "Gazoline" : "Diesel";
-        String range2 = (gazRange2 < dieselRange2) ? "Gazoline" : "Diesel";
 
-        System.out.printf("Gazoline\t%.2f $\t\t%.2f $\t\t%s%n", gazRange1, gazRange2, range1);
-        System.out.printf("Diesel  \t%.2f $\t\t%.2f $\t\t%s%n", dieselRange1, dieselRange2, range2);
-        System.out.println("\n");
-
+        System.out.printf("%-20s%-30s%-30s%-30s\n", "Vehichle", "Range = 17000", "Range = 25000", "More favorable");
+        //System.out.println("\nVehicle\t\tRange = 17000 KM\tRange = 25000 KM\tMore favorable");
+        String favorable1 = (gazRange1 < dieselRange1) ? "Gazoline" : "Diesel";
+        String favorable2 = (gazRange2 < dieselRange2) ? "Gazoline" : "Diesel";
+        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.printf("%-20s%-30s%-30s%-30s\n", "Gazoline", gazRange1, gazRange2, favorable1);
+        System.out.printf("%-20s%-30s%-30s%-30s\n", "Diesel", dieselRange1, dieselRange2, favorable2);
     }
 
     static double calculator(int fixcosts, int tax, double consumption, double fuelPrice, int RANGE) {
@@ -41,7 +41,6 @@ public class CalculateMethods {
         double dieselRange2 = calculator(fixCosts2, tax2, consumption2, dieselPrice, RANGE2);
 
         display(gazRange1, gazRange2, dieselRange1, dieselRange2);
-
     }
 
 }

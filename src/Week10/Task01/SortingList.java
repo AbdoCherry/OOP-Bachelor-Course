@@ -10,7 +10,7 @@ public class SortingList {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nPlease enter random numbers into command line");
+        System.out.println("\nPlease enter random numbers into command line\n");
 
         List<Integer> myInput = new ArrayList<>();
         Random random = new Random();
@@ -18,7 +18,7 @@ public class SortingList {
         int randomInt = random.nextInt((10) + 1);
 
         while (myInput.size() < randomInt) {
-            System.out.print("\nInput: ");
+            System.out.print("Input: ");
             myInput.add(scanner.nextInt());
         }
 

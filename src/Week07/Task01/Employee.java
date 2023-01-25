@@ -71,6 +71,7 @@ public class Employee {
             System.out.println("\nYour requested salary increase has been approved");
             System.out.printf("%-15s%-15s%-15s%-15s\n", "Salary Before", "Salary after", "Increased by %", "Increased by $");
             System.out.printf("%-15.2f%-15.2f%-15.2f%-15.2f\n", salaryBefore, salaryNew, validator, difference);
+            this.setSalary(salaryNew);
         } else {
             System.out.println(
                     "\nWe have to regretfully decline your desired salary increase because it exceeds the maximum of 10 % from the current salary");

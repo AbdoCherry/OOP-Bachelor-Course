@@ -54,7 +54,7 @@ public class Book {
             return extractedBooksList.get(bookDecision - 1);
         } else {
             System.out.println("\nBook not available or in inventory");
-            
+
             return null;
         }
 
@@ -63,20 +63,28 @@ public class Book {
     public static String genres() {
 
         Scanner genreScanner = new Scanner(System.in);
-        String[][] genres = { { "1", "Fantasy" }, { "2", "Education" }, { "3", "Adventure" }, { "4", "Novel" },
-                { "5", "History" }, { "6", "tech" }, { "7", "Science" }, { "8", "nonfiction" }, { "9", "fiction" },
-                { "10", "philosophy" } };
+
+        Map<Integer, String> genresMap = new HashMap<Integer, String>();
+        genresMap.put(1, "Fantasy");
+        genresMap.put(2, "Education");
+        genresMap.put(3, "Adventure");
+        genresMap.put(4, "Novel");
+        genresMap.put(5, "History");
+        genresMap.put(6, "Tech");
+        genresMap.put(7, "Science");
+        genresMap.put(8, "Nonfiction");
+        genresMap.put(9, "Fiction");
+        genresMap.put(10, "Philosophy");
 
         System.out.printf("\n\033[1m%-5s%-15s\033[0m\n", "Key", "Genre");
         System.out.println("--------------------------------");
 
-        for (String[] genre : genres)
-            for (String s : genre) System.out.printf("%-5s%-10s", s, " \n");
+        for (Map.Entry<Integer, String> entry : genresMap.entrySet()) {
+            System.out.printf("%-5d%-15s\n", entry.getKey(), entry.getValue());
+        }
 
         System.out.print("\nChoose genres: ");
-        int index = genreScanner.nextInt();
-
-        return genres[index - 1][0];
+        return genresMap.get(genreScanner.nextInt());
     }
 
     public static Book createBook() {

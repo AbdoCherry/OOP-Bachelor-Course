@@ -8,17 +8,16 @@ public class HR {
 
         Scanner scanner = new Scanner(System.in);
 
-        Employee[] employees = new Employee[10];
-
-        employees[0] = new Engineer(101, "012-34-5678", "Jane Schmidt", 120345.67);
-        employees[1] = new Engineer(102, "012-34-5679", "Shaddap Yakkant", 110500.99);
-        employees[2] = new Admin(304, "108-23-6509", "Bill Moser", 75002.34);
-        employees[3] = new Admin(305, "108-23-6510", "Ben Dover", 90300.50);
-        employees[4] = new Manager(207, "054-12-2367", "Barbara Janson", 109501.36, "IT-Service US");
-        employees[5] = new Manager(208, "054-12-2368", "Tess Tickles", 150993.20, "Compliance & Regulatory");
-        employees[6] = new Director(12, "099-45-2340", "Susanne Weiler", 120567.36, "Global Marketing", 1000000.00);
-        employees[7] = new Director(13, "099-45-2341", "Dickins Cyder", 200400.55, "Technology & Innovations",
-                500250000.00);
+        Employee[] employees = {
+                new Engineer(101, "012-34-5678", "Jane Schmidt", 120345.67),
+                new Engineer(102, "012-34-5679", "Shaddap Yakkant", 110500.99),
+                new Admin(304, "108-23-6509", "Bill Moser", 75002.34),
+                new Admin(305, "108-23-6510", "Ben Dover", 90300.50),
+                new Manager(207, "054-12-2367", "Barbara Janson", 109501.36, "IT-Service US"),
+                new Manager(208, "054-12-2368", "Tess Tickles", 150993.20, "Compliance & Regulatory"),
+                new Director(12, "099-45-2340", "Susanne Weiler", 120567.36, "Global Marketing", 1000000.00),
+                new Director(13, "099-45-2341", "Dickins Cyder", 200400.55, "Technology & Innovations", 500250000.00)
+        };
 
         System.out.println(
                 "\n---------------------------------------------------------------- Human Resource Pool ----------------------------------------------------------------\n");

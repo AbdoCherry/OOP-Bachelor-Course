@@ -14,8 +14,8 @@ public class Reader {
 
         List<Deposit> deposits = new ArrayList<>();
 
-        String pathWindows = "src\\Week9\\Task2\\Data\\input.csv";
-        String pathMacOS = "src/Week9/Task2/Data/input.csv";
+        String pathWindows = "src\\Week09\\Task02\\Data\\input.csv";
+        String pathMacOS = "src/Week09/Task02/Data/input.csv";
         String path = "";
         String myOS = System.getProperty("os.name");
         String line = null;

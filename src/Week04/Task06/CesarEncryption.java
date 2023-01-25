@@ -18,7 +18,7 @@ public class CesarEncryption {
 
     // Moves the letter by the specified shift (key)
     public static char shift(char letter, int shift) {
-        // Buchstaben als Zahl behandeln
+        // Treat letters as numbers
         if (letter >= 'a' && letter <= 'z') { // Do not change special characters
             letter += shift;
             while (letter > 'z') {

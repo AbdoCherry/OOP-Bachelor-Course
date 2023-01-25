@@ -10,8 +10,8 @@ public class FileReaderText {
 
     static String fileReader() {
         String os = System.getProperty("os.name");
-        String pathWindows = "src\\Week4\\Task5\\Textpassage.txt"; // On Windows the file convention looks like this
-        String pathMacOS = "src/Week4/Task5/Textpassage.txt"; // On macOS the file convention looks like this
+        String pathWindows = "src\\Week04\\Task05\\Textpassage.txt"; // On Windows the file convention looks like this
+        String pathMacOS = "src/Week04/Task05/Textpassage.txt"; // On macOS the file convention looks like this
         String path;
         if (os.startsWith("Mac")) {
             path = pathMacOS;

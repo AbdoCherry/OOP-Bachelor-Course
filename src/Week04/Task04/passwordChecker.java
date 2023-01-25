@@ -15,7 +15,7 @@ public class passwordChecker {
         boolean level1 = false, level2 = false, level3 = false, hasUpperCase = false, hasDigit = false,
                 specialChar = false, firstCharIsUpperCase = false;
 
-        if (username.equals("Abda")) {
+        if (username.equals("java")) {
             System.out.print("Password: ");
             String password = scanner.nextLine();
             char[] pass = password.toCharArray();

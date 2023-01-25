@@ -29,15 +29,14 @@ public class Textreader {
 
         System.out.println("\n----- Only balances over 100.- $ -------\n");
         while (myFile.hasNextLine()) {
-            accountBalance[counter] = Double.parseDouble(myFile.nextLine().replaceAll(",", ".")); // Converting string
-                                                                                                  // input into double
-                                                                                                  // output
+            //Converting string input into double output
+            accountBalance[counter] = Double.parseDouble(myFile.nextLine().replaceAll(",", "."));
+
             if (accountBalance[counter] > 100) {
-                System.out.println("Amount at line " + (counter + 1) + ": " + accountBalance[counter] + " $");
+                System.out.println("Amount at line " + (counter + 1) + ": " + accountBalance[counter] + " $\n");
             }
             counter++;
         }
-        System.out.println(" ");
 
         myFile.close();
 

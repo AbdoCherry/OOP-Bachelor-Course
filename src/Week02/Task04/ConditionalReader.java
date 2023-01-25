@@ -13,7 +13,7 @@ public class ConditionalReader {
 
         if (amount < 100) {
             double difference = 100 - amount;
-            System.out.printf("Error input ! - Undercut: < %.2f $>\n", difference);
+            System.out.printf("Error input ! - Undercut: < %.2f $ >\n", difference);
         } else {
             System.out.println("Your entered amount: " + amount + " $");
         }

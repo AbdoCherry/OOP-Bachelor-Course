@@ -402,8 +402,8 @@ public class Deposit extends Customer {
 
         Date today = new Date();
 
-        String pathWindows = "src\\Week9\\Task2\\Data\\Deposits_" + DateConverter.sdfParser.format(today) + "_.csv";
-        String pathMacOS = "src/Week9/Task2/Data/Deposits_" + DateConverter.sdfParser.format(today) + "_.csv";
+        String pathWindows = "src\\Week09\\Task02\\Data\\Deposits_" + DateConverter.sdfParser.format(today) + "_.csv";
+        String pathMacOS = "src/Week09/Task02/Data/Deposits_" + DateConverter.sdfParser.format(today) + "_.csv";
         String path = "";
         String myOS = System.getProperty("os.name");
 

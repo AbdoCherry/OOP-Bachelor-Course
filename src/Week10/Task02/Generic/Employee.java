@@ -72,11 +72,11 @@ public abstract class Employee<T> {
     public String[] fullName() {
         System.out.println("\nPlease enter the necessary information in the fields below");
 
+        scannerEmp.nextLine();
         System.out.print("First Name: ");
         String firstName = scannerEmp.nextLine();
         System.out.print("Last Name: ");
         String lastName = scannerEmp.nextLine();
-        scannerEmp.nextLine();
         return new String[]{firstName, lastName};
 
     }
